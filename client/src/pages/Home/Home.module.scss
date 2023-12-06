@@ -1,0 +1,48 @@
+.logoContainer {
+  /*   position: absolute;
+  top: 25%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+
+  &.scroll {
+    top: 0;
+    transform: none;
+    align-items: flex-start;
+  } */
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  transition: all 0.2s;
+
+  &.scroll {
+    top: 0;
+    left: 15%;
+    transform: translateX(-50%);
+    align-items: flex-start;
+    height: 30px;
+  }
+}
+
+.logoImg {
+  /*   height: 300px;
+  transition: all 0.2s;
+  &.scroll {
+    height: 30px;
+  } */
+  height: 100%;
+  width: auto;
+  transition: all 0.2s;
+
+  &.scroll {
+    height: 30%;
+  }
+}

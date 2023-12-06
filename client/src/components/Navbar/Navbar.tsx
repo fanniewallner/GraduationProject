@@ -8,12 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useTheme } from "../../contexts/ThemeContext";
+import { Link } from "react-router-dom";
 
 interface Props {
   window?: () => Window;
@@ -21,11 +21,11 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
-  "Hem",
-  "Produktkatalog",
-  "Om Xtools",
-  "Kontakt",
-  "Köpvillkor",
+  { label: "Hem", path: "/" },
+  { label: "Produktkatalog", path: "/produkter" },
+  { label: "Om Xtools", path: "/om-oss" },
+  { label: "Kontakt", path: "/kontakt" },
+  { label: "Köpvillkor", path: "/kopvillkor" },
 ];
 
 export default function DrawerAppBar(props: Props) {
@@ -48,9 +48,16 @@ export default function DrawerAppBar(props: Props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.label} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <Link
+                to={item.path}
+                style={{ textDecoration: "none", color: theme.primaryColor }}
+              >
+                <Typography variant="body1" sx={{ color: "inherit" }}>
+                  {item.label}
+                </Typography>
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
@@ -66,7 +73,10 @@ export default function DrawerAppBar(props: Props) {
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: theme.primaryBackgroundColor }}
+        sx={{
+          backgroundColor: "transparent",
+          boxShadow: "none",
+        }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "flex-end" }}>
           <IconButton
@@ -87,8 +97,13 @@ export default function DrawerAppBar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button key={item.label} sx={{ color: "#fff" }}>
+                <Link
+                  to={item.path}
+                  style={{ textDecoration: "none", color: theme.primaryColor }}
+                >
+                  {item.label}
+                </Link>
               </Button>
             ))}
           </Box>
