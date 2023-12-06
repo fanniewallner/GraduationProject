@@ -40,7 +40,10 @@ export default function DrawerAppBar(props: Props) {
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
-      sx={{ textAlign: "center", color: theme.primaryColor }}
+      sx={{
+        textAlign: "center",
+        color: theme.primaryColor,
+      }}
     >
       <Typography variant="h6" sx={{ my: 2 }}>
         Xtools
@@ -78,7 +81,10 @@ export default function DrawerAppBar(props: Props) {
           boxShadow: "none",
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Toolbar
+          id="back-to-top-anchor"
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
