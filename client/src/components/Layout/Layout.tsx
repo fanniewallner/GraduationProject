@@ -4,7 +4,8 @@ import { Box, Fab, Zoom } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-
+import styles from "./Layout.module.scss";
+import { Footer } from "../Footer/Footer";
 interface LayoutProps {
   window?: () => Window;
 }
@@ -24,9 +25,13 @@ export const Layout = (props: LayoutProps) => {
     threshold: 100,
   });
   return (
-    <Box>
+    <Box className={styles.layoutWrapper}>
       <Navbar />
+      {/*       <Box className={styles.layoutWrapper__outlet}> */}
       <Outlet />
+      {/*       </Box> */}
+
+      <Footer />
       <Zoom in={trigger} unmountOnExit>
         <Fab
           size="small"

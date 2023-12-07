@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
+import styles from "./Navbar.module.scss";
 
 interface Props {
   window?: () => Window;
@@ -21,7 +22,7 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
-  { label: "Hem", path: "/" },
+  /*   { label: "Hem", path: "/" }, */
   { label: "Produktkatalog", path: "/produkter" },
   { label: "Om Xtools", path: "/om-oss" },
   { label: "Kontakt", path: "/kontakt" },
@@ -45,21 +46,22 @@ export default function DrawerAppBar(props: Props) {
         color: theme.primaryColor,
       }}
     >
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Xtools
-      </Typography>
+      <Link to={"/"} className={styles.flex}>
+        <Typography variant="h6" color={theme.primaryColor}>
+          Xtools
+        </Typography>
+      </Link>
+
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton>
               <Link
                 to={item.path}
                 style={{ textDecoration: "none", color: theme.primaryColor }}
               >
-                <Typography variant="body1" sx={{ color: "inherit" }}>
-                  {item.label}
-                </Typography>
+                <Typography variant="body1">{item.label}</Typography>
               </Link>
             </ListItemButton>
           </ListItem>
@@ -72,41 +74,48 @@ export default function DrawerAppBar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{
-          backgroundColor: "transparent",
-          boxShadow: "none",
-        }}
+        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
       >
-        <Toolbar
-          id="back-to-top-anchor"
-          sx={{ display: "flex", justifyContent: "flex-end" }}
-        >
+        <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerToggle}
-            sx={{ mr: 0, display: { sm: "none" } }}
+            sx={{ display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ fontSize: "2rem" }} />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            Xtools
-          </Typography>
+          <Link to={"/"} className={styles.flex}>
+            <Typography
+              variant="h6"
+              component="div"
+              //className={styles.flex}
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "block",
+                  color: theme.secondaryColor,
+                },
+              }}
+            >
+              Xtools
+            </Typography>
+          </Link>
+
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item.label} sx={{ color: "#fff" }}>
+              <Button key={item.label} className={styles.desktopLinks}>
                 <Link
                   to={item.path}
-                  style={{ textDecoration: "none", color: theme.primaryColor }}
+                  style={{
+                    textDecoration: "none",
+                    color: theme.secondaryColor,
+                  }}
                 >
                   {item.label}
                 </Link>

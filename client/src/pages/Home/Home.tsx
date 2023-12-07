@@ -25,7 +25,7 @@ export const Home = () => {
       <Container
         className={`${styles.logoContainer} ${scroll ? "scroll" : ""} `}
         sx={{
-          position: "absolute",
+          backgroundColor: theme.primaryBackgroundColor,
           display: "flex",
           justifyContent: "center",
         }}
@@ -40,16 +40,16 @@ export const Home = () => {
 
         <Box
           sx={{
+            mt: "2rem",
+            mb: "20rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            border: "3px solid red",
 
-            position: "relative",
             top: "425px",
             width: "80%",
-            gap: "1rem",
+            gap: "3rem",
           }}
         >
           <Typography
@@ -63,6 +63,7 @@ export const Home = () => {
             sx={{
               backgroundColor: theme.contrastColor,
               color: theme.secondaryColor,
+              boxShadow: "3",
             }}
           >
             Till produktkatalogen
@@ -81,12 +82,21 @@ export const Home = () => {
               och ett snyggt slutresultat.
             </Typography>
           </Box>
-
-          <Box sx={{ backgroundColor: "pink" }}>
-            <Typography>Produkturval</Typography>
+          <Typography variant="h6" color={theme.secondaryColor}>
+            Produkturval
+          </Typography>
+          <Box className={styles.flexContainer}>
             <Productcard
               image={"/vite.svg"}
               title={"Produkt 1"}
+              price={12345}
+              description={""}
+              specification={""}
+              id={""}
+            />
+            <Productcard
+              image={"/vite.svg"}
+              title={"Produkt 2"}
               price={12345}
               description={""}
               specification={""}

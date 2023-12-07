@@ -19,7 +19,7 @@ export default function Productcard(props: ProductcardProps) {
   const navigate = useNavigate();
   const { theme } = useTheme();
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 225 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -51,6 +51,7 @@ export default function Productcard(props: ProductcardProps) {
           sx={{
             backgroundColor: theme.contrastColor,
             color: theme.secondaryColor,
+            boxShadow: 3,
           }}
           size="small"
           onClick={() => navigate(`/produkter/${props.id}`)}

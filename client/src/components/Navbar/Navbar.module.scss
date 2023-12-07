@@ -1,0 +1,23 @@
+.navbar {
+  background-color: transparent;
+  box-shadow: none;
+
+  &__anchor {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &--icon {
+    margin-right: 0;
+  }
+}
+
+.flex {
+  text-decoration: none;
+}
+
+.desktopLinks {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

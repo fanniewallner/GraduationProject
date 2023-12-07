@@ -3,6 +3,11 @@ import { colors } from "./ThemeVariables";
 //import { colors } from '../theme/themeVariables';
 
 interface Theme {
+  breakpoints: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
   primaryBackgroundColor: string;
   secondaryBackgroundColor: string;
   primaryColor: string;
@@ -16,6 +21,7 @@ interface ThemeContextProps {
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -30,6 +36,11 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme] = useState<Theme>({
+    breakpoints: {
+      sm: 678,
+      md: 900,
+      lg: 1280,
+    },
     primaryBackgroundColor: colors.primayBackgroundColor,
     secondaryBackgroundColor: colors.secondaryBackgroundColor,
     primaryColor: colors.primaryColor,
