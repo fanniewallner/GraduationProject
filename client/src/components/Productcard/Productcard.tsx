@@ -2,9 +2,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useTheme } from "../../contexts/ThemeContext";
+import { CardActionArea } from "@mui/material";
+import { useTheme } from "../../contexts/ThemeContext.tsx";
+//import { useNavigate } from "react-router-dom";
 
 export interface ProductcardProps {
   image: string;
@@ -16,14 +16,14 @@ export interface ProductcardProps {
 }
 
 export default function Productcard(props: ProductcardProps) {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { theme } = useTheme();
   return (
-    <Card sx={{ width: 225 }}>
+    <Card sx={{ display: "flex" }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="200"
+          height="100"
           width="150"
           image={props.image}
           alt={props.title}
@@ -46,7 +46,7 @@ export default function Productcard(props: ProductcardProps) {
           <Typography>{props.specification}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      {/*       <CardActions>
         <Button
           sx={{
             backgroundColor: theme.contrastColor,
@@ -58,7 +58,7 @@ export default function Productcard(props: ProductcardProps) {
         >
           Till produkten
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "esModuleInterop": true,
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "jsx": "react-jsx"
+  },
+  /* "include": ["cypress.config.ts"] */
+  "include": ["cypress/e2e/**/*.ts"]
+}
