@@ -33,10 +33,5 @@
     /*     "types": ["jest"] */
   },
 
-  "include": ["src"],
-
-  "references": [
-    { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.cypress.json" }
-  ]
+  "include": ["src"]
 }
