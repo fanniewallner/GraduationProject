@@ -1,10 +1,14 @@
 .navbar {
   background-color: transparent;
   box-shadow: none;
+  position: relative;
 
   &__anchor {
     display: flex;
     justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 
   &--icon {

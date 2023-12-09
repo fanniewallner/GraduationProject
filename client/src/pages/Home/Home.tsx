@@ -5,6 +5,7 @@ import { useTheme } from "../../contexts/ThemeContext";
 import Productcard from "../../components/Productcard/Productcard";
 import { ProductList } from "../ProductList/ProductList";
 import { Carousel } from "../../components/Carousel/Carousel";
+import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";
 
 export const Home = () => {
   const [scroll, setScroll] = useState(false);
@@ -88,7 +89,8 @@ export const Home = () => {
             Produkturval
           </Typography>
           <Box className={styles.flexContainer}>
-            <Carousel />
+            <MuiCarousel />
+            {/*   <Carousel /> */}
             {/*  <Productcard
               image={"/vite.svg"}
               title={"Produkt 1"}

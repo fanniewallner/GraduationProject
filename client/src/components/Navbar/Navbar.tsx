@@ -73,7 +73,7 @@ export default function DrawerAppBar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box>
+    <Box sx={{ width: "100%" }}>
       <CssBaseline />
       <AppBar
         component="nav"

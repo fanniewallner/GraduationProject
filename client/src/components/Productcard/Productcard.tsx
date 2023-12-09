@@ -31,16 +31,19 @@ export default function Productcard({ product }: ProductcardProps) {
   return (
     <Card
       sx={{
-        minWidth: "200px",
-        maxWidth: "200px",
+        minWidth: "250px",
+        maxWidth: "250px",
+        height: "200px",
         display: "flex",
         flexWrap: "noWrap",
+        boxShadow: "3",
+        position: "relative",
       }}
     >
       <CardActionArea>
         <CardMedia
           component="img"
-          height="100"
+          width="200"
           image={`http://localhost:1337${product.image.data.attributes.url}`}
           alt={product.title}
         />
