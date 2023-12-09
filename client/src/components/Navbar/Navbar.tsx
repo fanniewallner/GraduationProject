@@ -22,7 +22,6 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
-  /*   { label: "Hem", path: "/" }, */
   { label: "Produktkatalog", path: "/produkter" },
   { label: "Om Xtools", path: "/om-oss" },
   { label: "Kontakt", path: "/kontakt" },
@@ -94,11 +93,12 @@ export default function DrawerAppBar(props: Props) {
             <Typography
               variant="h6"
               component="div"
-              //className={styles.flex}
+              className={styles.flex}
               sx={{
                 display: {
                   xs: "none",
                   sm: "block",
+
                   color: theme.secondaryColor,
                 },
               }}

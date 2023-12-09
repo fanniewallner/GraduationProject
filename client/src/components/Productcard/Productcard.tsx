@@ -3,47 +3,58 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { useTheme } from "../../contexts/ThemeContext.tsx";
+
+import { IProduct } from "/git/examensarbete/client/src/models/iproductcard.js";
+import { useTheme } from "../../contexts/ThemeContext";
 //import { useNavigate } from "react-router-dom";
 
-export interface ProductcardProps {
+/* export interface ProductcardProps {
   image: string;
   title: string;
   price: number;
   description: string;
   specification: string;
   id: string;
+} */
+
+interface ProductcardProps {
+  product: IProduct;
 }
 
-export default function Productcard(props: ProductcardProps) {
+export default function Productcard({ product }: ProductcardProps) {
   //const navigate = useNavigate();
   const { theme } = useTheme();
+
+  const imageUrl = product.image.data.attributes.url;
+
+  console.log(product.image.data.attributes.url);
   return (
-    <Card sx={{ display: "flex" }}>
+    <Card
+      sx={{
+        minWidth: "200px",
+        maxWidth: "200px",
+        display: "flex",
+        flexWrap: "noWrap",
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
           height="100"
-          width="150"
-          image={props.image}
-          alt={props.title}
+          image={`http://localhost:1337${product.image.data.attributes.url}`}
+          alt={product.title}
         />
         <CardContent>
-          <Typography
-            color={theme.contrastColor}
-            gutterBottom
-            variant="h6"
-            component="div"
-          >
-            {props.title}
+          <Typography color={"black"} gutterBottom variant="h6" component="div">
+            {product.title}
           </Typography>
           <Typography variant="body2" color={theme.contrastColor}>
-            {props.price} kr exkl. moms
+            {product.price} kr
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.description}
+          {/*  <Typography variant="body2" color="text.secondary">
+            {product.description}
           </Typography>
-          <Typography>{props.specification}</Typography>
+          <Typography>{product.specification}</Typography> */}
         </CardContent>
       </CardActionArea>
       {/*       <CardActions>

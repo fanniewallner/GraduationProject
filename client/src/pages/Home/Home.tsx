@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./Home.module.scss";
 import { useTheme } from "../../contexts/ThemeContext";
 import Productcard from "../../components/Productcard/Productcard";
+import { ProductList } from "../ProductList/ProductList";
+import { Carousel } from "../../components/Carousel/Carousel";
 
 export const Home = () => {
   const [scroll, setScroll] = useState(false);
@@ -86,7 +88,8 @@ export const Home = () => {
             Produkturval
           </Typography>
           <Box className={styles.flexContainer}>
-            <Productcard
+            <Carousel />
+            {/*  <Productcard
               image={"/vite.svg"}
               title={"Produkt 1"}
               price={12345}
@@ -102,6 +105,7 @@ export const Home = () => {
               specification={""}
               id={""}
             />
+            <ProductList /> */}
           </Box>
         </Box>
       </Container>
