@@ -3,19 +3,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-
 import { IProduct } from "/git/examensarbete/client/src/models/iproductcard.js";
 import { useTheme } from "../../contexts/ThemeContext";
-//import { useNavigate } from "react-router-dom";
-
-/* export interface ProductcardProps {
-  image: string;
-  title: string;
-  price: number;
-  description: string;
-  specification: string;
-  id: string;
-} */
+import styles from "./Productcard.module.scss";
 
 interface ProductcardProps {
   product: IProduct;
@@ -25,21 +15,9 @@ export default function Productcard({ product }: ProductcardProps) {
   //const navigate = useNavigate();
   const { theme } = useTheme();
 
-  const imageUrl = product.image.data.attributes.url;
-
   console.log(product.image.data.attributes.url);
   return (
-    <Card
-      sx={{
-        minWidth: "250px",
-        maxWidth: "250px",
-        height: "200px",
-        display: "flex",
-        flexWrap: "noWrap",
-        boxShadow: "3",
-        position: "relative",
-      }}
-    >
+    <Card className={styles.cardComponent}>
       <CardActionArea>
         <CardMedia
           component="img"

@@ -1,14 +1,13 @@
 .navbar {
   background-color: transparent;
   box-shadow: none;
-  position: relative;
+  //position: relative;
 
   &__anchor {
     display: flex;
     justify-content: flex-end;
-    position: absolute;
+    // position: absolute;
     top: 0;
-    width: 100%;
   }
 
   &--icon {
@@ -21,7 +20,7 @@
 }
 
 .desktopLinks {
-  position: absolute;
+  //position: absolute;
   top: 0;
   right: 0;
 }

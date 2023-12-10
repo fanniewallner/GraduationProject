@@ -1,0 +1,12 @@
+.cardComponent {
+  width: 250px;
+  height: 200px;
+  display: flex;
+  flex-wrap: noWrap;
+  box-shadow: 3;
+  //position: relative;
+  @media (min-width: 600px) {
+    width: 400px;
+    height: 350px;
+  }
+}

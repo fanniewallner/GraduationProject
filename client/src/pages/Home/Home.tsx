@@ -2,9 +2,6 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import styles from "./Home.module.scss";
 import { useTheme } from "../../contexts/ThemeContext";
-import Productcard from "../../components/Productcard/Productcard";
-import { ProductList } from "../ProductList/ProductList";
-import { Carousel } from "../../components/Carousel/Carousel";
 import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";
 
 export const Home = () => {
@@ -33,14 +30,11 @@ export const Home = () => {
           justifyContent: "center",
         }}
       >
-        {/* <Box className={`${styles.logoContainer} ${scroll ? "scroll" : ""} `}> */}
         <Box
           component="img"
           src="xtoolslogo.png"
           className={`${styles.logoImg} ${scroll ? "scroll" : ""} `}
         />
-        {/*         </Box> */}
-
         <Box
           sx={{
             mt: "2rem",
@@ -88,27 +82,11 @@ export const Home = () => {
           <Typography variant="h6" color={theme.secondaryColor}>
             Produkturval
           </Typography>
-          <Box className={styles.flexContainer}>
-            <MuiCarousel />
-            {/*   <Carousel /> */}
-            {/*  <Productcard
-              image={"/vite.svg"}
-              title={"Produkt 1"}
-              price={12345}
-              description={""}
-              specification={""}
-              id={""}
-            />
-            <Productcard
-              image={"/vite.svg"}
-              title={"Produkt 2"}
-              price={12345}
-              description={""}
-              specification={""}
-              id={""}
-            />
-            <ProductList /> */}
-          </Box>
+          <Container>
+            <Box className={styles.flexContainer}>
+              <MuiCarousel />
+            </Box>
+          </Container>
         </Box>
       </Container>
     </>

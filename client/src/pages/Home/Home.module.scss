@@ -8,6 +8,7 @@
   transition: all 0.2s;
   @media only screen and (min-width: 800px) {
     padding-top: 10%;
+    align-items: flex-start;
   }
 
   &.scroll {
@@ -25,6 +26,10 @@
 
   &.scroll {
     height: 30%;
+  }
+
+  @media only screen and (min-width: 800px) {
+    height: 500px;
   }
 }
 

@@ -27,10 +27,7 @@ export const Layout = (props: LayoutProps) => {
   return (
     <Box className={styles.layoutWrapper}>
       <Navbar />
-      {/*       <Box className={styles.layoutWrapper__outlet}> */}
       <Outlet />
-      {/*       </Box> */}
-
       <Footer />
       <Zoom in={trigger} unmountOnExit>
         <Fab

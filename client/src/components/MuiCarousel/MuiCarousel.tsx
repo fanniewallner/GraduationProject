@@ -30,12 +30,8 @@ export const MuiCarousel = () => {
 
   return (
     <Carousel
-      next={() => {
-        handleNext;
-      }}
-      prev={() => {
-        handlePrev;
-      }}
+      next={handleNext}
+      prev={handlePrev}
       animation="slide"
       index={currentIndex}
     >
