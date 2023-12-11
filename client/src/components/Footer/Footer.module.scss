@@ -1,7 +1,5 @@
 .footerWrapper {
   min-height: 150px;
-  //position: absolute;
-  //bottom: 0;
   width: 100%;
   padding: 10px;
   display: flex;
@@ -9,7 +7,30 @@
   gap: 1rem;
   @media only screen and (min-width: 800px) {
     flex-direction: row;
-
     text-align: start;
+    justify-content: cente;
+  }
+
+  &__contacts {
+    display: flex;
+    justify-content: space-between;
+    @media only screen and (min-width: 800px) {
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 20%;
+      text-align: start;
+    }
+  }
+  &__freeText {
+    @media only screen and (min-width: 800px) {
+      width: 50%;
+    }
+  }
+
+  &__socials {
+    @media only screen and (min-width: 800px) {
+      display: flex;
+      width: 20%;
+    }
   }
 }
