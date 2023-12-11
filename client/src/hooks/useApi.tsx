@@ -1,16 +1,21 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { IStrapiResponse } from "../models/IProductcard";
+import { IStrapiResponse } from "../models/IStrapiResponse";
 
-const useApi = (uri: string) => {
-  const [data, setData] = useState<IStrapiResponse | null>();
-  const [loading, setLoading] = useState<Boolean>(true);
+export const PRODUCT_ENDPOINT = "/api/products?populate=*";
+export const CONTACT_ENDPOINT = "/api/contact?populate=*;";
+
+function useApi<T>(uri: string) {
+  const [data, setData] = useState<IStrapiResponse<T>>();
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response: AxiosResponse<IStrapiResponse> = await axios.get(uri);
+        const response: AxiosResponse<IStrapiResponse<T>> = await axios.get(
+          `http://localhost:1337${uri}`
+        );
         setData(response.data);
         setLoading(false);
       } catch (error) {
@@ -22,6 +27,6 @@ const useApi = (uri: string) => {
   }, [uri]);
 
   return { loading, error, data };
-};
+}
 
 export default useApi;

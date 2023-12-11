@@ -12,13 +12,3 @@ export type IProduct = {
   specification: string;
   id: string;
 };
-
-export type IStrapiResponse = {
-  data: {
-    attributes: IProduct;
-    id: number;
-  }[];
-  meta: {
-    pagination: number;
-  };
-};

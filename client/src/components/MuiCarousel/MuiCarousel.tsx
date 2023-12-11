@@ -1,21 +1,26 @@
 import Carousel from "react-material-ui-carousel";
 import Productcard from "../Productcard/Productcard";
 import { useState, useEffect } from "react";
-import fetchData from "/git/Examensarbete/client/src/hooks/useApi";
 import { Container } from "@mui/material";
+import useApi, { PRODUCT_ENDPOINT } from "../../hooks/useApi";
+import { IProduct } from "../../models/IProductcard";
 
 export const MuiCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { loading, data } = fetchData(
+  /*   const { loading, data } = fetchData(
     "http://localhost:1337/api/products?populate=*"
   );
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); */
 
-  useEffect(() => {
-    if (!loading) {
-      setIsLoading(false);
-    }
-  }, [loading]);
+  const { loading, error, data } = useApi<IProduct>(PRODUCT_ENDPOINT);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
