@@ -93,12 +93,10 @@ export default function DrawerAppBar(props: Props) {
             <Typography
               variant="h6"
               component="div"
-              className={styles.flex}
               sx={{
                 display: {
                   xs: "none",
                   sm: "block",
-
                   color: theme.secondaryColor,
                 },
               }}

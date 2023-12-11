@@ -22,21 +22,22 @@ export default function Productcard({ product }: ProductcardProps) {
         <CardMedia
           component="img"
           width="200"
+          height="200"
           image={`http://localhost:1337${product.image.data.attributes.url}`}
           alt={product.title}
         />
-        <CardContent>
-          <Typography color={"black"} gutterBottom variant="h6" component="div">
+        {/*  <CardContent> */}
+        {/*           <Typography color={"black"} gutterBottom variant="h6" component="div">
             {product.title}
           </Typography>
           <Typography variant="body2" color={theme.contrastColor}>
             {product.price} kr
-          </Typography>
-          {/*  <Typography variant="body2" color="text.secondary">
+          </Typography> */}
+        {/*  <Typography variant="body2" color="text.secondary">
             {product.description}
           </Typography>
           <Typography>{product.specification}</Typography> */}
-        </CardContent>
+        {/*         </CardContent> */}
       </CardActionArea>
       {/*       <CardActions>
         <Button

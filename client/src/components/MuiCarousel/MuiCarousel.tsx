@@ -2,6 +2,7 @@ import Carousel from "react-material-ui-carousel";
 import Productcard from "../Productcard/Productcard";
 import { useState, useEffect } from "react";
 import fetchData from "/git/Examensarbete/client/src/hooks/useApi";
+import { Container } from "@mui/material";
 
 export const MuiCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,13 +31,21 @@ export const MuiCarousel = () => {
 
   return (
     <Carousel
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
       next={handleNext}
       prev={handlePrev}
       animation="slide"
       index={currentIndex}
     >
       {data?.data.map((item, i) => (
-        <Productcard key={i} product={item.attributes} />
+        <Container key={i} sx={{ display: "flex", justifyContent: "center" }}>
+          <Productcard product={item.attributes} />
+        </Container>
       ))}
     </Carousel>
   );

@@ -5,9 +5,9 @@ import { useTheme } from "../../contexts/ThemeContext";
 import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";
 
 export const Home = () => {
-  const [scroll, setScroll] = useState(false);
+  //const [scroll, setScroll] = useState(false);
   const { theme } = useTheme();
-
+  /* 
   useEffect(() => {
     const handleScroll = () => {
       setScroll(window.scrollY > 0);
@@ -18,75 +18,57 @@ export const Home = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, []); */
 
   return (
     <>
       <Container
-        className={`${styles.logoContainer} ${scroll ? "scroll" : ""} `}
+        className={`${styles.logoContainer}`}
         sx={{
-          backgroundColor: theme.primaryBackgroundColor,
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <Box
-          component="img"
-          src="xtoolslogo.png"
-          className={`${styles.logoImg} ${scroll ? "scroll" : ""} `}
-        />
-        <Box
-          sx={{
-            mt: "2rem",
-            mb: "20rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-
-            top: "425px",
-            width: "80%",
-            gap: "3rem",
-          }}
-        >
-          <Typography
-            variant="h6"
-            color={theme.secondaryColor}
-            textAlign="center"
-          >
-            Portabla arbetsbänkar tillverkade i Sverige
-          </Typography>
-          <Button
-            sx={{
-              backgroundColor: theme.contrastColor,
-              color: theme.secondaryColor,
-              boxShadow: "3",
-            }}
-          >
-            Till produktkatalogen
-          </Button>
-          <Box>
-            <Typography color={theme.secondaryColor}>
-              "Det ska vara lätt att jobba rätt".
+        <Box className={styles.heroContainer}>
+          <Box
+            component="img"
+            src="xtoolslogo.png"
+            className={`${styles.logoImg}`}
+          />
+          <Box className={styles.heroContainer__text}>
+            <Typography variant="h6" color={theme.secondaryColor}>
+              Portabla arbetsbänkar tillverkade i Sverige
             </Typography>
-            <Typography color={theme.secondaryColor}>
-              XTools tillverkar portabla arbetsbänkar för hantverkare som
-              tröttnat att arbeta på golvet eller på tillfälliga arbetsbockar
-              och bänkar. En bra arbetsbänk skapar möjlighet för en trevligare
-              och mer ergonomisk arbetsmiljö.Bänken kommer med fiffiga
-              funktioner och kan dessutom kompletteras med tillbehör som passar
-              just din profession. Detta möjliggör ett mer tidseffektivt arbete
-              och ett snyggt slutresultat.
-            </Typography>
-          </Box>
-          <Typography variant="h6" color={theme.secondaryColor}>
-            Produkturval
-          </Typography>
-          <Container>
-            <Box className={styles.flexContainer}>
-              <MuiCarousel />
+            <Button
+              sx={{
+                backgroundColor: theme.contrastColor,
+                color: theme.secondaryColor,
+                boxShadow: "3",
+              }}
+            >
+              Till produktkatalogen
+            </Button>
+            <Box>
+              <Typography color={theme.secondaryColor}>
+                "Det ska vara lätt att jobba rätt".
+              </Typography>
+              <Typography color={theme.secondaryColor}>
+                XTools tillverkar portabla arbetsbänkar för hantverkare som
+                tröttnat att arbeta på golvet eller på tillfälliga arbetsbockar
+                och bänkar. En bra arbetsbänk skapar möjlighet för en trevligare
+                och mer ergonomisk arbetsmiljö.Bänken kommer med fiffiga
+                funktioner och kan dessutom kompletteras med tillbehör som
+                passar just din profession. Detta möjliggör ett mer
+                tidseffektivt arbete och ett snyggt slutresultat.
+              </Typography>
             </Box>
-          </Container>
+          </Box>
+        </Box>
+        <Typography variant="h6" color={theme.secondaryColor}>
+          Produkturval
+        </Typography>
+        <Box className={styles.flexContainer}>
+          <MuiCarousel />
         </Box>
       </Container>
     </>

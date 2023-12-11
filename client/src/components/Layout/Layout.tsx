@@ -25,7 +25,10 @@ export const Layout = (props: LayoutProps) => {
     threshold: 100,
   });
   return (
-    <Box className={styles.layoutWrapper}>
+    <Box
+      sx={{ backgroundColor: theme.primaryBackgroundColor }}
+      className={styles.layoutWrapper}
+    >
       <Navbar />
       <Outlet />
       <Footer />
