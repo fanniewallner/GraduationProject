@@ -28,9 +28,9 @@
 
     "noEmit": true,
 
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
 
-    /*     "types": ["jest"] */
+    "types": ["cypress", "node"]
   },
 
   "include": ["src"]

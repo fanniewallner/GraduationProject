@@ -7,6 +7,5 @@
       "cypress/support/*": ["./support/*"],
       "cypress/plugins/*": ["./plugins/*"]
     }
-  },
-  "include": ["./e2e/**/*.ts", "./**.feature", "./plugins/**.ts"]
+  }
 }

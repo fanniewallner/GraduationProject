@@ -5,4 +5,5 @@ export default (
   config: Cypress.PluginConfigOptions
 ) => {
   on("file:preprocessor", cucumber());
+  return config;
 };
