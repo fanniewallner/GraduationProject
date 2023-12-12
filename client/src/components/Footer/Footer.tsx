@@ -13,17 +13,18 @@ export const Footer = () => {
   const { theme } = useTheme();
   const api = useApi();
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<IContact>();
+  const [contactData, setContactData] = useState<IContact>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await api.getContactInfo();
-        setData(response.data);
+        setContactData(response.data);
+        console.log("kontaktstate", contactData);
+        console.log("API RESPONSE", response.data);
       } catch (error) {
         console.log(error);
       }
-      console.log("kontaktstate", data);
     };
 
     fetchData();
@@ -39,13 +40,13 @@ export const Footer = () => {
     >
       <Box className={styles.footerWrapper__contacts}>
         <Typography variant="h6">Kontakt</Typography>
-        <Typography>{data?.data.attributes.company}</Typography>
-        <Typography>{data?.data.attributes.phonenumber}</Typography>
-        <Typography>{data?.data.attributes.email}</Typography>
+        <Typography>{contactData?.data.attributes.company}</Typography>
+        <Typography>{contactData?.data.attributes.phonenumber}</Typography>
+        <Typography>{contactData?.data.attributes.email}</Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
         <Typography variant="h6">Xtools</Typography>
-        <Typography>{data?.data.attributes.freeText}</Typography>
+        <Typography>{contactData?.data.attributes.freeText}</Typography>
       </Box>
 
       <Box className={styles.footerWrapper__socials}>
