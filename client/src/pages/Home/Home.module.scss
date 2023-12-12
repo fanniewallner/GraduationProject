@@ -53,8 +53,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3rem;
   width: 80%;
+  gap: 3rem;
 
   @media only screen and (min-width: 800px) {
     flex-direction: row;

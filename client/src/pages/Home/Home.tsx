@@ -48,7 +48,7 @@ export const Home = () => {
             >
               Till produktkatalogen
             </Button>
-            <Box>
+            <Box sx={{ py: "1rem" }}>
               <Typography color={theme.secondaryColor}>
                 "Det ska vara lätt att jobba rätt".
               </Typography>

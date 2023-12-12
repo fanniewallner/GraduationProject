@@ -4,23 +4,23 @@ import { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import useApi, { PRODUCT_ENDPOINT } from "../../hooks/useApi";
 import { IProduct } from "../../models/IProductcard";
+import { IStrapiResponse } from "../../models/IStrapiResponse";
 
 export const MuiCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  /*   const { loading, data } = fetchData(
-    "http://localhost:1337/api/products?populate=*"
-  );
-  const [isLoading, setIsLoading] = useState(true); */
 
-  const { loading, error, data } = useApi<IProduct>(PRODUCT_ENDPOINT);
+  const { loading, error, data } =
+    useApi<IStrapiResponse<IProduct>>(PRODUCT_ENDPOINT);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: Something went wrong</div>;
   }
+
+  console.log(data, "produktdata");
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
@@ -47,8 +47,11 @@ export const MuiCarousel = () => {
       animation="slide"
       index={currentIndex}
     >
-      {data?.data.map((item, i) => (
-        <Container key={i} sx={{ display: "flex", justifyContent: "center" }}>
+      {data?.data.map((item, index) => (
+        <Container
+          key={index}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <Productcard product={item.attributes} />
         </Container>
       ))}

@@ -4,20 +4,29 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import styles from "./Footer.module.scss";
-import useApi, { CONTACT_ENDPOINT } from "../../hooks/useApi";
+import { getContactInfo } from "../../hooks/useApi";
 import { IContact } from "../../models/IContact";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const Footer = () => {
   const { theme } = useTheme();
-  const { loading, error, data } = useApi<IContact>(CONTACT_ENDPOINT);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<IContact>();
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getContactInfo("/api/contact");
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching contact info:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
 
   return (
     <Box
@@ -28,7 +37,6 @@ export const Footer = () => {
       }}
     >
       <Box className={styles.footerWrapper__contacts}>
-        <Typography>{data?.data.attributes.website}</Typography>
         <Typography>{data?.data.attributes.company}</Typography>
         <Typography>{data?.data.attributes.phonenumber}</Typography>
       </Box>

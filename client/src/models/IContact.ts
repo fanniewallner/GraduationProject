@@ -6,6 +6,9 @@ export type IContact = {
       company: string;
       website: string;
       freeText: string;
+      createdAt: string;
+      updatedAt: string;
+      publishedAt: string;
     };
   };
 };

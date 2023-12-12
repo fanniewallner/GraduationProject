@@ -6,16 +6,17 @@ import { CardActionArea } from "@mui/material";
 import { IProduct } from "/git/examensarbete/client/src/models/iproductcard.js";
 import { useTheme } from "../../contexts/ThemeContext";
 import styles from "./Productcard.module.scss";
+import { useNavigate } from "react-router-dom";
 
 interface ProductcardProps {
   product: IProduct;
 }
 
 export default function Productcard({ product }: ProductcardProps) {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const { theme } = useTheme();
 
-  console.log(product.image.data.attributes.url);
+  console.log(product, "!!!!!!!!!!!!!!!!!!");
   return (
     <Card className={styles.cardComponent}>
       <CardActionArea>
@@ -25,6 +26,7 @@ export default function Productcard({ product }: ProductcardProps) {
           height="200"
           image={`http://localhost:1337${product.image.data.attributes.url}`}
           alt={product.title}
+          onClick={() => navigate(`/produkt/${product.id}`)}
         />
         {/*  <CardContent> */}
         {/*           <Typography color={"black"} gutterBottom variant="h6" component="div">
