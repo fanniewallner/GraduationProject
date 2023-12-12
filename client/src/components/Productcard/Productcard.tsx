@@ -30,7 +30,6 @@ export default function Productcard({ product }: ProductcardProps) {
           />
         </CardActionArea>
       ) : null}
-      ;
     </Card>
   );
 }

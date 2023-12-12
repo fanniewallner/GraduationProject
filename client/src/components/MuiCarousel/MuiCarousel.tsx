@@ -25,7 +25,7 @@ export const MuiCarousel = () => {
     };
 
     fetchData();
-  }, [api]);
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>

@@ -7,25 +7,27 @@ import styles from "./Footer.module.scss";
 import { IContact } from "../../models/IContact";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useApi from "../../hooks/useApi";
 
 export const Footer = () => {
   const { theme } = useTheme();
+  const api = useApi();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IContact>();
 
-  /*   useEffect(() => {
-    const getData = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const data = await getContactInfo("/api/contact");
-        setData(data);
+        const response = await api.getContactInfo();
+        setData(response.data);
       } catch (error) {
-        console.error("Error fetching contact info:", error);
-      } finally {
-        setLoading(false);
+        console.log(error);
       }
+      console.log("kontaktstate", data);
     };
-    getData();
-  }, []); */
+
+    fetchData();
+  }, []);
 
   return (
     <Box

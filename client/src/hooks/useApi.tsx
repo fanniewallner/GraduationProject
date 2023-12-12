@@ -47,6 +47,7 @@ import { AppConfigContext } from "../contexts/ApiContext";
 import axios from "axios";
 import { IProduct } from "../models/IProductcard";
 import { IStrapiResponse } from "../models/IStrapiResponse";
+import { IContact } from "../models/IContact";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);
@@ -61,6 +62,9 @@ export default function useApi(url?: string) {
     },
     getProductById: async (id: string) => {
       return axiosInstance.get<IProduct>(`/api/products/${id}`);
+    },
+    getContactInfo: async () => {
+      return axiosInstance.get<IContact>("/api/contact");
     },
   };
   return api;
