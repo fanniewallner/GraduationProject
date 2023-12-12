@@ -37,37 +37,43 @@ export const Footer = () => {
       }}
     >
       <Box className={styles.footerWrapper__contacts}>
+        <Typography variant="h6">Kontakt</Typography>
         <Typography>{data?.data.attributes.company}</Typography>
         <Typography>{data?.data.attributes.phonenumber}</Typography>
-      </Box>
-      <Box>
         <Typography>{data?.data.attributes.email}</Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
+        <Typography variant="h6">Xtools</Typography>
         <Typography>{data?.data.attributes.freeText}</Typography>
       </Box>
+
       <Box className={styles.footerWrapper__socials}>
-        <Link
-          to={"https://www.facebook.com/xtools.se"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FacebookIcon
-            sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
-          />
-        </Link>
-        <Link
-          to={"https://www.instagram.com/xtools.se/"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <InstagramIcon
-            sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
-          />
-        </Link>
-        <Link to={"#"} target="_blank" rel="noopener noreferrer">
-          <YouTubeIcon sx={{ color: theme.secondaryColor, fontSize: "2rem" }} />
-        </Link>
+        <Typography variant="h6">Följ oss</Typography>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Link
+            to={"https://www.facebook.com/xtools.se"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FacebookIcon
+              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+            />
+          </Link>
+          <Link
+            to={"https://www.instagram.com/xtools.se/"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <InstagramIcon
+              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+            />
+          </Link>
+          <Link to={"#"} target="_blank" rel="noopener noreferrer">
+            <YouTubeIcon
+              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+            />
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

@@ -64,10 +64,11 @@ export const Home = () => {
             </Box>
           </Box>
         </Box>
-        <Typography variant="h6" color={theme.secondaryColor}>
-          Produkturval
-        </Typography>
+
         <Box className={styles.flexContainer}>
+          <Typography variant="h6" color={theme.secondaryColor}>
+            Produkturval
+          </Typography>
           <MuiCarousel />
         </Box>
       </Container>

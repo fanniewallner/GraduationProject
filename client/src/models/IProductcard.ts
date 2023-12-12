@@ -11,4 +11,5 @@ export type IProduct = {
   description: string;
   specification: string;
   id: string;
+  category: number;
 };

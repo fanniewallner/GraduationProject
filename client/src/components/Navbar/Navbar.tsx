@@ -77,7 +77,10 @@ export default function DrawerAppBar(props: Props) {
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+        sx={{
+          backgroundColor: theme.primaryBackgroundColor,
+          boxShadow: "none",
+        }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
           <IconButton
