@@ -55,6 +55,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return (
     <ThemeContext.Provider value={contextValue}>
       {children}
+      <style>{`
+        :root {
+          --primary-background-color: ${theme.primaryBackgroundColor};
+          --secondary-background-color: ${theme.secondaryBackgroundColor};
+          --primary-color: ${theme.primaryColor};
+          --secondary-color: ${theme.secondaryColor};
+          --contrast-color: ${theme.contrastColor};
+        }
+      `}</style>
     </ThemeContext.Provider>
   );
 };

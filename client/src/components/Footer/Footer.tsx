@@ -39,18 +39,26 @@ export const Footer = () => {
       }}
     >
       <Box className={styles.footerWrapper__contacts}>
-        <Typography variant="h6">Kontakt</Typography>
-        <Typography>{contactData?.data.attributes.company}</Typography>
-        <Typography>{contactData?.data.attributes.phonenumber}</Typography>
-        <Typography>{contactData?.data.attributes.email}</Typography>
+        <Typography>Kontakt</Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.company}
+        </Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.phonenumber}
+        </Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.email}
+        </Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
-        <Typography variant="h6">Xtools</Typography>
-        <Typography>{contactData?.data.attributes.freeText}</Typography>
+        <Typography>Xtools</Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.freeText}
+        </Typography>
       </Box>
 
       <Box className={styles.footerWrapper__socials}>
-        <Typography variant="h6">Följ oss</Typography>
+        <Typography>Följ oss</Typography>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Link
             to={"https://www.facebook.com/xtools.se"}

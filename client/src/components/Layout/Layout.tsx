@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import { Box, Fab, Zoom } from "@mui/material";
+import { Box, Fab, Zoom, useMediaQuery } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
@@ -25,16 +25,14 @@ export const Layout = (props: LayoutProps) => {
     threshold: 100,
   });
   return (
-    <Box
-      sx={{ backgroundColor: theme.primaryBackgroundColor }}
-      className={styles.layoutWrapper}
-    >
+    <Box className={styles.layoutWrapper}>
       <Navbar />
       <Outlet />
       <Footer />
       <Zoom in={trigger} unmountOnExit>
         <Fab
           size="small"
+          className={styles.fabIcon}
           onClick={handleScrollTop}
           sx={{
             position: "fixed",
