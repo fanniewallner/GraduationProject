@@ -31,6 +31,7 @@ export const Home = () => {
         }}
       >
         <Box
+          data-cy="logo"
           component="img"
           src="xtoolslogo.png"
           className={`${styles.logoImg} ${scroll ? "scroll" : ""} `}
@@ -57,6 +58,7 @@ export const Home = () => {
             Portabla arbetsbänkar tillverkade i Sverige
           </Typography>
           <Button
+            data-cy="actionButton"
             sx={{
               backgroundColor: theme.contrastColor,
               color: theme.secondaryColor,

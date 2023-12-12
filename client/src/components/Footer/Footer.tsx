@@ -9,6 +9,7 @@ export const Footer = () => {
   const { theme } = useTheme();
   return (
     <Box
+      data-cy="footer"
       className={styles.footerWrapper}
       sx={{
         backgroundColor: theme.contrastColor,
