@@ -2,12 +2,19 @@ export type IProduct = {
   image: {
     data: {
       attributes: {
-        url: string;
+        formats: {
+          thumbnail: {
+            url: string;
+          };
+          small: {
+            url: string;
+          };
+        };
       };
     };
   };
   title: string;
-  price: number;
+  price: string;
   description: string;
   specification: string;
   id: string;

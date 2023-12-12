@@ -14,46 +14,23 @@ interface ProductcardProps {
 
 export default function Productcard({ product }: ProductcardProps) {
   const navigate = useNavigate();
-  const { theme } = useTheme();
+  const imageUrl = product.image.data.attributes.formats.thumbnail.url;
 
-  console.log(product, "!!!!!!!!!!!!!!!!!!");
   return (
     <Card className={styles.cardComponent}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          width="200"
-          height="200"
-          image={`http://localhost:1337${product.image.data.attributes.url}`}
-          alt={product.title}
-          onClick={() => navigate(`/produkt/${product.id}`)}
-        />
-        {/*  <CardContent> */}
-        {/*           <Typography color={"black"} gutterBottom variant="h6" component="div">
-            {product.title}
-          </Typography>
-          <Typography variant="body2" color={theme.contrastColor}>
-            {product.price} kr
-          </Typography> */}
-        {/*  <Typography variant="body2" color="text.secondary">
-            {product.description}
-          </Typography>
-          <Typography>{product.specification}</Typography> */}
-        {/*         </CardContent> */}
-      </CardActionArea>
-      {/*       <CardActions>
-        <Button
-          sx={{
-            backgroundColor: theme.contrastColor,
-            color: theme.secondaryColor,
-            boxShadow: 3,
-          }}
-          size="small"
-          onClick={() => navigate(`/produkter/${props.id}`)}
-        >
-          Till produkten
-        </Button>
-      </CardActions> */}
+      {product ? (
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            width="200"
+            height="200"
+            image={`http://localhost:1337${imageUrl}`}
+            alt={product.title}
+            onClick={() => navigate(`/produkt/${product.id}`)}
+          />
+        </CardActionArea>
+      ) : null}
+      ;
     </Card>
   );
 }

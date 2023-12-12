@@ -4,7 +4,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import styles from "./Footer.module.scss";
-import { getContactInfo } from "../../hooks/useApi";
 import { IContact } from "../../models/IContact";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -14,7 +13,7 @@ export const Footer = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IContact>();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const getData = async () => {
       try {
         const data = await getContactInfo("/api/contact");
@@ -26,7 +25,7 @@ export const Footer = () => {
       }
     };
     getData();
-  }, []);
+  }, []); */
 
   return (
     <Box
