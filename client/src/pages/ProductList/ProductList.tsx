@@ -78,7 +78,10 @@ export const ProductList = () => {
       >
         {products?.data.map((product, index) => (
           <Box key={product.id}>
-            <ProductCard product={product.attributes} />
+            <ProductCard
+              productAttributes={product.attributes}
+              productId={product.id}
+            />
           </Box>
         ))}
       </Container>

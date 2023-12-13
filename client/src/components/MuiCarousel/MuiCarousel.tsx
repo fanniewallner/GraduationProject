@@ -5,6 +5,7 @@ import { Container } from "@mui/material";
 import useApi from "../../hooks/useApi";
 import { IProduct } from "../../models/IProductcard";
 import { IStrapiResponse } from "../../models/IStrapiResponse";
+import ProductCard from "../ProductCard/ProductCard";
 
 export const MuiCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,12 +22,12 @@ export const MuiCarousel = () => {
       } catch (error) {
         console.log(error);
       }
-      console.log("produkter state", products);
     };
 
     fetchData();
   }, []);
 
+  console.log("produkter state", products);
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex < (products?.data.length ?? 0) - 1 ? prevIndex + 1 : 0
@@ -62,7 +63,7 @@ export const MuiCarousel = () => {
               key={index}
               sx={{ display: "flex", justifyContent: "center" }}
             >
-              <Productcard product={attributes} />
+              <ProductCard productAttributes={attributes} productId={id} />
             </Container>
           )
         )}

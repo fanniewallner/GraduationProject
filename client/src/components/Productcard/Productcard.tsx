@@ -10,21 +10,34 @@ import { IProduct } from "../../models/IProductcard";
 import { useNavigate } from "react-router-dom";
 
 type IProductCardProps = {
-  product: IProduct;
+  productAttributes: IProduct;
+  productId: number;
 };
 
-export default function ProductCard(product: IProductCardProps) {
+export default function ProductCard({
+  productAttributes,
+  productId,
+}: IProductCardProps) {
   const { theme } = useTheme();
   const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    if (productId !== undefined) {
+      navigate(`/produktkatalog/${productId}`);
+    }
+  };
+
+  console.log(productId);
+  console.log(productAttributes);
   //console.log(product.product.image.data.attributes.formats.small.url);
-  // const imageUrl = product.product.image.data.attributes.formats.small;
+  //let imageUrl = productAttributes.image.data.attributes.formats.small.hash;
   return (
     <Card sx={{ width: 330, minHeight: 300 }}>
       <CardMedia
         component="img"
-        alt={product.product.title}
+        alt={productAttributes.title}
         height="200"
-        //image={`http://localhost:1337${imageUrl}`}
+        image={`http://localhost:1337${productAttributes?.image?.data?.attributes?.formats?.small?.url}`}
         onError={(e) => console.error("Error loading image:", e)}
       />
       <CardContent>
@@ -36,15 +49,15 @@ export default function ProductCard(product: IProductCardProps) {
           display="flex"
           flexWrap="wrap"
         >
-          {product.product.title}
+          {productAttributes.title}
         </Typography>
         <Typography color={theme.contrastColor} variant="body2">
-          {product.product.price} kr exkl. moms
+          {productAttributes.price} kr exkl. moms
         </Typography>
       </CardContent>
       <CardActions>
         <Button
-          onClick={() => navigate(`/produktkatalog/${product.product.id}`)}
+          onClick={handleRedirect}
           sx={{
             backgroundColor: theme.secondaryBackgroundColor,
             color: "white",

@@ -11,7 +11,7 @@ interface ProductcardProps {
 
 export default function ProductSlideComponent({ product }: ProductcardProps) {
   const navigate = useNavigate();
-  const imageUrl = product.image.data.attributes.formats.thumbnail.url;
+  const imageUrl = product.image.data.attributes.formats.small.url;
 
   return (
     <Card className={styles.cardComponent}>

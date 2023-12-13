@@ -8,6 +8,15 @@ export type IProduct = {
           };
           small: {
             url: string;
+            hash: string;
+          };
+          medium: {
+            url: string;
+            hash: string;
+          };
+          large: {
+            url: string;
+            hash: string;
           };
         };
       };
@@ -17,6 +26,10 @@ export type IProduct = {
   price: string;
   description: string;
   specification: string;
-  id: string;
-  category: number;
+  id: number;
+  category: {
+    data: {
+      id: number;
+    };
+  };
 };
