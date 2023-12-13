@@ -20,8 +20,8 @@ export const Footer = () => {
       try {
         const response = await api.getContactInfo();
         setContactData(response.data);
-        console.log("kontaktstate", contactData);
-        console.log("API RESPONSE", response.data);
+        /*  console.log("kontaktstate", contactData);
+        console.log("API RESPONSE", response.data); */
       } catch (error) {
         console.log(error);
       }

@@ -27,7 +27,6 @@ export const MuiCarousel = () => {
     fetchData();
   }, []);
 
-  console.log("produkter state", products);
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex < (products?.data.length ?? 0) - 1 ? prevIndex + 1 : 0

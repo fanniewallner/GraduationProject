@@ -71,7 +71,7 @@ export const Home = () => {
 
         <Box className={styles.flexContainer}>
           <Typography variant="h6" color={theme.secondaryColor}>
-            Produkturval
+            Produkter i fokus
           </Typography>
           <MuiCarousel />
         </Box>

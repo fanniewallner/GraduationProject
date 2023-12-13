@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import { IStrapiResponse } from "../../models/IStrapiResponse";
 import { IProduct } from "../../models/IProductcard";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 
 export const ProductView = () => {
   const { id } = useParams();
@@ -31,7 +31,7 @@ export const ProductView = () => {
     fetchData();
   }, [id]);
 
-  console.log(product, "PROD VIEW");
+  /*   console.log(product, "PROD VIEW"); */
 
   if (loading) {
     return <CircularProgress />;
@@ -45,6 +45,9 @@ export const ProductView = () => {
     <Box sx={{ minHeight: "100vh", py: "5rem" }}>
       {product && (
         <>
+          <Container>
+            <img src={product?.image?.data?.attributes?.formats?.medium?.url} />
+          </Container>
           <Typography sx={{ color: "white" }}>
             {product.specification}
           </Typography>

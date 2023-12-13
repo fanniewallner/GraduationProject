@@ -12,6 +12,7 @@ export const ProductList = () => {
   const [products, setProducts] = useState<
     IStrapiResponse<IProduct> | undefined
   >();
+  const [filteredCategory, setFilteredCategory] = useState<number | null>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,11 +22,27 @@ export const ProductList = () => {
       } catch (error) {
         console.log(error);
       }
-      console.log("produkter state productlist", products);
     };
 
     fetchData();
   }, []);
+
+  const filterProductsByCategory = (categoryId: number | null) => {
+    setFilteredCategory(categoryId);
+  };
+
+  const filteredProducts = filteredCategory
+    ? products?.data.filter(
+        (product) => product.attributes.category.data.id === filteredCategory
+      )
+    : products?.data;
+
+  const resetFiltering = () => {
+    setFilteredCategory(null);
+  };
+
+  console.log("FILTERING", filteredProducts);
+
   return (
     <Box
       sx={{
@@ -39,6 +56,7 @@ export const ProductList = () => {
       }}
     >
       <Button
+        onClick={() => filterProductsByCategory(1)}
         sx={{
           width: "50%",
           backgroundColor: theme.contrastColor,
@@ -48,6 +66,7 @@ export const ProductList = () => {
         Arbetsbänkar
       </Button>
       <Button
+        onClick={() => filterProductsByCategory(2)}
         sx={{
           backgroundColor: theme.contrastColor,
           color: theme.secondaryColor,
@@ -57,6 +76,7 @@ export const ProductList = () => {
         Tillbehör
       </Button>
       <Button
+        onClick={() => resetFiltering()}
         sx={{
           width: "50%",
           backgroundColor: theme.contrastColor,
@@ -76,7 +96,7 @@ export const ProductList = () => {
           alignItems: "center",
         }}
       >
-        {products?.data.map((product, index) => (
+        {filteredProducts?.map((product, index) => (
           <Box key={product.id}>
             <ProductCard
               productAttributes={product.attributes}
@@ -84,6 +104,15 @@ export const ProductList = () => {
             />
           </Box>
         ))}
+        {!filteredProducts &&
+          products?.data.map((product, index) => (
+            <Box key={product.id}>
+              <ProductCard
+                productAttributes={product.attributes}
+                productId={product.id}
+              />
+            </Box>
+          ))}
       </Container>
     </Box>
   );

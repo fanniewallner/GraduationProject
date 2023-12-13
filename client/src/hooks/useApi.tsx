@@ -16,8 +16,14 @@ export default function useApi(url?: string) {
         "/api/products?populate=*"
       );
     },
+    getProductsByFiltering: async () => {
+      return axiosInstance.get<IStrapiResponse<IProduct>>(
+        "/api/products?populate=*"
+      );
+    },
+
     getProductById: async (id: string) => {
-      return axiosInstance.get<IProduct>(`/api/products/${id}`);
+      return axiosInstance.get<IProduct>(`/api/products/${id}?populate=*`);
     },
     getContactInfo: async () => {
       return axiosInstance.get<IContact>("/api/contact");

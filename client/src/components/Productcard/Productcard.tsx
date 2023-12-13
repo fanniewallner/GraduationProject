@@ -26,11 +26,6 @@ export default function ProductCard({
       navigate(`/produktkatalog/${productId}`);
     }
   };
-
-  console.log(productId);
-  console.log(productAttributes);
-  //console.log(product.product.image.data.attributes.formats.small.url);
-  //let imageUrl = productAttributes.image.data.attributes.formats.small.hash;
   return (
     <Card sx={{ width: 330, minHeight: 300 }}>
       <CardMedia
@@ -41,14 +36,7 @@ export default function ProductCard({
         onError={(e) => console.error("Error loading image:", e)}
       />
       <CardContent>
-        <Typography
-          color={theme.contrastColor}
-          gutterBottom
-          variant="h5"
-          component="div"
-          display="flex"
-          flexWrap="wrap"
-        >
+        <Typography color={theme.contrastColor} variant="h5">
           {productAttributes.title}
         </Typography>
         <Typography color={theme.contrastColor} variant="body2">
