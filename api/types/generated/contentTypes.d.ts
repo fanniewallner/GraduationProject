@@ -788,6 +788,37 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
 }
 
+export interface ApiPurchaseConditionPurchaseCondition
+  extends Schema.SingleType {
+  collectionName: 'purchase_conditions';
+  info: {
+    singularName: 'purchase-condition';
+    pluralName: 'purchase-conditions';
+    displayName: 'PurchaseCondition';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::purchase-condition.purchase-condition',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::purchase-condition.purchase-condition',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -807,6 +838,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::contact.contact': ApiContactContact;
       'api::product.product': ApiProductProduct;
+      'api::purchase-condition.purchase-condition': ApiPurchaseConditionPurchaseCondition;
     }
   }
 }

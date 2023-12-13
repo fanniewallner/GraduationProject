@@ -37,7 +37,11 @@ export const Home = () => {
           />
           <Box className={styles.heroContainer__text}>
             <Typography variant="h6" color={theme.secondaryColor}>
-              Portabla arbetsbänkar tillverkade i Sverige
+              Portabla{" "}
+              <Typography variant="h6" color={theme.contrastColor}>
+                arbetsbänkar
+              </Typography>
+              tillverkade i Sverige
             </Typography>
             <Button
               sx={{
@@ -48,20 +52,20 @@ export const Home = () => {
             >
               Till produktkatalogen
             </Button>
-            <Box sx={{ py: "1rem" }}>
-              <Typography color={theme.secondaryColor}>
-                "Det ska vara lätt att jobba rätt".
-              </Typography>
-              <Typography color={theme.secondaryColor}>
-                XTools tillverkar portabla arbetsbänkar för hantverkare som
-                tröttnat att arbeta på golvet eller på tillfälliga arbetsbockar
-                och bänkar. En bra arbetsbänk skapar möjlighet för en trevligare
-                och mer ergonomisk arbetsmiljö.Bänken kommer med fiffiga
-                funktioner och kan dessutom kompletteras med tillbehör som
-                passar just din profession. Detta möjliggör ett mer
-                tidseffektivt arbete och ett snyggt slutresultat.
-              </Typography>
-            </Box>
+          </Box>
+          <Box>
+            <Typography color={theme.secondaryColor}>
+              "Det ska vara lätt att jobba rätt".
+            </Typography>
+            <Typography color={theme.secondaryColor}>
+              XTools tillverkar portabla arbetsbänkar för hantverkare som
+              tröttnat att arbeta på golvet eller på tillfälliga arbetsbockar
+              och bänkar. En bra arbetsbänk skapar möjlighet för en trevligare
+              och mer ergonomisk arbetsmiljö.Bänken kommer med fiffiga
+              funktioner och kan dessutom kompletteras med tillbehör som passar
+              just din profession. Detta möjliggör ett mer tidseffektivt arbete
+              och ett snyggt slutresultat.
+            </Typography>
           </Box>
         </Box>
 
