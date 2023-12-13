@@ -1,5 +1,5 @@
 import Carousel from "react-material-ui-carousel";
-import Productcard from "../Productcard/Productcard";
+import Productcard from "../ProductSlideComponent/ProductSlideComponent";
 import { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import useApi from "../../hooks/useApi";

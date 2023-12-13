@@ -22,7 +22,7 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
-  { label: "Produktkatalog", path: "/produkter" },
+  { label: "Produktkatalog", path: "/produktkatalog" },
   { label: "Om Xtools", path: "/om-oss" },
   { label: "Kontakt", path: "/kontakt" },
   { label: "Köpvillkor", path: "/kopvillkor" },

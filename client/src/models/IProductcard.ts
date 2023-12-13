@@ -6,6 +6,9 @@ export type IProduct = {
           thumbnail: {
             url: string;
           };
+          small: {
+            url: string;
+          };
         };
       };
     };
