@@ -3,5 +3,5 @@ export const colors = {
   secondaryBackgroundColor: "#556c56",
   primaryColor: "#556c56",
   secondaryColor: "#ffffff",
-  contrastColor: "#ffffff",
+  contrastColor: "#AB8673",
 };

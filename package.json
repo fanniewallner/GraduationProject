@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^19.2.0"
+  }
+}

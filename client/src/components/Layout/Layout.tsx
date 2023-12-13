@@ -1,14 +1,50 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import { ThemeProvider } from "../../contexts/ThemeContext";
+import { Box, Fab, Zoom, useMediaQuery } from "@mui/material";
+import { useTheme } from "../../contexts/ThemeContext";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import styles from "./Layout.module.scss";
+import { Footer } from "../Footer/Footer";
+interface LayoutProps {
+  window?: () => Window;
+}
+export const Layout = (props: LayoutProps) => {
+  const { theme } = useTheme();
 
-export const Layout = () => {
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const trigger = useScrollTrigger({
+    target: props.window ? props.window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
   return (
-    <>
-      <ThemeProvider>
-        <Navbar />
-        <Outlet />
-      </ThemeProvider>
-    </>
+    <Box className={styles.layoutWrapper}>
+      <Navbar />
+      <Outlet />
+      <Footer />
+      <Zoom in={trigger} unmountOnExit>
+        <Fab
+          size="small"
+          className={styles.fabIcon}
+          onClick={handleScrollTop}
+          sx={{
+            position: "fixed",
+            color: theme.secondaryColor,
+            backgroundColor: theme.contrastColor,
+            bottom: "5%",
+            right: "10%",
+          }}
+        >
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </Zoom>
+    </Box>
   );
 };

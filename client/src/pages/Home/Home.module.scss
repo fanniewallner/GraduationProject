@@ -1,0 +1,71 @@
+.logoContainer {
+  z-index: 3;
+  display: flex;
+  padding-top: 30%;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  @media only screen and (min-width: 800px) {
+    padding-top: 10%;
+    align-items: flex-start;
+  }
+
+  &.scroll {
+    top: 0;
+    left: 15%;
+    align-items: flex-start;
+    height: 30px;
+  }
+}
+
+.logoImg {
+  height: auto;
+  width: auto;
+  transition: all 0.2s;
+
+  @media only screen and (min-width: 800px) {
+    height: 500px;
+  }
+}
+
+.buttonContainer {
+  top: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flexContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  gap: 3rem;
+
+  @media only screen and (min-width: 800px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5rem;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}
