@@ -4,8 +4,9 @@ import { Container, useMediaQuery } from "@mui/material";
 import useApi from "../../hooks/useApi";
 import { IProduct } from "../../models/IProductcard";
 import { IStrapiResponse } from "../../models/IStrapiResponse";
-import ProductCard from "../ProductCard/ProductCard";
+
 import { useTheme } from "../../contexts/ThemeContext";
+import ProductCard from "../ProductCard/ProductCard";
 
 export const MuiCarousel = () => {
   const { theme } = useTheme();
