@@ -26,18 +26,19 @@ export default function ProductCard({
       navigate(`/produktkatalog/${productId}`);
     }
   };
+
   return (
     <Card sx={{ width: 330, minHeight: 300 }}>
       <CardMedia
         component="img"
-        alt={productAttributes.title}
+        alt={productAttributes.name}
         height="200"
         image={`http://localhost:1337${productAttributes?.image?.data?.attributes?.formats?.small?.url}`}
         onError={(e) => console.error("Error loading image:", e)}
       />
       <CardContent>
         <Typography color={theme.contrastColor} variant="h5">
-          {productAttributes.title}
+          {productAttributes.name}
         </Typography>
         <Typography color={theme.contrastColor} variant="body2">
           {productAttributes.price} kr exkl. moms

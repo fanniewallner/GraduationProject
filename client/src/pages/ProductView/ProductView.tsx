@@ -15,10 +15,10 @@ export const ProductView = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!id || isNaN(Number(id))) {
+        if (!id) {
+          setLoading(true);
           throw new Error("Invalid product ID");
         }
-
         const response = await api.getProductById(id);
         setProduct(response.data);
       } catch (error) {
@@ -31,7 +31,7 @@ export const ProductView = () => {
     fetchData();
   }, [id]);
 
-  /*   console.log(product, "PROD VIEW"); */
+  console.log(product);
 
   if (loading) {
     return <CircularProgress />;
@@ -48,10 +48,8 @@ export const ProductView = () => {
           <Container>
             <img src={product?.image?.data?.attributes?.formats?.medium?.url} />
           </Container>
-          <Typography sx={{ color: "white" }}>
-            {product.specification}
-          </Typography>
-          <Typography>hejhejhej</Typography>
+          <Typography sx={{ color: "white" }}>{product.name}</Typography>
+          <Typography>hejhejhej tjotjo</Typography>
           <Typography color="white">{product.description}</Typography>
         </>
       )}

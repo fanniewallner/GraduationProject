@@ -5,6 +5,7 @@ import useApi from "../../hooks/useApi";
 import { IProduct } from "../../models/IProductcard";
 import { IStrapiResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
+import styles from "./ProductList.module.scss";
 
 export const ProductList = () => {
   const { theme } = useTheme();
@@ -12,7 +13,7 @@ export const ProductList = () => {
   const [products, setProducts] = useState<
     IStrapiResponse<IProduct> | undefined
   >();
-  const [filteredCategory, setFilteredCategory] = useState<number | null>();
+  const [filteredCategory, setFilteredCategory] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,58 +45,26 @@ export const ProductList = () => {
   console.log("FILTERING", filteredProducts);
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        pt: "6rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "1rem",
-        pb: "1rem",
-      }}
-    >
+    <Box className={styles.productListWrapper}>
       <Button
+        className={styles.productListWrapper__filterButtons}
         onClick={() => filterProductsByCategory(1)}
-        sx={{
-          width: "50%",
-          backgroundColor: theme.contrastColor,
-          color: theme.secondaryColor,
-        }}
       >
         Arbetsbänkar
       </Button>
       <Button
+        className={styles.productListWrapper__filterButtons}
         onClick={() => filterProductsByCategory(2)}
-        sx={{
-          backgroundColor: theme.contrastColor,
-          color: theme.secondaryColor,
-          width: "50%",
-        }}
       >
         Tillbehör
       </Button>
       <Button
+        className={styles.productListWrapper__filterButtons}
         onClick={() => resetFiltering()}
-        sx={{
-          width: "50%",
-          backgroundColor: theme.contrastColor,
-          color: theme.secondaryColor,
-        }}
       >
         Alla produkter
       </Button>
-      <Typography variant="h6" color={theme.secondaryColor}>
-        Nu visas xx produkter
-      </Typography>
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          alignItems: "center",
-        }}
-      >
+      <Container className={styles.productListWrapper__productWrapper}>
         {filteredProducts?.map((product, index) => (
           <Box key={product.id}>
             <ProductCard

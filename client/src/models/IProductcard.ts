@@ -22,7 +22,7 @@ export type IProduct = {
       };
     };
   };
-  title: string;
+  name: string;
   price: string;
   description: string;
   specification: string;

@@ -22,7 +22,7 @@ export default function ProductSlideComponent({ product }: ProductcardProps) {
             width="200"
             height="200"
             image={`http://localhost:1337${imageUrl}`}
-            alt={product.title}
+            alt={product.name}
             onClick={() => navigate(`/produkt/${product.id}`)}
           />
         </CardActionArea>
