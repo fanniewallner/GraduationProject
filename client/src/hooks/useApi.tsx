@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AppConfigContext } from "../contexts/ApiContext";
 import axios from "axios";
 import {
+  IStrapiContactResponse,
   IStrapiListResponse,
   IStrapiSingleResponse,
 } from "../models/IStrapiResponse";
@@ -27,7 +28,7 @@ export default function useApi(url?: string) {
       );
     },
     getContactInfo: async () => {
-      return axiosInstance.get<IContact>("/api/contact");
+      return axiosInstance.get<IStrapiContactResponse>("/api/contact");
     },
   };
   return api;

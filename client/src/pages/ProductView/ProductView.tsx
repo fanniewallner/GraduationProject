@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi";
-import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Typography,
+} from "@mui/material";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
+import { useTheme } from "../../contexts/ThemeContext";
 
 export const ProductView = () => {
   const { id } = useParams();
+  const { theme } = useTheme();
   const api = useApi();
   const [product, setProduct] = useState<IStrapiSingleResponse>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,7 +38,10 @@ export const ProductView = () => {
     fetchData();
   }, [id]);
 
-  console.log(product);
+  console.log(product?.data.attributes.specification);
+
+  const specs = product?.data.attributes.specification;
+  const formattedSpecs = specs?.replace("n/", "\n");
 
   if (loading) {
     return <CircularProgress />;
@@ -41,22 +52,54 @@ export const ProductView = () => {
   }
 
   return (
-    <Box sx={{ minHeight: "100vh", py: "5rem" }}>
+    <Container
+      sx={{
+        minHeight: "100vh",
+        py: "5rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+      }}
+    >
       {product && (
         <>
           <Container>
-            <img
-              src={`http://localhost:1337${product?.data.attributes.image.data.attributes.formats.small.url}`}
-            />
+            <Box sx={{ width: "90%" }}>
+              <img
+                width="100%"
+                height="auto"
+                src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
+              />
+            </Box>
           </Container>
-          <Typography sx={{ color: "white" }}>
+          <Typography color={theme.secondaryColor}>
             {product.data.attributes.name}
           </Typography>
-          <Typography color="white">
+          <Typography color={theme.secondaryColor}>
+            {product.data.attributes.price} kr exkl. moms
+          </Typography>
+          {product.data.attributes.stockStatus ?? (
+            <Typography variant="h6">
+              {product.data.attributes.stockStatus}
+            </Typography>
+          )}
+          <Typography color={theme.secondaryColor}>
             {product.data.attributes.description}
+          </Typography>
+          <Box>
+            <Typography color={theme.secondaryColor}>
+              Specifikationer:
+            </Typography>
+            <Typography color={theme.secondaryColor}>
+              {product.data.attributes.specification}
+            </Typography>
+          </Box>
+          <Button>Skicka köpförfrågan</Button>
+          <Typography>
+            Formulär här i modal när knapp klickad, snackbar när skickat
           </Typography>
         </>
       )}
-    </Box>
+    </Container>
   );
 };

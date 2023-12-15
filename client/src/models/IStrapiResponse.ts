@@ -1,3 +1,4 @@
+import { IContact } from "./IContact";
 import { IProduct } from "./IProduct";
 
 export type IStrapiSingleResponse = {
@@ -22,4 +23,9 @@ export type IStrapiListResponse = {
       total: number;
     };
   };
+};
+
+export type IStrapiContactResponse = {
+  data: IContact;
+  meta: {};
 };

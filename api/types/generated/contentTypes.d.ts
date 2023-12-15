@@ -730,6 +730,8 @@ export interface ApiContactContact extends Schema.SingleType {
     website: Attribute.String;
     freeText: Attribute.Text;
     phonenumber: Attribute.String;
+    pickup: Attribute.Text;
+    companyInfo: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -770,6 +772,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
+    stockStatus: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

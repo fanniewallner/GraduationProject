@@ -27,6 +27,12 @@
     },
     "phonenumber": {
       "type": "string"
+    },
+    "pickup": {
+      "type": "text"
+    },
+    "companyInfo": {
+      "type": "text"
     }
   }
 }

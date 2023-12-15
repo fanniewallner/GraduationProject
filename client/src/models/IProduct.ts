@@ -8,6 +8,7 @@ export type IProduct = {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
+    stockStatus?: string;
     image: {
       data: {
         attributes: {

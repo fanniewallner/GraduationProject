@@ -8,20 +8,21 @@ import { IContact } from "../../models/IContact";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
+import { IStrapiContactResponse } from "../../models/IStrapiResponse";
 
 export const Footer = () => {
   const { theme } = useTheme();
   const api = useApi();
   const [loading, setLoading] = useState(false);
-  const [contactData, setContactData] = useState<IContact>();
+  const [contactData, setContactData] = useState<IStrapiContactResponse>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await api.getContactInfo();
         setContactData(response.data);
-        /*         console.log("kontaktstate", contactData);
-        console.log("API RESPONSE", response.data); */
+        console.log("kontaktstate", contactData);
+        console.log("API RESPONSE", response.data);
       } catch (error) {
         console.log(error);
       }

@@ -41,7 +41,15 @@ export default function ProductCard({ product }: IProductCardProps) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={handleRedirect}>Mer info</Button>
+          <Button
+            sx={{
+              backgroundColor: theme.contrastColor,
+              color: theme.secondaryColor,
+            }}
+            onClick={handleRedirect}
+          >
+            Mer info
+          </Button>
         </CardActions>
       </Card>
     </>
