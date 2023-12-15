@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { AppConfigContext } from "../contexts/ApiContext";
 import axios from "axios";
-import { IProduct } from "../models/IProductcard";
-import { IStrapiResponse } from "../models/IStrapiResponse";
+import {
+  IStrapiListResponse,
+  IStrapiSingleResponse,
+} from "../models/IStrapiResponse";
 import { IContact } from "../models/IContact";
+import { IProduct } from "../models/IProduct";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);
@@ -12,18 +15,16 @@ export default function useApi(url?: string) {
   });
   const api = {
     getProducts: async () => {
-      return axiosInstance.get<IStrapiResponse<IProduct>>(
-        "/api/products?populate=*"
-      );
+      return axiosInstance.get<IStrapiListResponse>("/api/products?populate=*");
     },
     getProductsByFiltering: async () => {
-      return axiosInstance.get<IStrapiResponse<IProduct>>(
-        "/api/products?populate=*"
-      );
+      return axiosInstance.get<IStrapiListResponse>("/api/products?populate=*");
     },
 
     getProductById: async (id: string) => {
-      return axiosInstance.get<IProduct>(`/api/products/${id}?populate=*`);
+      return axiosInstance.get<IStrapiSingleResponse>(
+        `/api/products/${id}?populate=*`
+      );
     },
     getContactInfo: async () => {
       return axiosInstance.get<IContact>("/api/contact");

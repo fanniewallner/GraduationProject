@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi";
-import { IStrapiResponse } from "../../models/IStrapiResponse";
-import { IProduct } from "../../models/IProductcard";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 
 export const ProductView = () => {
   const { id } = useParams();
   const api = useApi();
-  const [product, setProduct] = useState<IProduct>();
+  const [product, setProduct] = useState<IStrapiSingleResponse>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,11 +45,16 @@ export const ProductView = () => {
       {product && (
         <>
           <Container>
-            <img src={product?.image?.data?.attributes?.formats?.medium?.url} />
+            <img
+              src={`http://localhost:1337${product?.data.attributes.image.data.attributes.formats.small.url}`}
+            />
           </Container>
-          <Typography sx={{ color: "white" }}>{product.name}</Typography>
-          <Typography>hejhejhej tjotjo</Typography>
-          <Typography color="white">{product.description}</Typography>
+          <Typography sx={{ color: "white" }}>
+            {product.data.attributes.name}
+          </Typography>
+          <Typography color="white">
+            {product.data.attributes.description}
+          </Typography>
         </>
       )}
     </Box>
