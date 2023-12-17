@@ -1,4 +1,4 @@
-import { Container, Box, Typography, Button, Link } from "@mui/material";
+import { Container, Typography, Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
 import styles from "./ErrorPage.module.scss";
@@ -34,6 +34,15 @@ export const ErrorPage = () => {
         >
           produktkatalogen.
         </Link>
+        Eller kika vidare på{" "}
+        <Link
+          style={{ color: theme.secondaryColor, textDecoration: "underline" }}
+          component={Link}
+          href="/"
+        >
+          startsidan
+        </Link>{" "}
+        vet jag!
       </Typography>
       <Typography color={theme.secondaryColor}>
         Vill du ha kontakt med oss? Mejla oss på kreativasnickare@gmail.com
