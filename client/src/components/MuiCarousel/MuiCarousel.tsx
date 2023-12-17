@@ -1,17 +1,19 @@
 import Carousel from "react-material-ui-carousel";
-import Productcard from "../Productcard/Productcard";
 import { useState, useEffect } from "react";
-import { Container } from "@mui/material";
+import { Container, useMediaQuery } from "@mui/material";
 import useApi from "../../hooks/useApi";
-import { IProduct } from "../../models/IProductcard";
-import { IStrapiResponse } from "../../models/IStrapiResponse";
+
+import { useTheme } from "../../contexts/ThemeContext";
+import { IStrapiListResponse } from "../../models/IStrapiResponse";
+import ProductCard from "../ProductCardComponent/ProductCardComponent";
 
 export const MuiCarousel = () => {
+  const { theme } = useTheme();
+  const { breakpoints } = useTheme().theme;
+  const isMobile = useMediaQuery(`(max-width: ${breakpoints.sm}px)`);
   const [currentIndex, setCurrentIndex] = useState(0);
   const api = useApi();
-  const [products, setProducts] = useState<
-    IStrapiResponse<IProduct> | undefined
-  >();
+  const [products, setProducts] = useState<IStrapiListResponse>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,23 +23,26 @@ export const MuiCarousel = () => {
       } catch (error) {
         console.log(error);
       }
-      console.log("produkter state", products);
     };
 
     fetchData();
   }, []);
 
+  const slides = isMobile ? 1 : 3;
+
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < (products?.data.length ?? 0) - 1 ? prevIndex + 1 : 0
+      prevIndex < (products?.data.length ?? 0) - slides ? prevIndex + slides : 0
     );
   };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : (products?.data.length ?? 1) - 1
+      prevIndex > 0 ? prevIndex - slides : (products?.data.length ?? 1) - slides
     );
   };
+
+  console.log(products);
 
   return (
     <Carousel
@@ -51,21 +56,29 @@ export const MuiCarousel = () => {
       prev={handlePrev}
       animation="slide"
       index={currentIndex}
+      indicators
+      navButtonsAlwaysVisible
+      IndicatorIcon
     >
-      {Array.isArray(products?.data) &&
-        products?.data.map(
-          (
-            { attributes, id }: { attributes: IProduct; id: number },
-            index: number
-          ) => (
-            <Container
-              key={index}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
-              <Productcard product={attributes} />
-            </Container>
-          )
-        )}
+      {Array.isArray(products?.data) && (
+        <Container
+          key={currentIndex}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: isMobile ? 0 : "1rem",
+          }}
+        >
+          {Array.from({ length: slides }).map((_, i) => {
+            const productIndex =
+              (currentIndex + i) % (products?.data.length ?? 1);
+            const { attributes, id } = products?.data[productIndex] ?? {};
+            return (
+              <ProductCard key={i} product={products.data[productIndex]} />
+            );
+          })}
+        </Container>
+      )}
     </Carousel>
   );
 };

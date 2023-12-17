@@ -1,53 +1,13 @@
-/* 
-import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
-import { useEffect, useState } from "react";
-import { IStrapiResponse } from "../models/IStrapiResponse";
-import { IContact } from "../models/IContact";
-
-export const PRODUCT_ENDPOINT = "/api/products?populate=*";
-export const CONTACT_ENDPOINT = "/api/contact";
-
-function useApi<T>(uri: string, options?: AxiosRequestConfig) {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<unknown>();
-
-  const url = `http://localhost:1337${uri}`;
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get<T>(url, options);
-      setData(response.data);
-    } catch (error: unknown) {
-      setError(error);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return { data, loading, error };
-}
-
-export const getContactInfo = async (uri: string): Promise<IContact> => {
-  const url = `http://localhost:1337${uri}`;
-  const response = await axios.get(url);
-  return response.data;
-};
-
-
-export default useApi;
- */
-
 import { useContext } from "react";
 import { AppConfigContext } from "../contexts/ApiContext";
 import axios from "axios";
-import { IProduct } from "../models/IProductcard";
-import { IStrapiResponse } from "../models/IStrapiResponse";
+import {
+  IStrapiContactResponse,
+  IStrapiListResponse,
+  IStrapiSingleResponse,
+} from "../models/IStrapiResponse";
 import { IContact } from "../models/IContact";
+import { IProduct } from "../models/IProduct";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);
@@ -56,15 +16,19 @@ export default function useApi(url?: string) {
   });
   const api = {
     getProducts: async () => {
-      return axiosInstance.get<IStrapiResponse<IProduct>>(
-        "/api/products?populate=*"
+      return axiosInstance.get<IStrapiListResponse>("/api/products?populate=*");
+    },
+    getProductsByFiltering: async () => {
+      return axiosInstance.get<IStrapiListResponse>("/api/products?populate=*");
+    },
+
+    getProductById: async (id: string) => {
+      return axiosInstance.get<IStrapiSingleResponse>(
+        `/api/products/${id}?populate=*`
       );
     },
-    getProductById: async (id: string) => {
-      return axiosInstance.get<IProduct>(`/api/products/${id}`);
-    },
     getContactInfo: async () => {
-      return axiosInstance.get<IContact>("/api/contact");
+      return axiosInstance.get<IStrapiContactResponse>("/api/contact");
     },
   };
   return api;
