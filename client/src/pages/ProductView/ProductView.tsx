@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
+import Modal from "../../components/Modal/Modal";
 
 export const ProductView = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ export const ProductView = () => {
   const [product, setProduct] = useState<IStrapiSingleResponse>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +39,14 @@ export const ProductView = () => {
 
     fetchData();
   }, [id]);
+
+  const handleClickOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
   console.log(product?.data.attributes.specification);
 
@@ -94,7 +104,8 @@ export const ProductView = () => {
               {product.data.attributes.specification}
             </Typography>
           </Box>
-          <Button>Skicka köpförfrågan</Button>
+          <Button onClick={handleClickOpen}>Skicka köpförfrågan</Button>
+          <Modal open={openModal} handleClose={handleClose} />
           <Typography>
             Formulär här i modal när knapp klickad, snackbar när skickat
           </Typography>
