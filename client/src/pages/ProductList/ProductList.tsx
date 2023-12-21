@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   Typography,
   useMediaQuery,
@@ -22,8 +23,10 @@ export const ProductList = () => {
   const [filteredCategory, setFilteredCategory] = useState<number | null>(null);
   const [sorting, setSorting] = useState<number | null>(null);
   const { search } = window.location;
-  const [filteredAndSortedProducts, setFilteredAndSortedProducts] =
-    useState<IProduct[]>();
+  const [loading, setLoading] = useState(true);
+  const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<
+    IProduct[] | null
+  >(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +35,8 @@ export const ProductList = () => {
         setProducts(response.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -40,6 +45,8 @@ export const ProductList = () => {
 
   useEffect(() => {
     filterAndSortProducts();
+    console.log("filtered", filteredAndSortedProducts);
+    console.log("products", products?.data);
   }, [filteredCategory, sorting]);
 
   const filterAndSortProducts = () => {
@@ -84,7 +91,8 @@ export const ProductList = () => {
     const params = new URLSearchParams(search);
     setFilteredCategory(null);
     params.delete("category");
-    window.location.search = params.toString();
+    setFilteredAndSortedProducts(null);
+    window.history.replaceState({}, "", `?${params.toString()}`);
   };
 
   return (
@@ -99,12 +107,6 @@ export const ProductList = () => {
           width: isMobile ? "100%" : "20%",
         }}
       >
-        <Typography>
-          {filteredAndSortedProducts?.map((product) => (
-            <Typography>{product.attributes.name}</Typography>
-          ))}
-        </Typography>
-        <Typography>{sorting}</Typography>
         <Button
           sx={{
             backgroundColor: theme.contrastColor,
@@ -137,27 +139,31 @@ export const ProductList = () => {
         </Button>
       </Container>
       <FilteringComponent filter={sorting} setFilter={setSorting} />
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-        className={styles.productListWrapper__productWrapper}
-      >
-        {filteredAndSortedProducts
-          ? filteredAndSortedProducts?.map((product) => (
-              <Box key={product.id}>
-                <ProductCard product={product} />
-              </Box>
-            ))
-          : products?.data.map((product) => (
-              <Box key={product.id}>
-                <ProductCard product={product} />
-              </Box>
-            ))}
-      </Container>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+          className={styles.productListWrapper__productWrapper}
+        >
+          {filteredAndSortedProducts !== null
+            ? filteredAndSortedProducts?.map((product) => (
+                <Box key={product.id}>
+                  <ProductCard product={product} />
+                </Box>
+              ))
+            : products?.data.map((product) => (
+                <Box key={product.id}>
+                  <ProductCard product={product} />
+                </Box>
+              ))}
+        </Container>
+      )}
     </Container>
   );
 };

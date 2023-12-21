@@ -779,6 +779,40 @@ export interface ApiContactContact extends Schema.SingleType {
   };
 }
 
+export interface ApiContactDetailContactDetail extends Schema.SingleType {
+  collectionName: 'contact_details';
+  info: {
+    singularName: 'contact-detail';
+    pluralName: 'contact-details';
+    displayName: 'ContactDetail';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.Email;
+    phonenumber: Attribute.String;
+    freeText: Attribute.Text;
+    company: Attribute.String;
+    website: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-detail.contact-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-detail.contact-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -870,6 +904,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::company.company': ApiCompanyCompany;
       'api::contact.contact': ApiContactContact;
+      'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
       'api::product.product': ApiProductProduct;
       'api::purchase-condition.purchase-condition': ApiPurchaseConditionPurchaseCondition;
     }
