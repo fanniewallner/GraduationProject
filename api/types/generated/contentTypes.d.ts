@@ -713,6 +713,37 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiCompanyCompany extends Schema.SingleType {
+  collectionName: 'companies';
+  info: {
+    singularName: 'company';
+    pluralName: 'companies';
+    displayName: 'Company';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    pickup: Attribute.Text;
+    companyInfo: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiContactContact extends Schema.SingleType {
   collectionName: 'contacts';
   info: {
@@ -730,8 +761,6 @@ export interface ApiContactContact extends Schema.SingleType {
     website: Attribute.String;
     freeText: Attribute.Text;
     phonenumber: Attribute.String;
-    pickup: Attribute.Text;
-    companyInfo: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -743,6 +772,40 @@ export interface ApiContactContact extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactDetailContactDetail extends Schema.SingleType {
+  collectionName: 'contact_details';
+  info: {
+    singularName: 'contact-detail';
+    pluralName: 'contact-details';
+    displayName: 'ContactDetail';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.Email;
+    phonenumber: Attribute.String;
+    freeText: Attribute.Text;
+    company: Attribute.String;
+    website: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-detail.contact-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-detail.contact-detail',
       'oneToOne',
       'admin::user'
     > &
@@ -839,7 +902,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::category.category': ApiCategoryCategory;
+      'api::company.company': ApiCompanyCompany;
       'api::contact.contact': ApiContactContact;
+      'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
       'api::product.product': ApiProductProduct;
       'api::purchase-condition.purchase-condition': ApiPurchaseConditionPurchaseCondition;
     }

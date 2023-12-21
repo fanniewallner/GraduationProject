@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { colors } from "./ThemeVariables";
-//import { colors } from '../theme/themeVariables';
+
+const colors = {
+  primayBackgroundColor: "#556c56",
+  secondaryBackgroundColor: "#556c56",
+  primaryColor: "#556c56",
+  secondaryColor: "#ffffff",
+  contrastColor: "#AB8673",
+};
 
 interface Theme {
   breakpoints: {
