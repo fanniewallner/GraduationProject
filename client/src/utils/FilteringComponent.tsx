@@ -37,7 +37,7 @@ export default function FilteringComponent({
     } else {
       params.delete("sort");
     }
-    window.location.search = params.toString();
+    window.history.replaceState({}, "", `?${params.toString()}`);
   };
 
   return (

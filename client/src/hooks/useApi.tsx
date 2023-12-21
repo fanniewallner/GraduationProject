@@ -6,8 +6,6 @@ import {
   IStrapiListResponse,
   IStrapiSingleResponse,
 } from "../models/IStrapiResponse";
-import { IContact } from "../models/IContact";
-import { IProduct } from "../models/IProduct";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);

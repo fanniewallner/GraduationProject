@@ -56,7 +56,7 @@ export const ProductList = () => {
         ) || [];
     }
 
-    let sortedList: IProduct[] = filteredList;
+    let sortedList: IProduct[] = [...filteredList];
 
     if (sorting === 3) {
       sortedList.sort((a: IProduct, b: IProduct) =>
@@ -86,16 +86,7 @@ export const ProductList = () => {
     params.delete("category");
     window.location.search = params.toString();
   };
-  /* 
-  const handleCategoryParams = (categoryId: number) => {
-    setFilteredCategory(categoryId);
-    const params = new URLSearchParams(search);
-    if (categoryId !== null) {
-      params.set("category", categoryId.toString());
-      window.location.search = params.toString();
-      filterAndSortProducts();
-    }
-  }; */
+
   return (
     <Container className={styles.productListWrapper}>
       <Container
@@ -108,6 +99,11 @@ export const ProductList = () => {
           width: isMobile ? "100%" : "20%",
         }}
       >
+        <Typography>
+          {filteredAndSortedProducts?.map((product) => (
+            <Typography>{product.attributes.name}</Typography>
+          ))}
+        </Typography>
         <Typography>{sorting}</Typography>
         <Button
           sx={{

@@ -49,8 +49,6 @@ export const ProductView = () => {
     setOpenModal(false);
   };
 
-  console.log(product?.data.attributes.specification);
-
   const specs = product?.data.attributes.specification;
   const formattedSpecs = specs?.replace("n/", "\n");
 
