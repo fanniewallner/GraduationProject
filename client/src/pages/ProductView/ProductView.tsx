@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   CircularProgress,
@@ -12,6 +15,7 @@ import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
 import Modal from "../../components/Modal/Modal";
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
+import { ExpandMore } from "@mui/icons-material";
 
 export const ProductView = () => {
   const { id } = useParams();
@@ -49,8 +53,8 @@ export const ProductView = () => {
     setOpenModal(false);
   };
 
-  const specs = product?.data.attributes.specification;
-  const formattedSpecs = specs?.replace("n/", "\n");
+  /*   const specs = product?.data.attributes.specification;
+  const formattedSpecs = specs?.replace("n/", "\n"); */
 
   if (loading) {
     return <CircularProgress />;
@@ -87,7 +91,7 @@ export const ProductView = () => {
               )}
             </Box>
           </Container>
-          <Typography color={theme.secondaryColor}>
+          <Typography variant="h6" color={theme.secondaryColor}>
             {product.data.attributes.name}
           </Typography>
           <Typography color={theme.secondaryColor}>
@@ -98,19 +102,42 @@ export const ProductView = () => {
               {product.data.attributes.stockStatus}
             </Typography>
           )}
-          <Typography color={theme.secondaryColor}>
-            {product.data.attributes.description}
-          </Typography>
-          <Box>
-            <Typography color={theme.secondaryColor}>
-              Specifikationer:
-            </Typography>
-            <Typography color={theme.secondaryColor}>
-              {product.data.attributes.specification}
-            </Typography>
-          </Box>
+          <Accordion defaultExpanded sx={{ backgroundColor: "transparent" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMore sx={{ color: "white" }} />}
+            >
+              <Typography color={theme.secondaryColor}>
+                Produktbeskrivning
+              </Typography>
+            </AccordionSummary>
+
+            <AccordionDetails>
+              <Typography color={theme.secondaryColor}>
+                {product.data.attributes.description}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion sx={{ backgroundColor: "transparent" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMore sx={{ color: "white" }} />}
+            >
+              <Typography color={theme.secondaryColor}>
+                Specifikationer:
+              </Typography>
+            </AccordionSummary>
+
+            <AccordionDetails>
+              <Typography
+                color={theme.secondaryColor}
+                sx={{ whiteSpace: "pre-line" }}
+              >
+                {product.data.attributes.specification}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
           <Button onClick={handleClickOpen}>Skicka köpförfrågan</Button>
-          <Modal open={openModal} handleClose={handleClose} />
+          <Modal open={openModal} handleClose={handleClose} product={product} />
           <Typography>
             Formulär här i modal när knapp klickad, snackbar när skickat
           </Typography>
