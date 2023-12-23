@@ -26,13 +26,14 @@ export const ProductList = () => {
   const [loading, setLoading] = useState(true);
   const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<
     IProduct[] | null
-  >(null);
+  >();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await api.getProducts();
         setProducts(response.data);
+        setFilteredAndSortedProducts(response.data.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -52,7 +53,7 @@ export const ProductList = () => {
   const filterAndSortProducts = () => {
     const params = new URLSearchParams(search);
     let filteredList: IProduct[] = products?.data || [];
-
+    console.log("FILTRERAD LISTA", filteredList);
     if (filteredCategory) {
       params.set("category", filteredCategory.toString());
       filteredList =
@@ -92,7 +93,7 @@ export const ProductList = () => {
     setFilteredCategory(null);
     params.delete("category");
     setFilteredAndSortedProducts(null);
-    window.history.replaceState({}, "", `?${params.toString()}`);
+    window.history.replaceState({}, "", window.location.pathname);
   };
 
   return (
