@@ -53,9 +53,6 @@ export const ProductView = () => {
     setOpenModal(false);
   };
 
-  /*   const specs = product?.data.attributes.specification;
-  const formattedSpecs = specs?.replace("n/", "\n"); */
-
   if (loading) {
     return <CircularProgress />;
   }
@@ -102,13 +99,24 @@ export const ProductView = () => {
               {product.data.attributes.stockStatus}
             </Typography>
           )}
-          <Accordion defaultExpanded sx={{ backgroundColor: "transparent" }}>
+          <Button
+            sx={{
+              backgroundColor: theme.contrastColor,
+              color: theme.secondaryColor,
+              width: "50%",
+            }}
+            onClick={handleClickOpen}
+          >
+            Skicka köpförfrågan
+          </Button>
+          <Accordion
+            defaultExpanded
+            sx={{ backgroundColor: theme.primaryBackgroundColor }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMore sx={{ color: "white" }} />}
             >
-              <Typography color={theme.secondaryColor}>
-                Produktbeskrivning
-              </Typography>
+              <Typography color="white">Produktbeskrivning</Typography>
             </AccordionSummary>
 
             <AccordionDetails>
@@ -118,7 +126,7 @@ export const ProductView = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion sx={{ backgroundColor: "transparent" }}>
+          <Accordion sx={{ backgroundColor: theme.primaryBackgroundColor }}>
             <AccordionSummary
               expandIcon={<ExpandMore sx={{ color: "white" }} />}
             >
@@ -136,11 +144,7 @@ export const ProductView = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Button onClick={handleClickOpen}>Skicka köpförfrågan</Button>
           <Modal open={openModal} handleClose={handleClose} product={product} />
-          <Typography>
-            Formulär här i modal när knapp klickad, snackbar när skickat
-          </Typography>
         </>
       )}
     </Container>
