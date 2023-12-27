@@ -3,6 +3,7 @@ import { Layout } from "./components/Layout/Layout";
 import { Home } from "./pages/Home/Home";
 import { ProductList } from "./pages/ProductList/ProductList";
 import { ProductView } from "./pages/ProductView/ProductView";
+import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/produktkatalog/:id",
         element: <ProductView />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
       },
     ],
   },
