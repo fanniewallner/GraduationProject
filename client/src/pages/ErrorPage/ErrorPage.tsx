@@ -27,8 +27,8 @@ export const ErrorPage = () => {
         Sidan kunde tyvärr inte hittas..
       </Typography>
       <Typography color={theme.secondaryColor}>
-        Vi arbetar hårt för att få tillbaka den, men under tiden kan du kika
-        vidare på {""}
+        Vi arbetar för att få tillbaka den, men under tiden kan du kika vidare
+        på {""}
         <Link
           style={{ color: theme.secondaryColor, textDecoration: "underline" }}
           component={Link}

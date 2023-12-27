@@ -11,6 +11,7 @@ import {
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
 import Modal from "../../components/Modal/Modal";
+import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 
 export const ProductView = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ export const ProductView = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
-
+  const [brokenImageUrl, setBrokenImageUrl] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,8 +48,6 @@ export const ProductView = () => {
   const handleClose = () => {
     setOpenModal(false);
   };
-
-  console.log(product?.data.attributes.specification);
 
   const specs = product?.data.attributes.specification;
   const formattedSpecs = specs?.replace("n/", "\n");
@@ -79,7 +78,13 @@ export const ProductView = () => {
                 width="100%"
                 height="auto"
                 src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
+                onError={(e) => setBrokenImageUrl(true)}
               />
+              {brokenImageUrl && (
+                <Box>
+                  <BrokenImageIcon />
+                </Box>
+              )}
             </Box>
           </Container>
           <Typography color={theme.secondaryColor}>
