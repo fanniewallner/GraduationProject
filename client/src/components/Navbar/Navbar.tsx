@@ -83,6 +83,13 @@ export default function DrawerAppBar(props: Props) {
         }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
+          {/*  <Box sx={{ display: { xs: "block", sm: "none" } }}>
+            <img
+              src="/xtoolslogo.png"
+              alt="Xtools Logo"
+              style={{ width: "40px", height: "auto" }}
+            />
+          </Box> */}
           <IconButton
             color="inherit"
             aria-label="open drawer"

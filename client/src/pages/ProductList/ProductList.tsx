@@ -140,7 +140,7 @@ export const ProductList = () => {
       </Container>
       <FilteringComponent filter={sorting} setFilter={setSorting} />
       {loading ? (
-        <CircularProgress />
+        <CircularProgress sx={{ color: theme.secondaryColor }} />
       ) : (
         <Container
           sx={{

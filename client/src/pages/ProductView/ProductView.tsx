@@ -73,21 +73,20 @@ export const ProductView = () => {
     >
       {product && (
         <>
-          <Container>
-            <Box sx={{ width: "90%" }}>
-              <img
-                width="100%"
-                height="auto"
-                src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
-                onError={(e) => setBrokenImageUrl(true)}
-              />
-              {brokenImageUrl && (
-                <Box>
-                  <BrokenImageIcon />
-                </Box>
-              )}
-            </Box>
-          </Container>
+          <Box sx={{ width: "100%", p: "0", m: "0" }}>
+            <img
+              width="100%"
+              height="auto"
+              src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
+              onError={(e) => setBrokenImageUrl(true)}
+            />
+            {brokenImageUrl && (
+              <Box>
+                <BrokenImageIcon />
+              </Box>
+            )}
+          </Box>
+          <Container></Container>
           <Typography variant="h6" color={theme.secondaryColor}>
             {product.data.attributes.name}
           </Typography>
@@ -107,16 +106,22 @@ export const ProductView = () => {
             }}
             onClick={handleClickOpen}
           >
-            Skicka köpförfrågan
+            Köp
           </Button>
           <Accordion
             defaultExpanded
-            sx={{ backgroundColor: theme.primaryBackgroundColor }}
+            sx={{
+              backgroundColor: theme.primaryBackgroundColor,
+              boxShadow: "none",
+              borderTop: `2px solid ${theme.secondaryColor}`,
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMore sx={{ color: "white" }} />}
             >
-              <Typography color="white">Produktbeskrivning</Typography>
+              <Typography textTransform={"uppercase"} color="white">
+                Produktbeskrivning
+              </Typography>
             </AccordionSummary>
 
             <AccordionDetails>
@@ -125,12 +130,20 @@ export const ProductView = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-
-          <Accordion sx={{ backgroundColor: theme.primaryBackgroundColor }}>
+          <Accordion
+            sx={{
+              backgroundColor: theme.primaryBackgroundColor,
+              boxShadow: "none",
+              borderTop: `2px solid ${theme.secondaryColor}`,
+            }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMore sx={{ color: "white" }} />}
             >
-              <Typography color={theme.secondaryColor}>
+              <Typography
+                textTransform={"uppercase"}
+                color={theme.secondaryColor}
+              >
                 Specifikationer:
               </Typography>
             </AccordionSummary>

@@ -7,11 +7,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link, Select, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { PurchaseInquiry } from "../../models/PurchaseInquiry";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
+import { MenuItem } from "@mui/base";
 
 type IModalProps = {
   open: boolean;
@@ -23,7 +24,10 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
   const { handleSubmit, formState, register, reset } =
     useForm<PurchaseInquiry>();
   const [isChecked, setIsChecked] = useState<boolean>(false);
-
+  const [amount, setAmount] = useState<number>(1);
+  const [totalPrice, setTotalPrice] = useState<number>(
+    parseInt(product.data.attributes.price)
+  );
   const formValid =
     !formState.errors.amount &&
     !formState.errors.checked &&
@@ -33,6 +37,10 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
     !formState.errors.phonenumber &&
     !formState.errors.productId &&
     !formState.errors.productname;
+
+  /*   const handleChangeOfAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event?.target.value;
+  }; */
 
   const handleCheckbox = () => {
     setIsChecked(!isChecked);
@@ -51,16 +59,14 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
           <DialogContentText>
             <Typography>{product.data.attributes.name}</Typography>
             <Typography>Antal:</Typography>
-            <Typography>
-              Totalt pris: {product.data.attributes.price} kr exkl. moms
-            </Typography>
+            <Typography>Totalt pris: {totalPrice} kr exkl. moms</Typography>
           </DialogContentText>
           <form>
-            <TextField
-              helperText={formState.errors.amount?.message}
+            <Select
+              //helperText={formState.errors.amount?.message}
               error={formState.errors.amount != undefined}
-              margin="normal"
               fullWidth
+              value={amount}
               label="Antal"
               autoFocus
               type="number"
@@ -68,7 +74,10 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               {...register("amount", {
                 required: "Du måste ange det här fältet",
               })}
-            />
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+            </Select>
             <TextField
               helperText={formState.errors.firstname?.message}
               error={formState.errors.firstname != undefined}
@@ -134,7 +143,9 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               id="message"
               {...register("message")}
             />
+
             <TextField
+              sx={{ display: "none" }}
               helperText={formState.errors.productId?.message}
               error={formState.errors.productId != undefined}
               margin="normal"
@@ -146,6 +157,7 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               {...register("productId")}
             />
             <TextField
+              sx={{ display: "none" }}
               helperText={formState.errors.productname?.message}
               error={formState.errors.productname != undefined}
               margin="normal"
@@ -156,35 +168,40 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               id="productname"
               {...register("productname")}
             />
+            <Typography fontSize={"14px"}>
+              Köpet är inte bindande förrän bekräftelse från XTools mottagits
+            </Typography>
           </form>
         </DialogContent>
         <DialogActions>
           <Box>
-            <Checkbox onChange={handleCheckbox} checked={isChecked} />
-            <Typography>
-              Jag har läst och godkänner{" "}
-              <Link sx={{ color: "black" }}>köpvillkoren</Link>
-            </Typography>
-          </Box>
+            <Box sx={{ display: "flex" }}>
+              <Checkbox onChange={handleCheckbox} checked={isChecked} />
+              <Typography>
+                Jag har läst och godkänner{" "}
+                <Link sx={{ color: "black" }}>köpvillkoren</Link>
+              </Typography>
+            </Box>
 
-          <Button onClick={handleClose}>Stäng</Button>
-          <Button
-            onClick={handleSubmit((data) => {
-              console.log(data);
-              reset({
-                amount: 0,
-                firstname: "",
-                lastname: "",
-                email: "",
-                phonenumber: 0,
-                message: "",
-              });
-              handleCheckbox();
-            })}
-            disabled={formState.isSubmitting || !isChecked || !formValid}
-          >
-            Skicka
-          </Button>
+            <Button onClick={handleClose}>Stäng</Button>
+            <Button
+              onClick={handleSubmit((data) => {
+                console.log(data);
+                reset({
+                  amount: 0,
+                  firstname: "",
+                  lastname: "",
+                  email: "",
+                  phonenumber: 0,
+                  message: "",
+                });
+                handleCheckbox();
+              })}
+              disabled={formState.isSubmitting || !isChecked || !formValid}
+            >
+              Skicka
+            </Button>
+          </Box>
         </DialogActions>
       </Dialog>
     </React.Fragment>
