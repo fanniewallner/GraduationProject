@@ -29,32 +29,57 @@ export const ProductList = () => {
   >();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.getProducts();
-        setProducts(response.data);
-        setFilteredAndSortedProducts(response.data.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
+    try {
+      const productsFromLS = localStorage.getItem(
+        "filteredAndSortedProductList"
+      );
+      if (productsFromLS && JSON.parse(productsFromLS).length > 0) {
+        console.log("FROM LS", productsFromLS);
+        const previousProducts = JSON.parse(productsFromLS);
+        setProducts({ data: previousProducts });
+        setFilteredAndSortedProducts(previousProducts);
+        console.log("LS", products);
+      } else {
+        console.log("ELSE - hämtat data", products);
+        fetchData();
       }
-    };
-
-    fetchData();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  const fetchData = async () => {
+    const response = await api.getProducts();
+    const responseData = response.data.data;
+
+    setProducts(response.data);
+    setFilteredAndSortedProducts(responseData);
+    localStorage.setItem(
+      "filteredAndSortedProductList",
+      JSON.stringify(responseData)
+    );
+  };
 
   useEffect(() => {
     filterAndSortProducts();
-    console.log("filtered", filteredAndSortedProducts);
-    console.log("products", products?.data);
   }, [filteredCategory, sorting]);
 
   const filterAndSortProducts = () => {
     const params = new URLSearchParams(search);
     let filteredList: IProduct[] = products?.data || [];
-    console.log("FILTRERAD LISTA", filteredList);
-    if (filteredCategory) {
+
+    //const productsFromLS = localStorage.getItem("filteredAndSortedProductList");
+
+    /*     if (productsFromLS && JSON.parse(productsFromLS).length > 0) {
+      const previousProducts = JSON.parse(productsFromLS);
+      setFilteredAndSortedProducts(previousProducts);
+      return;
+    } */
+
+    const currentFilter = params.get("category");
+    if (filteredCategory && filteredCategory.toString() !== currentFilter) {
       params.set("category", filteredCategory.toString());
       filteredList =
         products?.data.filter((product) =>
@@ -62,8 +87,12 @@ export const ProductList = () => {
             ? product.attributes.category.data.id === filteredCategory
             : true
         ) || [];
+    } /* else {
+      const productsFromLS = localStorage.getItem("filteredAndSortedProductList");
+      const previousProducts = JSON.parse(productsFromLS);
+      setFilteredAndSortedProducts(previousProducts);
     }
-
+ */
     let sortedList: IProduct[] = [...filteredList];
 
     if (sorting === 3) {
@@ -86,6 +115,11 @@ export const ProductList = () => {
 
     setFilteredAndSortedProducts(sortedList);
     window.history.replaceState({}, "", `?${params.toString()}`);
+    localStorage.setItem(
+      "filteredAndSortedProductList",
+      JSON.stringify(sortedList)
+    );
+    console.log("FILTER FN LS", sortedList);
   };
 
   const resetFiltering = () => {
@@ -141,7 +175,18 @@ export const ProductList = () => {
       </Container>
       <FilteringComponent filter={sorting} setFilter={setSorting} />
       {loading ? (
-        <CircularProgress />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            gap: "1rem",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress sx={{ color: theme.contrastColor }} />
+          <Typography sx={{ color: theme.contrastColor }}>Loading..</Typography>
+        </Box>
       ) : (
         <Container
           sx={{
