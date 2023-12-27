@@ -1,7 +1,7 @@
 import { Container, Typography, Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
-import styles from "./ErrorPage.module.scss";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 export const ErrorPage = () => {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ export const ErrorPage = () => {
         gap: "1rem",
       }}
     >
-      {/* <img src="/5203299.jpg" alt="error" /> */}
+      <SentimentVeryDissatisfiedIcon
+        sx={{ color: theme.secondaryColor, fontSize: "5rem" }}
+      />
       <Typography variant="h1" color={theme.secondaryColor}>
         404
       </Typography>
