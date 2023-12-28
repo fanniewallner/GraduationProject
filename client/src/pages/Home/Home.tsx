@@ -42,7 +42,7 @@ export const Home = () => {
               Till produktkatalogen
             </Button>
 
-            <Box>
+            <Box sx={{ textAlign: "start" }}>
               <Typography color={theme.secondaryColor}>
                 "Det ska vara lätt att jobba rätt".
               </Typography>

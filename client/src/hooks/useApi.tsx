@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { AppConfigContext } from "../contexts/ApiContext";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import {
   IStrapiContactResponse,
   IStrapiListResponse,
   IStrapiSingleResponse,
 } from "../models/IStrapiResponse";
+import { EmailData, PurchaseInquiry } from "../models/PurchaseInquiry";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);
@@ -26,7 +27,20 @@ export default function useApi(url?: string) {
       );
     },
     getContactInfo: async () => {
-      return axiosInstance.get<IStrapiContactResponse>("/api/contact");
+      return axiosInstance.get<IStrapiContactResponse>("/api/contact-detail");
+    },
+    submitForm: async (formData: EmailData) => {
+      return axiosInstance.post("/api/email", formData);
+      /*  try {
+        const response: AxiosResponse = await axiosInstance.post(
+          "/api/email",
+          formData
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error submitting form", error);
+        throw error;
+      } */
     },
   };
   return api;
