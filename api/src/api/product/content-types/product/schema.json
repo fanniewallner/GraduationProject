@@ -34,6 +34,15 @@
     "price": {
       "type": "biginteger",
       "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "stockStatus": {
+      "type": "string"
     }
   }
 }

@@ -2,6 +2,7 @@
   z-index: 3;
   display: flex;
   padding-top: 30%;
+  gap: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -20,13 +21,9 @@
 }
 
 .logoImg {
-  height: 300px;
+  height: auto;
   width: auto;
   transition: all 0.2s;
-
-  &.scroll {
-    height: 30%;
-  }
 
   @media only screen and (min-width: 800px) {
     height: 500px;
@@ -42,9 +39,38 @@
 
 .flexContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  /*
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  gap: 3rem;
+
   @media only screen and (min-width: 800px) {
     flex-direction: row;
-  } */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5rem;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    text-align: start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    @media only screen and (min-width: 800px) {
+      align-items: flex-start;
+      gap: 2rem;
+      text-align: start;
+    }
+  }
 }

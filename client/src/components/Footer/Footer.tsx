@@ -4,9 +4,31 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import styles from "./Footer.module.scss";
+import { IContact } from "../../models/IContact";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useApi from "../../hooks/useApi";
+import { IStrapiContactResponse } from "../../models/IStrapiResponse";
 
 export const Footer = () => {
   const { theme } = useTheme();
+  const api = useApi();
+  const [loading, setLoading] = useState(false);
+  const [contactData, setContactData] = useState<IStrapiContactResponse>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.getContactInfo();
+        setContactData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Box
       data-cy="footer"
@@ -16,30 +38,52 @@ export const Footer = () => {
         color: theme.secondaryColor,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography>hemsida</Typography>
-        <Typography>kreativa snicakre AB</Typography>
-        <Typography>telefon</Typography>
-      </Box>
-      <Box>
-        <Typography>email</Typography>
-      </Box>
-      <Box>
-        <Typography>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
-          corrupti, nobis autem veritatis beatae nesciunt consequatur modi illo
-          sapiente quibusdam, ipsa assumenda dolorum error obcaecati.
+      <Box className={styles.footerWrapper__contacts}>
+        <Typography>Kontakt</Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.company}
+        </Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.phonenumber}
+        </Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.email}
         </Typography>
       </Box>
-      <Box>
-        <FacebookIcon sx={{ color: theme.secondaryColor, fontSize: "2rem" }} />
-        <InstagramIcon sx={{ color: theme.secondaryColor, fontSize: "2rem" }} />
-        <YouTubeIcon sx={{ color: theme.secondaryColor, fontSize: "2rem" }} />
+      <Box className={styles.footerWrapper__freeText}>
+        <Typography>Xtools</Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.data.attributes.freeText}
+        </Typography>
+      </Box>
+
+      <Box className={styles.footerWrapper__socials}>
+        <Typography>Följ oss</Typography>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Link
+            to={"https://www.facebook.com/xtools.se"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FacebookIcon
+              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+            />
+          </Link>
+          <Link
+            to={"https://www.instagram.com/xtools.se/"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <InstagramIcon
+              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+            />
+          </Link>
+          <Link to={"#"} target="_blank" rel="noopener noreferrer">
+            <YouTubeIcon
+              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+            />
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

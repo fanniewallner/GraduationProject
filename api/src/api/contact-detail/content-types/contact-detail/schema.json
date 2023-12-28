@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_details",
+  "info": {
+    "singularName": "contact-detail",
+    "pluralName": "contact-details",
+    "displayName": "ContactDetail"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "phonenumber": {
+      "type": "string"
+    },
+    "freeText": {
+      "type": "text"
+    },
+    "company": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    }
+  }
+}

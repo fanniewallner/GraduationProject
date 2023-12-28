@@ -1,0 +1,8 @@
+{
+  "method": "POST",
+  "path": "/purchase-inquiry/send-email",
+  "handler": "purchase-inquiry.sendEmail",
+  "config": {
+    "policies": []
+  }
+}

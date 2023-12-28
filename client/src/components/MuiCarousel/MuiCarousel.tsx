@@ -1,43 +1,80 @@
 import Carousel from "react-material-ui-carousel";
-import Productcard from "../Productcard/Productcard";
 import { useState, useEffect } from "react";
-import fetchData from "/git/Examensarbete/client/src/hooks/useApi";
+import { Container, useMediaQuery } from "@mui/material";
+import useApi from "../../hooks/useApi";
+
+import { useTheme } from "../../contexts/ThemeContext";
+import { IStrapiListResponse } from "../../models/IStrapiResponse";
+import ProductCard from "../ProductCardComponent/ProductCardComponent";
 
 export const MuiCarousel = () => {
+  const { theme } = useTheme();
+  const { breakpoints } = useTheme().theme;
+  const isMobile = useMediaQuery(`(max-width: ${breakpoints.sm}px)`);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { loading, data } = fetchData(
-    "http://localhost:1337/api/products?populate=*"
-  );
-  const [isLoading, setIsLoading] = useState(true);
+  const api = useApi();
+  const [products, setProducts] = useState<IStrapiListResponse>();
 
   useEffect(() => {
-    if (!loading) {
-      setIsLoading(false);
-    }
-  }, [loading]);
+    const fetchData = async () => {
+      try {
+        const response = await api.getProducts();
+        setProducts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const slides = isMobile ? 1 : 3;
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < (data?.data.length ?? 0) - 1 ? prevIndex + 1 : 0
+      prevIndex < (products?.data.length ?? 0) - slides ? prevIndex + slides : 0
     );
   };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : (data?.data.length ?? 1) - 1
+      prevIndex > 0 ? prevIndex - slides : (products?.data.length ?? 1) - slides
     );
   };
 
   return (
     <Carousel
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
       next={handleNext}
       prev={handlePrev}
       animation="slide"
       index={currentIndex}
+      navButtonsAlwaysVisible={!isMobile}
     >
-      {data?.data.map((item, i) => (
-        <Productcard key={i} product={item.attributes} />
-      ))}
+      {Array.isArray(products?.data) && (
+        <Container
+          key={currentIndex}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: isMobile ? 0 : "1rem",
+          }}
+        >
+          {Array.from({ length: slides }).map((_, i) => {
+            const productIndex =
+              (currentIndex + i) % (products?.data.length ?? 1);
+            //const { attributes, id } = products?.data[productIndex] ?? {};
+            return (
+              <ProductCard key={i} product={products.data[productIndex]} />
+            );
+          })}
+        </Container>
+      )}
     </Carousel>
   );
 };

@@ -1,7 +1,11 @@
 .layoutWrapper {
-  //display: flex;
-  //flex-direction: column;
-  //min-height: 100vh;
-
+  background-color: var(--primary-background-color);
+  width: 100%;
   //position: relative;
+
+  &__arrow {
+    position: fixed;
+    bottom: 5%;
+    right: 10%;
+  }
 }

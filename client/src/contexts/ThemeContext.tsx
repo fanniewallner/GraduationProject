@@ -1,6 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { colors } from "./ThemeVariables";
-//import { colors } from '../theme/themeVariables';
+
+const colors = {
+  /*   primayBackgroundColor: "#1d1d1d",
+  secondaryBackgroundColor: "#556c56",
+  primaryColor: "#556c56",
+  secondaryColor: "#ffffff",
+  contrastColor: "#d6804b", */
+  primayBackgroundColor: "#556c56",
+  secondaryBackgroundColor: "#556c56",
+  primaryColor: "#556c56",
+  secondaryColor: "#ffffff",
+  contrastColor: "#AB8673",
+};
 
 interface Theme {
   breakpoints: {
@@ -55,6 +66,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return (
     <ThemeContext.Provider value={contextValue}>
       {children}
+      <style>{`
+        :root {
+          --primary-background-color: ${theme.primaryBackgroundColor};
+          --secondary-background-color: ${theme.secondaryBackgroundColor};
+          --primary-color: ${theme.primaryColor};
+          --secondary-color: ${theme.secondaryColor};
+          --contrast-color: ${theme.contrastColor};
+        }
+      `}</style>
     </ThemeContext.Provider>
   );
 };

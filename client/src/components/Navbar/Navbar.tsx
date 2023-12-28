@@ -22,7 +22,7 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
-  { label: "Produktkatalog", path: "/produkter" },
+  { label: "Produktkatalog", path: "/produktkatalog" },
   { label: "Om Xtools", path: "/om-oss" },
   { label: "Kontakt", path: "/kontakt" },
   { label: "Köpvillkor", path: "/kopvillkor" },
@@ -77,9 +77,19 @@ export default function DrawerAppBar(props: Props) {
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+        sx={{
+          backgroundColor: theme.primaryBackgroundColor,
+          boxShadow: "none",
+        }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
+          {/*  <Box sx={{ display: { xs: "block", sm: "none" } }}>
+            <img
+              src="/xtoolslogo.png"
+              alt="Xtools Logo"
+              style={{ width: "40px", height: "auto" }}
+            />
+          </Box> */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -93,12 +103,10 @@ export default function DrawerAppBar(props: Props) {
             <Typography
               variant="h6"
               component="div"
-              className={styles.flex}
               sx={{
                 display: {
                   xs: "none",
                   sm: "block",
-
                   color: theme.secondaryColor,
                 },
               }}

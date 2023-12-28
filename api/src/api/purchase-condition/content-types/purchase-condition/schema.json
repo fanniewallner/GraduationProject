@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "purchase_conditions",
+  "info": {
+    "singularName": "purchase-condition",
+    "pluralName": "purchase-conditions",
+    "displayName": "PurchaseCondition"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "text"
+    }
+  }
+}
