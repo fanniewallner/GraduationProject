@@ -9,3 +9,9 @@ export type PurchaseInquiry = {
   message?: string;
   checked: boolean;
 };
+
+export type EmailData = {
+  toEmail: string;
+  subject: string;
+  content: string;
+};

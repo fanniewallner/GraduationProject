@@ -9,10 +9,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { Box, Link, Select, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { PurchaseInquiry } from "../../models/PurchaseInquiry";
+import { EmailData, PurchaseInquiry } from "../../models/PurchaseInquiry";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-import { MenuItem } from "@mui/base";
+import useApi from "../../hooks/useApi";
+import axios from "axios";
 
 type IModalProps = {
   open: boolean;
@@ -23,6 +24,7 @@ type IModalProps = {
 export default function Modal({ open, handleClose, product }: IModalProps) {
   const { handleSubmit, formState, register, reset } =
     useForm<PurchaseInquiry>();
+  const api = useApi();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState<number>(
@@ -42,13 +44,60 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
     const newValue = event?.target.value;
   }; */
 
+  // Your React component
+
+  // Call the sendEmail function when needed
+
+  const handleFormSubmit = async (data: PurchaseInquiry) => {
+    try {
+      console.log(data);
+      console.log("Skickat");
+      handleCheckbox();
+
+      try {
+        // Create an instance of the EmailData type
+        const emailData: EmailData = {
+          toEmail: data.email,
+          subject: "Orderbekräftelse",
+          content: "Hello, this is the body of your email!",
+        };
+
+        // Use the submitForm method from your useApi hook
+        const response = await api.submitForm(emailData);
+
+        console.log("Email sent successfully:", response.data);
+      } catch (error) {
+        console.error("Error sending email:", error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  /*   const sendEmail = async (toEmail: string) => {
+    try {
+      const response = await axios.post("/api/send-email", { to: toEmail });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  }; */
+
+  /*   const sendEmail = async (clientMail: string) => {
+    await strapi.plugins["email"].services.email.send({
+      to: clientMail,
+      subject: "Hello!",
+      text: "This is a test email sent from Strapi with SendGrid!",
+    });
+  }; */
+
   const handleCheckbox = () => {
     setIsChecked(!isChecked);
   };
   return (
     <React.Fragment>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle>Köpförfrågan</DialogTitle>
+        <DialogTitle>Köpformulär</DialogTitle>
         <DialogContent>
           <img
             src={
@@ -185,18 +234,7 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
 
             <Button onClick={handleClose}>Stäng</Button>
             <Button
-              onClick={handleSubmit((data) => {
-                console.log(data);
-                reset({
-                  amount: 0,
-                  firstname: "",
-                  lastname: "",
-                  email: "",
-                  phonenumber: 0,
-                  message: "",
-                });
-                handleCheckbox();
-              })}
+              onClick={handleSubmit(handleFormSubmit)}
               disabled={formState.isSubmitting || !isChecked || !formValid}
             >
               Skicka
