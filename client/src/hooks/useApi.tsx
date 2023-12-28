@@ -7,6 +7,7 @@ import {
   IStrapiSingleResponse,
 } from "../models/IStrapiResponse";
 import { EmailData, PurchaseInquiry } from "../models/PurchaseInquiry";
+import { IConditions } from "../models/IConditions";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);
@@ -31,16 +32,9 @@ export default function useApi(url?: string) {
     },
     submitForm: async (formData: EmailData) => {
       return axiosInstance.post("/api/email", formData);
-      /*  try {
-        const response: AxiosResponse = await axiosInstance.post(
-          "/api/email",
-          formData
-        );
-        return response.data;
-      } catch (error) {
-        console.error("Error submitting form", error);
-        throw error;
-      } */
+    },
+    getPurchaseConditions: async () => {
+      return axiosInstance.get<IConditions>("/api/purchase-condition");
     },
   };
   return api;

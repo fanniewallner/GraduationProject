@@ -15,7 +15,7 @@ export const Footer = () => {
   const api = useApi();
   const [loading, setLoading] = useState(false);
   const [contactData, setContactData] = useState<IStrapiContactResponse>();
-
+  /* 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +27,25 @@ export const Footer = () => {
     };
 
     fetchData();
+  }, []); */
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.getContactInfo();
+        const message = response.data;
+        setContactData(message);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  console.log(contactData);
 
   return (
     <Box
@@ -40,9 +58,9 @@ export const Footer = () => {
     >
       <Box className={styles.footerWrapper__contacts}>
         <Typography>Kontakt</Typography>
-        <Typography sx={{ fontSize: "14px" }}>
-          {contactData?.data.attributes.company}
-        </Typography>
+        {/*        <Typography sx={{ fontSize: "14px" }}>
+          {contactData?.attributes.company}
+        </Typography> */}
         <Typography sx={{ fontSize: "14px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
