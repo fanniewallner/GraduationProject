@@ -113,13 +113,15 @@ export const ProductView = () => {
             sx={{
               backgroundColor: theme.primaryBackgroundColor,
               boxShadow: "none",
-              borderTop: `1px solid ${theme.secondaryColor}`,
+              borderTop: `1px solid ${theme.contrastColor}`,
             }}
           >
             <AccordionSummary
-              expandIcon={<ExpandMore sx={{ color: "white" }} />}
+              expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
             >
-              <Typography /* textTransform={"uppercase"} */ color="white">
+              <Typography
+                /* textTransform={"uppercase"} */ color={theme.contrastColor}
+              >
                 Produktbeskrivning
               </Typography>
             </AccordionSummary>
@@ -134,15 +136,15 @@ export const ProductView = () => {
             sx={{
               backgroundColor: theme.primaryBackgroundColor,
               boxShadow: "none",
-              borderTop: `1px solid ${theme.secondaryColor}`,
+              borderTop: `1px solid ${theme.contrastColor}`,
             }}
           >
             <AccordionSummary
-              expandIcon={<ExpandMore sx={{ color: "white" }} />}
+              expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
             >
               <Typography
                 /*       textTransform={"uppercase"} */
-                color={theme.secondaryColor}
+                color={theme.contrastColor}
               >
                 Specifikationer:
               </Typography>

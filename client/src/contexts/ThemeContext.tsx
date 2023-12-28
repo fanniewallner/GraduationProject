@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 const colors = {
+  /*   primayBackgroundColor: "#1d1d1d",
+  secondaryBackgroundColor: "#556c56",
+  primaryColor: "#556c56",
+  secondaryColor: "#ffffff",
+  contrastColor: "#d6804b", */
   primayBackgroundColor: "#556c56",
   secondaryBackgroundColor: "#556c56",
   primaryColor: "#556c56",
