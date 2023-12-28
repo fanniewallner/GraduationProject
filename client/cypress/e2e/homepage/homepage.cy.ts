@@ -10,7 +10,3 @@ Then("I can see a logo", () => {
 Then("I can click a call-to-action button", () => {
   cy.get('[data-cy="actionButton"]').click();
 });
-
-Then("I can see a footer containing the email {string}", (email: string) => {
-  cy.get('[data-cy="footer"]').should("contain", `${email}`);
-});
