@@ -19,6 +19,7 @@ export const Home = () => {
       >
         <Box className={styles.heroContainer}>
           <Box
+            data-cy="logo"
             component="img"
             src="xtoolslogo.png"
             className={`${styles.logoImg}`}
@@ -32,6 +33,7 @@ export const Home = () => {
               tillverkade i Sverige
             </Typography>
             <Button
+              data-cy="actionButton"
               onClick={() => navigate("/produktkatalog")}
               sx={{
                 backgroundColor: theme.contrastColor,
