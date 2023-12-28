@@ -228,7 +228,14 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               <Checkbox onChange={handleCheckbox} checked={isChecked} />
               <Typography>
                 Jag har läst och godkänner{" "}
-                <Link sx={{ color: "black" }}>köpvillkoren</Link>
+                <Link
+                  sx={{ color: "black" }}
+                  href="/kopvillkor"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  köpvillkoren
+                </Link>
               </Typography>
             </Box>
 

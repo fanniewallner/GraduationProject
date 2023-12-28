@@ -4,6 +4,7 @@ import { Home } from "./pages/Home/Home";
 import { ProductList } from "./pages/ProductList/ProductList";
 import { ProductView } from "./pages/ProductView/ProductView";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
+import { PurchaseConditions } from "./pages/PurchaseConditions/PurchaseConditions";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/produktkatalog/:id",
         element: <ProductView />,
+      },
+      {
+        path: "/kopvillkor",
+        element: <PurchaseConditions />,
       },
       {
         path: "*",
