@@ -28,10 +28,14 @@
 
     "noEmit": true,
 
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
 
-    /*     "types": ["jest"] */
+    "types": ["cypress", "@testing-library/cypress"]
   },
 
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.cypress.json" }
+  ]
 }

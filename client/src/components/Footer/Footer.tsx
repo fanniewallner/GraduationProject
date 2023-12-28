@@ -31,6 +31,7 @@ export const Footer = () => {
 
   return (
     <Box
+      data-cy="footer"
       className={styles.footerWrapper}
       sx={{
         backgroundColor: theme.contrastColor,
