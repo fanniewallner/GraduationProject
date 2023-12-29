@@ -25,7 +25,8 @@ export const ProductView = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
-  const [brokenImageUrl, setBrokenImageUrl] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
+  const [brokenImageUrl, setBrokenImageUrl] = useState<boolean>(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,6 +51,7 @@ export const ProductView = () => {
   };
 
   const handleClose = () => {
+    setOrderConfirmed(false);
     setOpenModal(false);
   };
 
@@ -159,7 +161,13 @@ export const ProductView = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Modal open={openModal} handleClose={handleClose} product={product} />
+          <Modal
+            open={openModal}
+            handleClose={handleClose}
+            orderConfirmed={orderConfirmed}
+            setOrderConfirmed={setOrderConfirmed}
+            product={product}
+          />
         </>
       )}
     </Container>
