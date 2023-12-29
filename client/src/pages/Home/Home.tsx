@@ -26,10 +26,8 @@ export const Home = () => {
           />
           <Box className={styles.heroContainer__text}>
             <Typography variant="h6" color={theme.secondaryColor}>
-              Portabla
-              <Typography variant="h6" color={theme.contrastColor}>
-                arbetsbänkar
-              </Typography>
+              Portabla{" "}
+              <span style={{ color: theme.contrastColor }}>arbetsbänkar</span>{" "}
               tillverkade i Sverige
             </Typography>
             <Button

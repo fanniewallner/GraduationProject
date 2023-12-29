@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { Box, Link, Select, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { EmailData, PurchaseInquiry } from "../../models/PurchaseInquiry";
+import { PurchaseInquiry } from "../../models/PurchaseInquiry";
 import Checkbox from "@mui/material/Checkbox";
 import useApi from "../../hooks/useApi";
 

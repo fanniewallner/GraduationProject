@@ -778,6 +778,40 @@ export interface ApiContactDetailContactDetail extends Schema.SingleType {
   };
 }
 
+export interface ApiContactFormContactForm extends Schema.CollectionType {
+  collectionName: 'contact_forms';
+  info: {
+    singularName: 'contact-form';
+    pluralName: 'contact-forms';
+    displayName: 'ContactForm';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    firstname: Attribute.String;
+    lastname: Attribute.String;
+    email: Attribute.String;
+    phonenumber: Attribute.Integer;
+    message: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-form.contact-form',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-form.contact-form',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Schema.CollectionType {
   collectionName: 'orders';
   info: {
@@ -906,6 +940,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::company.company': ApiCompanyCompany;
       'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
+      'api::contact-form.contact-form': ApiContactFormContactForm;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::purchase-condition.purchase-condition': ApiPurchaseConditionPurchaseCondition;
