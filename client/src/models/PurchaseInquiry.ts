@@ -11,9 +11,3 @@ export type PurchaseInquiry = {
     checked: boolean;
   };
 };
-
-export type EmailData = {
-  toEmail: string;
-  subject: string;
-  content: string;
-};

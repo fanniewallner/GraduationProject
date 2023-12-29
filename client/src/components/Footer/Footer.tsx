@@ -2,9 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import styles from "./Footer.module.scss";
-import { IContact } from "../../models/IContact";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
@@ -15,19 +13,6 @@ export const Footer = () => {
   const api = useApi();
   const [loading, setLoading] = useState(false);
   const [contactData, setContactData] = useState<IStrapiContactResponse>();
-  /* 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.getContactInfo();
-        setContactData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []); */
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,19 +43,19 @@ export const Footer = () => {
     >
       <Box className={styles.footerWrapper__contacts}>
         <Typography>Kontakt</Typography>
-        {/*        <Typography sx={{ fontSize: "14px" }}>
-          {contactData?.attributes.company}
-        </Typography> */}
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
+          {contactData?.data.attributes.company}
+        </Typography>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.email}
         </Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
         <Typography>Xtools</Typography>
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.freeText}
         </Typography>
       </Box>
@@ -93,11 +78,6 @@ export const Footer = () => {
             rel="noopener noreferrer"
           >
             <InstagramIcon
-              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
-            />
-          </Link>
-          <Link to={"#"} target="_blank" rel="noopener noreferrer">
-            <YouTubeIcon
               sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
             />
           </Link>

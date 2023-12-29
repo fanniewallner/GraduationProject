@@ -1,16 +1,16 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 const colors = {
-  /*   primayBackgroundColor: "#1d1d1d",
+  primayBackgroundColor: "#1d1d1def",
   secondaryBackgroundColor: "#556c56",
   primaryColor: "#556c56",
   secondaryColor: "#ffffff",
-  contrastColor: "#d6804b", */
-  primayBackgroundColor: "#556c56",
+  contrastColor: "#556c56",
+  /*   primayBackgroundColor: "#556c56",
   secondaryBackgroundColor: "#556c56",
   primaryColor: "#556c56",
   secondaryColor: "#ffffff",
-  contrastColor: "#AB8673",
+  contrastColor: "#AB8673", */
 };
 
 interface Theme {
