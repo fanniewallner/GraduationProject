@@ -43,19 +43,19 @@ export const Footer = () => {
     >
       <Box className={styles.footerWrapper__contacts}>
         <Typography>Kontakt</Typography>
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.company}
         </Typography>
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.email}
         </Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
         <Typography>Xtools</Typography>
-        <Typography sx={{ fontSize: "14px" }}>
+        <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.freeText}
         </Typography>
       </Box>

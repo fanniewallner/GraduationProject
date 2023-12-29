@@ -1,4 +1,11 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { IContactFormDetails } from "../../models/IContactFormDetails";
 import { useForm } from "react-hook-form";
 import useApi from "../../hooks/useApi";
@@ -11,6 +18,7 @@ export const ContactPage = () => {
   const api = useApi();
   const [loading, setLoading] = useState(false);
   const [companyData, setCompanyData] = useState<ICompanyDetails>();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +65,27 @@ export const ContactPage = () => {
   };
 
   return (
-    <Container sx={{ minHeight: "100vh", pt: "5rem" }}>
-      <Box sx={{ backgroundColor: "white", p: "10px", borderRadius: "5px" }}>
+    <Container
+      sx={{
+        minHeight: "100vh",
+        pt: "5rem",
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        paddingTop: "10rem",
+        justifyContent: "center",
+
+        gap: "2rem",
+      }}
+    >
+      <Box
+        sx={{
+          backgroundColor: "white",
+          width: !isMobile ? "50%" : "100%",
+          p: "10px",
+          borderRadius: "5px",
+          height: "600px",
+        }}
+      >
         <Typography>Kontakta oss</Typography>
         <form onSubmit={submitForm(handleFormSubmit)}>
           <TextField
@@ -114,7 +141,7 @@ export const ContactPage = () => {
             })}
           />
           <TextField
-            helperText={formState.errors.data?.message}
+            //helperText={formState.errors.data?.message}
             error={formState.errors.data?.message != undefined}
             margin="normal"
             fullWidth
@@ -138,7 +165,16 @@ export const ContactPage = () => {
           </Button>
         </form>
       </Box>
-      <Box sx={{ color: theme.secondaryColor }}>
+      <Box
+        sx={{
+          color: theme.secondaryColor,
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          alignSelf: "inherit",
+          paddingBottom: "2rem",
+        }}
+      >
         <Typography variant="h6">Företagsinformation</Typography>
         <Typography sx={{ whiteSpace: "pre-line" }}>
           {companyData?.data.attributes.companyInfo}
