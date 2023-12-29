@@ -1,13 +1,15 @@
 import MediaGrid from "../../components/MediaGrid/MediaGrid";
-import { Container, Typography } from "@mui/material";
-import { useTheme } from "../../contexts/ThemeContext";
+import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import useApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IAboutInfo } from "../../models/IAboutInfo";
+import { useTheme } from "../../contexts/ThemeContext";
 
 export const About = () => {
+  const { theme } = useTheme();
   const [aboutData, setAboutData] = useState<IAboutInfo>();
   const [loading, setLoading] = useState<boolean>(true);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const api = useApi();
   useEffect(() => {
     const fetchData = async () => {
@@ -24,18 +26,28 @@ export const About = () => {
 
     fetchData();
   }, []);
-  const { theme } = useTheme();
+
   return (
-    <>
-      <Container sx={{ minHeight: "100vh", paddingTop: "5rem" }}>
-        <Typography variant="h6" color={theme.secondaryColor}>
-          Om XTools
-        </Typography>
+    <Container sx={{ paddingTop: "5rem" }}>
+      <Typography variant="h6" color={theme.secondaryColor}>
+        Om XTools
+      </Typography>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: "center",
+        }}
+      >
         <MediaGrid />
-        <Typography color={theme.secondaryColor}>
+        <Typography
+          sx={{ whiteSpace: "pre-line" }}
+          color={theme.secondaryColor}
+        >
           {aboutData?.data.attributes.freeText}
         </Typography>
-      </Container>
-    </>
+      </Box>
+    </Container>
   );
 };

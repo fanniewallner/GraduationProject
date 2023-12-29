@@ -37,6 +37,7 @@ export const Footer = () => {
       sx={{
         backgroundColor: "black",
         color: theme.secondaryColor,
+        height: "auto",
       }}
     >
       <Box className={styles.footerWrapper__contacts}>

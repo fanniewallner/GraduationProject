@@ -19,7 +19,7 @@ export const ContactPage = () => {
   const [loading, setLoading] = useState(false);
   const [companyData, setCompanyData] = useState<ICompanyDetails>();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-  const [formSent, setFormSent] = useState<boolean>(true);
+  const [formSent, setFormSent] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
