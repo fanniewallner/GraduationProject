@@ -30,14 +30,12 @@ export const Footer = () => {
     fetchData();
   }, []);
 
-  console.log(contactData);
-
   return (
     <Box
       data-cy="footer"
       className={styles.footerWrapper}
       sx={{
-        backgroundColor: theme.contrastColor,
+        backgroundColor: "black",
         color: theme.secondaryColor,
       }}
     >
