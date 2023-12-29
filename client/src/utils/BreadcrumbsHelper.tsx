@@ -8,11 +8,11 @@ type BreadcrumbProps = {
 
 const BreadCrumbsHelper: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumbs sx={{ color: "white" }} aria-label="breadcrumb">
       {items.map((item, index) => (
         <Link
           key={index}
-          color={index === items.length - 1 ? "textPrimary" : "inherit"}
+          color={index === items.length - 1 ? "#FFFFFF" : "inherit"}
           href={item.href}
           aria-current={index === items.length - 1 ? "page" : undefined}
         >

@@ -131,7 +131,7 @@ export const ProductView = () => {
               expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
             >
               <Typography
-                /* textTransform={"uppercase"} */ color={theme.contrastColor}
+                /* textTransform={"uppercase"} */ color={theme.secondaryColor}
               >
                 Produktbeskrivning
               </Typography>
@@ -155,7 +155,7 @@ export const ProductView = () => {
             >
               <Typography
                 /*       textTransform={"uppercase"} */
-                color={theme.contrastColor}
+                color={theme.secondaryColor}
               >
                 Specifikationer:
               </Typography>

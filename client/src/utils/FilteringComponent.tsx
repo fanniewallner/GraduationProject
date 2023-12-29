@@ -60,6 +60,16 @@ export default function FilteringComponent({
           label="Filter"
           onChange={handleChange}
           fullWidth
+          sx={{
+            height: "2.5rem",
+            color: "white",
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "white",
+            },
+            "& .MuiSvgIcon-root": {
+              color: "white",
+            },
+          }}
         >
           <MenuItem value="3">A-Ö</MenuItem>
           <MenuItem value="4">Ö-A</MenuItem>
