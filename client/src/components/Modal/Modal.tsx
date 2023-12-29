@@ -31,39 +31,35 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
     parseInt(product.data.attributes.price)
   );
   const formValid =
-    !formState.errors.amount &&
-    !formState.errors.checked &&
-    !formState.errors.email &&
-    !formState.errors.firstname &&
-    !formState.errors.lastname &&
-    !formState.errors.phonenumber &&
-    !formState.errors.productId &&
-    !formState.errors.productname;
-
-  /*   const handleChangeOfAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event?.target.value;
-  }; */
-
-  // Your React component
-
-  // Call the sendEmail function when needed
+    !formState.errors.data?.amount &&
+    !formState.errors.data?.checked &&
+    !formState.errors.data?.email &&
+    !formState.errors.data?.firstname &&
+    !formState.errors.data?.lastname &&
+    !formState.errors.data?.phonenumber &&
+    !formState.errors.data?.productId &&
+    !formState.errors.data?.productname;
 
   const handleFormSubmit = async (data: PurchaseInquiry) => {
     try {
-      console.log(data);
+      const response = await api.submitForm(data);
+      console.log("Form data:", { data: data });
+      console.log("RESP:", response);
+
       console.log("Skickat");
       handleCheckbox();
+      //Reset form - om lyckats
 
       try {
         // Create an instance of the EmailData type
         const emailData: EmailData = {
-          toEmail: data.email,
+          toEmail: data.data.email,
           subject: "Orderbekräftelse",
           content: "Hello, this is the body of your email!",
         };
 
         // Use the submitForm method from your useApi hook
-        const response = await api.submitForm(emailData);
+        // const response = await api.submitForm(emailData);
 
         console.log("Email sent successfully:", response.data);
       } catch (error) {
@@ -112,15 +108,15 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
           </DialogContentText>
           <form>
             <Select
-              //helperText={formState.errors.amount?.message}
-              error={formState.errors.amount != undefined}
+              helperText={formState.errors.data?.amount?.message}
+              error={formState.errors.data?.amount != undefined}
               fullWidth
               value={amount}
               label="Antal"
               autoFocus
               type="number"
               id="amount"
-              {...register("amount", {
+              {...register("data.amount", {
                 required: "Du måste ange det här fältet",
               })}
             >
@@ -128,60 +124,60 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               <option value={2}>2</option>
             </Select>
             <TextField
-              helperText={formState.errors.firstname?.message}
-              error={formState.errors.firstname != undefined}
+              helperText={formState.errors.data?.firstname?.message}
+              error={formState.errors.data?.firstname != undefined}
               margin="normal"
               fullWidth
               autoFocus
               label="Förnamn"
               type="text"
               id="firstname"
-              {...register("firstname", {
+              {...register("data.firstname", {
                 required: "Du måste ange det här fältet",
               })}
             />
             <TextField
-              helperText={formState.errors.lastname?.message}
-              error={formState.errors.lastname != undefined}
+              helperText={formState.errors.data?.lastname?.message}
+              error={formState.errors.data?.lastname != undefined}
               margin="normal"
               fullWidth
               autoFocus
               label="Efternamn"
               type="text"
               id="lastname"
-              {...register("lastname", {
+              {...register("data.lastname", {
                 required: "Du måste ange det här fältet",
               })}
             />
             <TextField
-              helperText={formState.errors.email?.message}
-              error={formState.errors.email != undefined}
+              helperText={formState.errors.data?.email?.message}
+              error={formState.errors.data?.email != undefined}
               margin="normal"
               fullWidth
               autoFocus
               label="E-post"
               type="email"
               id="email"
-              {...register("email", {
+              {...register("data.email", {
                 required: "Du måste ange det här fältet",
               })}
             />
             <TextField
-              helperText={formState.errors.phonenumber?.message}
-              error={formState.errors.phonenumber != undefined}
+              helperText={formState.errors.data?.phonenumber?.message}
+              error={formState.errors.data?.phonenumber != undefined}
               margin="normal"
               fullWidth
               autoFocus
               label="Mobilnummer"
               type="number"
               id="phonenumber"
-              {...register("phonenumber", {
+              {...register("data.phonenumber", {
                 required: "Du måste ange det här fältet",
               })}
             />
             <TextField
-              helperText={formState.errors.message?.message}
-              error={formState.errors.message != undefined}
+              helperText={formState.errors.data?.message}
+              error={formState.errors.data?.message != undefined}
               margin="normal"
               fullWidth
               autoFocus
@@ -190,32 +186,32 @@ export default function Modal({ open, handleClose, product }: IModalProps) {
               label="Meddelande (valfritt)"
               type="text"
               id="message"
-              {...register("message")}
+              {...register("data.message")}
             />
 
             <TextField
               sx={{ display: "none" }}
-              helperText={formState.errors.productId?.message}
-              error={formState.errors.productId != undefined}
+              helperText={formState.errors.data?.productId?.message}
+              error={formState.errors.data?.productId != undefined}
               margin="normal"
               fullWidth
               autoFocus
               value={product.data.id}
               type="number"
               id="productId"
-              {...register("productId")}
+              {...register("data.productId")}
             />
             <TextField
               sx={{ display: "none" }}
-              helperText={formState.errors.productname?.message}
-              error={formState.errors.productname != undefined}
+              helperText={formState.errors.data?.productname?.message}
+              error={formState.errors.data?.productname != undefined}
               margin="normal"
               fullWidth
               autoFocus
               value={product.data.attributes.name}
               type="text"
               id="productname"
-              {...register("productname")}
+              {...register("data.productname")}
             />
             <Typography fontSize={"14px"}>
               Köpet är inte bindande förrän bekräftelse från XTools mottagits

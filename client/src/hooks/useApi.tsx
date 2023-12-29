@@ -30,8 +30,8 @@ export default function useApi(url?: string) {
     getContactInfo: async () => {
       return axiosInstance.get<IStrapiContactResponse>("/api/contact-detail");
     },
-    submitForm: async (formData: EmailData) => {
-      return axiosInstance.post("/api/email", formData);
+    submitForm: async (data: PurchaseInquiry) => {
+      return axiosInstance.post("/api/orders", data);
     },
     getPurchaseConditions: async () => {
       return axiosInstance.get<IConditions>("/api/purchase-condition");
