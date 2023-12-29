@@ -32,7 +32,6 @@ export default function Modal({
     useForm<PurchaseInquiry>();
   const api = useApi();
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  // const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState<number>(
     parseInt(product.data.attributes.price)
@@ -98,7 +97,6 @@ export default function Modal({
                 {" "}
                 <form>
                   <Select
-                    helperText={formState.errors.data?.amount?.message}
                     error={formState.errors.data?.amount != undefined}
                     fullWidth
                     value={amount}
@@ -166,7 +164,6 @@ export default function Modal({
                     })}
                   />
                   <TextField
-                    helperText={formState.errors.data?.message}
                     error={formState.errors.data?.message != undefined}
                     margin="normal"
                     fullWidth

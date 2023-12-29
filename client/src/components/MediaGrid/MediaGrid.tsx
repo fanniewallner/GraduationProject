@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
 
 import { IStrapiMediaResponse } from "../../models/IStrapiResponse";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 export default function MediaGrid() {
   const [mediaGallery, setMediaGallery] = useState<IStrapiMediaResponse>({
@@ -39,16 +39,19 @@ export default function MediaGrid() {
   console.log("media", mediaGallery);
 
   return (
-    <ImageList sx={{ width: "100%", height: "auto" }} cols={3} rowHeight={164}>
-      {mediaGallery.data[0].attributes.image.data.map((image, index) => (
-        <Box key={index}>
-          <img
-            srcSet={`http://localhost:1337${image.attributes.formats.thumbnail.url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            src={`http://localhost:1337${image.attributes.formats.thumbnail.url}?w=164&h=164&fit=crop&auto=format`}
-            alt={image.attributes.name}
-          />
-        </Box>
-      ))}
-    </ImageList>
+    <Container>
+      <ImageList sx={{ height: "auto" }} cols={3} rowHeight={164}>
+        {mediaGallery.data.length > 0 &&
+          mediaGallery.data[0].attributes.image.data.map((image, index) => (
+            <Box key={index}>
+              <img
+                srcSet={`http://localhost:1337${image.attributes.formats.thumbnail.url}?w=328&h=328&fit=crop&auto=format&dpr=2 2x`}
+                src={`http://localhost:1337${image.attributes.formats.thumbnail.url}?w=328&h=328&fit=crop&auto=format`}
+                alt={image.attributes.name}
+              />
+            </Box>
+          ))}
+      </ImageList>
+    </Container>
   );
 }

@@ -130,9 +130,7 @@ export const ProductView = () => {
             <AccordionSummary
               expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
             >
-              <Typography
-                /* textTransform={"uppercase"} */ color={theme.secondaryColor}
-              >
+              <Typography color={theme.secondaryColor}>
                 Produktbeskrivning
               </Typography>
             </AccordionSummary>
@@ -153,10 +151,7 @@ export const ProductView = () => {
             <AccordionSummary
               expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
             >
-              <Typography
-                /*       textTransform={"uppercase"} */
-                color={theme.secondaryColor}
-              >
+              <Typography color={theme.secondaryColor}>
                 Specifikationer:
               </Typography>
             </AccordionSummary>
