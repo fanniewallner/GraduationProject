@@ -12,9 +12,6 @@
     width: 50%;
     background-color: var(--contrast-color);
     color: var(--secondary-color);
-    @media only screen and (min-width: 800px) {
-      width: 20%;
-    }
   }
 
   &__productWrapper {

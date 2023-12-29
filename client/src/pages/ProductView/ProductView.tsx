@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Breadcrumbs,
   Button,
   CircularProgress,
   Container,
@@ -16,6 +17,7 @@ import { useTheme } from "../../contexts/ThemeContext";
 import Modal from "../../components/Modal/Modal";
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { ExpandMore } from "@mui/icons-material";
+import BreadCrumbsHelper from "../../utils/BreadcrumbsHelper";
 
 export const ProductView = () => {
   const { id } = useParams();
@@ -27,6 +29,7 @@ export const ProductView = () => {
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
   const [brokenImageUrl, setBrokenImageUrl] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,6 +48,11 @@ export const ProductView = () => {
 
     fetchData();
   }, [id]);
+
+  const breadcrumbs = [
+    { label: "Hem", href: "/" },
+    { label: "Produkter", href: "/produktkatalog" },
+  ];
 
   const handleClickOpen = () => {
     setOpenModal(true);
@@ -73,6 +81,7 @@ export const ProductView = () => {
         gap: "1rem",
       }}
     >
+      <BreadCrumbsHelper items={breadcrumbs} />
       {product && (
         <>
           <Box sx={{ width: "100%", p: "0", m: "0" }}>

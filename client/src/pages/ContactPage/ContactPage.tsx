@@ -36,8 +36,6 @@ export const ContactPage = () => {
     fetchData();
   }, []);
 
-  console.log(companyData);
-
   const {
     handleSubmit: submitForm,
     formState,
@@ -77,93 +75,95 @@ export const ContactPage = () => {
         gap: "2rem",
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "white",
-          width: !isMobile ? "50%" : "100%",
-          p: "10px",
-          borderRadius: "5px",
-          height: "600px",
-        }}
-      >
-        <Typography>Kontakta oss</Typography>
-        <form onSubmit={submitForm(handleFormSubmit)}>
-          <TextField
-            helperText={formState.errors.data?.firstname?.message}
-            error={formState.errors.data?.firstname != undefined}
-            margin="normal"
-            fullWidth
-            autoFocus
-            label="Förnamn*"
-            type="text"
-            id="firstname"
-            {...register("data.firstname", {
-              required: "Du måste ange det här fältet",
-            })}
-          />
-          <TextField
-            helperText={formState.errors.data?.lastname?.message}
-            error={formState.errors.data?.lastname != undefined}
-            margin="normal"
-            fullWidth
-            autoFocus
-            label="Efternamn*"
-            type="text"
-            id="lastname"
-            {...register("data.lastname", {
-              required: "Du måste ange det här fältet",
-            })}
-          />
-          <TextField
-            helperText={formState.errors.data?.email?.message}
-            error={formState.errors.data?.email != undefined}
-            margin="normal"
-            fullWidth
-            autoFocus
-            label="E-post*"
-            type="email"
-            id="email"
-            {...register("data.email", {
-              required: "Du måste ange det här fältet",
-            })}
-          />
-          <TextField
-            helperText={formState.errors.data?.phonenumber?.message}
-            error={formState.errors.data?.phonenumber != undefined}
-            margin="normal"
-            fullWidth
-            autoFocus
-            label="Mobilnummer*"
-            type="number"
-            id="phonenumber"
-            {...register("data.phonenumber", {
-              required: "Du måste ange det här fältet",
-            })}
-          />
-          <TextField
-            //helperText={formState.errors.data?.message}
-            error={formState.errors.data?.message != undefined}
-            margin="normal"
-            fullWidth
-            autoFocus
-            multiline
-            minRows={5}
-            label="Meddelande*"
-            type="text"
-            id="message"
-            {...register("data.message", {
-              required: "Du måste ange det här fältet",
-            })}
-          />
-          <Button
-            sx={{ backgroundColor: theme.contrastColor }}
-            variant="contained"
-            type="submit"
-            disabled={!formState.isValid}
-          >
-            Skicka
-          </Button>
-        </form>
+      <Box sx={{ width: !isMobile ? "50%" : "100%", height: "600px" }}>
+        <Typography variant="h6" color={theme.secondaryColor}>
+          Kontakta oss
+        </Typography>
+        <Box
+          sx={{
+            backgroundColor: "white",
+            padding: "1rem",
+            borderRadius: "5px",
+          }}
+        >
+          <form onSubmit={submitForm(handleFormSubmit)}>
+            <TextField
+              helperText={formState.errors.data?.firstname?.message}
+              error={formState.errors.data?.firstname != undefined}
+              margin="normal"
+              fullWidth
+              autoFocus
+              label="Förnamn*"
+              type="text"
+              id="firstname"
+              {...register("data.firstname", {
+                required: "Du måste ange det här fältet",
+              })}
+            />
+            <TextField
+              helperText={formState.errors.data?.lastname?.message}
+              error={formState.errors.data?.lastname != undefined}
+              margin="normal"
+              fullWidth
+              autoFocus
+              label="Efternamn*"
+              type="text"
+              id="lastname"
+              {...register("data.lastname", {
+                required: "Du måste ange det här fältet",
+              })}
+            />
+            <TextField
+              helperText={formState.errors.data?.email?.message}
+              error={formState.errors.data?.email != undefined}
+              margin="normal"
+              fullWidth
+              autoFocus
+              label="E-post*"
+              type="email"
+              id="email"
+              {...register("data.email", {
+                required: "Du måste ange det här fältet",
+              })}
+            />
+            <TextField
+              helperText={formState.errors.data?.phonenumber?.message}
+              error={formState.errors.data?.phonenumber != undefined}
+              margin="normal"
+              fullWidth
+              autoFocus
+              label="Mobilnummer*"
+              type="number"
+              id="phonenumber"
+              {...register("data.phonenumber", {
+                required: "Du måste ange det här fältet",
+              })}
+            />
+            <TextField
+              //helperText={formState.errors.data?.message}
+              error={formState.errors.data?.message != undefined}
+              margin="normal"
+              fullWidth
+              autoFocus
+              multiline
+              minRows={5}
+              label="Meddelande*"
+              type="text"
+              id="message"
+              {...register("data.message", {
+                required: "Du måste ange det här fältet",
+              })}
+            />
+            <Button
+              sx={{ backgroundColor: theme.contrastColor }}
+              variant="contained"
+              type="submit"
+              disabled={!formState.isValid}
+            >
+              Skicka
+            </Button>
+          </form>
+        </Box>
       </Box>
       <Box
         sx={{
