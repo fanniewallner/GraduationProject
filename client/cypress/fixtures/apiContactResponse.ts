@@ -3,15 +3,15 @@ import { IStrapiContactResponse } from "../../src/models/IStrapiResponse";
 export const apiContactResponse: IStrapiContactResponse = {
   data: {
     attributes: {
-      email: "kreativa-snickare@gmail.com",
-      phonenumber: "0769136132",
-      company: "XTools C/O Kreativa snickare AB",
-      website: "XTools.se",
+      email: "kreativa.snickare@gmail.com",
+      phonenumber: " 070-423 75 88",
       freeText:
-        "XTools riktar sig främst till företag och därför visas priserna på sidan exklusive moms, men givetvis är alla välkomna",
-      createdAt: "string",
-      updatedAt: "string",
-      publishedAt: "string",
+        "XTools riktar sig främst till företag, därför visas priser på sidan exkl moms,\nmen alla är givetvis välkomna",
+      company: "XTools C/O Kreativa Snickare AB",
+      website: "XTools.se",
+      createdAt: "2023-12-28T12:00:10.719Z",
+      updatedAt: "2023-12-28T15:05:42.610Z",
+      publishedAt: "2023-12-28T14:47:14.428Z",
     },
   },
   meta: {},

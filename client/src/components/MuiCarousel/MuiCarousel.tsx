@@ -55,6 +55,7 @@ export const MuiCarousel = () => {
       animation="slide"
       index={currentIndex}
       navButtonsAlwaysVisible={!isMobile}
+      data-cy="carousel"
     >
       {Array.isArray(products?.data) && (
         <Container
@@ -68,7 +69,6 @@ export const MuiCarousel = () => {
           {Array.from({ length: slides }).map((_, i) => {
             const productIndex =
               (currentIndex + i) % (products?.data.length ?? 1);
-            //const { attributes, id } = products?.data[productIndex] ?? {};
             return (
               <ProductCard key={i} product={products.data[productIndex]} />
             );
