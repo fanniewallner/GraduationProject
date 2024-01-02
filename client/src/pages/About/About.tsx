@@ -28,7 +28,7 @@ export const About = () => {
   }, []);
 
   return (
-    <Container sx={{ paddingTop: "5rem" }}>
+    <Container sx={{ paddingTop: "5rem", paddingBottom: "2rem" }}>
       <Typography variant="h6" color={theme.secondaryColor}>
         Om XTools
       </Typography>

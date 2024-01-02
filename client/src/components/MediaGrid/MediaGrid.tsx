@@ -18,7 +18,7 @@ export default function MediaGrid() {
       },
     },
   });
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const api = useApi();
   useEffect(() => {
     const fetchData = async () => {

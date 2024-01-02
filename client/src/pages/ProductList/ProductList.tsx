@@ -53,7 +53,7 @@ export const ProductList = () => {
   const filterAndSortProducts = () => {
     const params = new URLSearchParams(search);
     let filteredList: IProduct[] = products?.data || [];
-    console.log("FILTRERAD LISTA", filteredList);
+
     if (filteredCategory) {
       params.set("category", filteredCategory.toString());
       filteredList =
