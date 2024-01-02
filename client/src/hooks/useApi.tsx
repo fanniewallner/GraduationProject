@@ -4,12 +4,15 @@ import axios, { AxiosResponse } from "axios";
 import {
   IStrapiContactResponse,
   IStrapiListResponse,
+  IStrapiMediaResponse,
   IStrapiSingleResponse,
 } from "../models/IStrapiResponse";
 import { PurchaseInquiry } from "../models/PurchaseInquiry";
 import { IConditions } from "../models/IConditions";
 import { IContactFormDetails } from "../models/IContactFormDetails";
 import { ICompanyDetails } from "../models/ICompanyDetails";
+import { IMediaGallery } from "../models/IMediaGallery";
+import { IAboutInfo } from "../models/IAboutInfo";
 
 export default function useApi(url?: string) {
   const config = useContext(AppConfigContext);
@@ -39,6 +42,14 @@ export default function useApi(url?: string) {
     },
     getCompanyDetails: async () => {
       return axiosInstance.get<ICompanyDetails>("api/company");
+    },
+    getMediaGallery: async () => {
+      return axiosInstance.get<IStrapiMediaResponse>(
+        "/api/media-galleries?populate=*"
+      );
+    },
+    getAboutInfo: async () => {
+      return axiosInstance.get<IAboutInfo>("/api/about-page");
     },
   };
   return api;

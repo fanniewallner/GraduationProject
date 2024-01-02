@@ -6,6 +6,7 @@ import { ProductView } from "./pages/ProductView/ProductView";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { PurchaseConditions } from "./pages/PurchaseConditions/PurchaseConditions";
 import { ContactPage } from "./pages/ContactPage/ContactPage";
+import { About } from "./pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/kopvillkor",
         element: <PurchaseConditions />,
+      },
+      {
+        path: "/om-oss",
+        element: <About />,
       },
       {
         path: "/kontakt",

@@ -842,6 +842,36 @@ export interface ApiContactFormContactForm extends Schema.CollectionType {
   };
 }
 
+export interface ApiMediaGalleryMediaGallery extends Schema.CollectionType {
+  collectionName: 'media_galleries';
+  info: {
+    singularName: 'media-gallery';
+    pluralName: 'media-galleries';
+    displayName: 'MediaGallery';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::media-gallery.media-gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::media-gallery.media-gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Schema.CollectionType {
   collectionName: 'orders';
   info: {
@@ -972,6 +1002,7 @@ declare module '@strapi/types' {
       'api::company.company': ApiCompanyCompany;
       'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
       'api::contact-form.contact-form': ApiContactFormContactForm;
+      'api::media-gallery.media-gallery': ApiMediaGalleryMediaGallery;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::purchase-condition.purchase-condition': ApiPurchaseConditionPurchaseCondition;

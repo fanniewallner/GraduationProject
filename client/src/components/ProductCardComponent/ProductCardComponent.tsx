@@ -24,7 +24,16 @@ export default function ProductCard({ product }: IProductCardProps) {
 
   return (
     <>
-      <Card sx={{ width: 330, minHeight: 300 }}>
+      <Card
+        sx={{
+          width: 330,
+          minHeight: 300,
+          display: "flex",
+          flexGrow: "1",
+          flexDirection: "column",
+          height: "100%",
+        }}
+      >
         <CardMedia
           component="img"
           alt={product.attributes.name}
