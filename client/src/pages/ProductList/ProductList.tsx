@@ -56,9 +56,11 @@ export const ProductList = () => {
       console.log(newCategory);
       sessionStorage.setItem("filteredCategory", String(newCategory));
       fetchData(parseInt(newCategory, 10));
+      window.history.replaceState({}, "", `?${params.toString()}`);
     } else {
       const storedCategory = sessionStorage.getItem("filteredCategory");
       const category = storedCategory ? parseInt(storedCategory, 10) : null;
+      window.history.replaceState({}, "", `?${params.toString()}`);
       console.log("SS", category);
       if (category !== null) {
         setFilteredCategory(category);
