@@ -3,7 +3,6 @@ import {
   Button,
   CircularProgress,
   Container,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -27,9 +26,18 @@ export const ProductList = () => {
   const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<
     IProduct[] | null
   >();
-  //const [newCategory, setNewCategory] = useState<number>();
 
   const fetchData = async (category?: number) => {
+    if (!category || category !== null) {
+      const params = new URLSearchParams(search);
+
+      params.delete("category");
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?${params.toString()}`
+      );
+    }
     try {
       const response = await api.getProducts(category);
       setProducts(response.data);
@@ -94,12 +102,10 @@ export const ProductList = () => {
   };
 
   const resetFiltering = () => {
-    const params = new URLSearchParams(search);
     setFilteredCategory(null);
-    params.delete("category");
     setFilteredAndSortedProducts(null);
+
     fetchData();
-    window.history.replaceState({}, "", `?${params.toString()}`);
   };
 
   return (
@@ -168,7 +174,7 @@ export const ProductList = () => {
           }}
           className={styles.productListWrapper__productWrapper}
         >
-          {filteredAndSortedProducts !== null
+          {filteredAndSortedProducts && filteredAndSortedProducts?.length > 0
             ? filteredAndSortedProducts?.map((product) => (
                 <Box key={product.id}>
                   <ProductCard product={product} />
