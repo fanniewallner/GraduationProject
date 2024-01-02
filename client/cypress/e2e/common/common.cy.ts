@@ -1,10 +1,24 @@
-/* import { apiResponse } from "../../fixtures/apiResponse";
+import { apiContactResponse } from "../../fixtures/apiContactResponse";
+import { apiResponse } from "../../fixtures/apiResponse";
 
-cy.intercept(
-  {
-    method: "GET",
-    url: "http://localhost:1337/api/products?populate=*",
-  },
-  apiResponse
-).as("getProducts");
- */
+before(() => {
+  cy.intercept(
+    {
+      method: "GET",
+
+      url: "/api/products?populate=*",
+    },
+    apiResponse
+  ).as("getProducts");
+});
+
+before(() => {
+  cy.intercept(
+    {
+      method: "GET",
+
+      url: "/api/contact-detail",
+    },
+    apiContactResponse
+  ).as("getContactInfo");
+});
