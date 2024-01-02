@@ -27,44 +27,49 @@ export const ProductList = () => {
   const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<
     IProduct[] | null
   >();
+  //const [newCategory, setNewCategory] = useState<number>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.getProducts();
-        setProducts(response.data);
-        setFilteredAndSortedProducts(response.data.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async (category?: number) => {
+    try {
+      const response = await api.getProducts(category);
+      setProducts(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    filterAndSortProducts();
-    console.log("filtered", filteredAndSortedProducts);
-    console.log("products", products?.data);
-  }, [filteredCategory, sorting]);
-
-  const filterAndSortProducts = () => {
+  const fetchDataAndFilter = async () => {
     const params = new URLSearchParams(search);
-    let filteredList: IProduct[] = products?.data || [];
+    const newCategory = params.get("category");
 
-    if (filteredCategory) {
-      params.set("category", filteredCategory.toString());
-      filteredList =
-        products?.data.filter((product) =>
-          filteredCategory
-            ? product.attributes.category.data.id === filteredCategory
-            : true
-        ) || [];
+    if (newCategory) {
+      console.log(newCategory);
+      sessionStorage.setItem("filteredCategory", String(newCategory));
+      fetchData(parseInt(newCategory, 10));
+    } else {
+      const storedCategory = sessionStorage.getItem("filteredCategory");
+      const category = storedCategory ? parseInt(storedCategory, 10) : null;
+      console.log("SS", category);
+      if (category !== null) {
+        setFilteredCategory(category);
+        await fetchData(category);
+      } else {
+        setFilteredAndSortedProducts(products?.data || []);
+      }
     }
 
-    let sortedList: IProduct[] = [...filteredList];
+    //SortProducts();
+  };
+
+  useEffect(() => {
+    fetchDataAndFilter();
+  }, [search]);
+
+  const SortProducts = () => {
+    const params = new URLSearchParams(search);
+    let sortedList: IProduct[] = [...(products?.data || [])];
 
     if (sorting === 3) {
       sortedList.sort((a: IProduct, b: IProduct) =>
@@ -93,7 +98,8 @@ export const ProductList = () => {
     setFilteredCategory(null);
     params.delete("category");
     setFilteredAndSortedProducts(null);
-    window.history.replaceState({}, "", window.location.pathname);
+    fetchData();
+    window.history.replaceState({}, "", `?${params.toString()}`);
   };
 
   return (
@@ -114,7 +120,12 @@ export const ProductList = () => {
             color: theme.secondaryColor,
           }}
           className={styles.productListWrapper__filterButtons}
-          onClick={() => setFilteredCategory(1)}
+          onClick={() => {
+            setFilteredCategory(1);
+            const params = new URLSearchParams(window.location.search);
+            params.set("category", "1");
+            window.history.replaceState({}, "", `?${params.toString()}`);
+          }}
         >
           Arbetsbänkar
         </Button>
@@ -124,7 +135,12 @@ export const ProductList = () => {
             color: theme.secondaryColor,
           }}
           className={styles.productListWrapper__filterButtons}
-          onClick={() => setFilteredCategory(2)}
+          onClick={() => {
+            setFilteredCategory(2);
+            const params = new URLSearchParams(window.location.search);
+            params.set("category", "2");
+            window.history.replaceState({}, "", `?${params.toString()}`);
+          }}
         >
           Tillbehör
         </Button>
