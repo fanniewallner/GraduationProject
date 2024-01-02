@@ -27,7 +27,7 @@ export const ProductList = () => {
     IProduct[] | null
   >();
 
-  const fetchData = async (category?: number) => {
+  const fetchData = async (category?: number): Promise<IProduct[]> => {
     if (!category || category !== null) {
       const params = new URLSearchParams(search);
       params.delete("category");
@@ -40,8 +40,10 @@ export const ProductList = () => {
     try {
       const response = await api.getProducts(category);
       setProducts(response.data);
+      return response.data.data;
     } catch (error) {
       console.log(error);
+      return [];
     } finally {
       setLoading(false);
     }
@@ -50,54 +52,65 @@ export const ProductList = () => {
   const fetchDataAndFilter = async () => {
     const params = new URLSearchParams(search);
     const newCategory = params.get("category");
+    const sort = params.get("sort");
+    let productList: IProduct[] = [];
 
     if (newCategory) {
       console.log(newCategory);
-      sessionStorage.setItem("filteredCategory", String(newCategory));
-      fetchData(parseInt(newCategory, 10));
+      sessionStorage.setItem("filteredCategory", newCategory);
+      productList = await fetchData(parseInt(newCategory, 10));
       window.history.replaceState({}, "", `?${params.toString()}`);
+
+      if (sort) {
+        const sortedList = await SortProducts(productList, parseInt(sort));
+        setFilteredAndSortedProducts(sortedList);
+      }
     } else {
       sessionStorage.clear();
       fetchData();
     }
-
-    //SortProducts();
   };
 
   useEffect(() => {
     fetchDataAndFilter();
   }, [search]);
 
-  const SortProducts = () => {
+  const SortProducts = (productList: IProduct[], sortValue: number) => {
     const params = new URLSearchParams(search);
-    let sortedList: IProduct[] = [...(products?.data || [])];
 
-    if (sorting === 3) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        a.attributes.name.localeCompare(b.attributes.name)
-      );
-    } else if (sorting === 4) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        b.attributes.name.localeCompare(a.attributes.name)
-      );
-    } else if (sorting === 5) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        a.attributes.price.localeCompare(b.attributes.price)
-      );
-    } else if (sorting === 6) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        b.attributes.price.localeCompare(a.attributes.price)
-      );
+    console.log(filteredAndSortedProducts);
+    let filteredList: IProduct[] = JSON.parse(JSON.stringify(productList));
+
+    if (filteredAndSortedProducts) {
+      if (sortValue === 3) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          a.attributes.name.localeCompare(b.attributes.name)
+        );
+      }
+      if (sortValue === 4) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          b.attributes.name.localeCompare(a.attributes.name)
+        );
+      }
+      if (sortValue === 5) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          a.attributes.price.localeCompare(b.attributes.price)
+        );
+      }
+      if (sortValue === 6) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          b.attributes.price.localeCompare(a.attributes.price)
+        );
+      }
     }
 
-    setFilteredAndSortedProducts(sortedList);
     window.history.replaceState({}, "", `?${params.toString()}`);
+    return filteredList;
   };
 
   const resetFiltering = () => {
     setFilteredCategory(null);
     setFilteredAndSortedProducts(null);
-
     fetchData();
   };
 
