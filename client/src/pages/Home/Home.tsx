@@ -10,13 +10,7 @@ export const Home = () => {
 
   return (
     <>
-      <Container
-        className={styles.logoContainer}
-        /*         sx={{
-          display: "flex",
-          justifyContent: "center",
-        }} */
-      >
+      <Container className={styles.logoContainer}>
         <Box className={styles.heroContainer}>
           <Box
             data-cy="logo"
@@ -44,6 +38,7 @@ export const Home = () => {
                 backgroundColor: theme.contrastColor,
                 color: theme.secondaryColor,
                 boxShadow: "3",
+                width: "75%",
               }}
             >
               Till produktkatalogen

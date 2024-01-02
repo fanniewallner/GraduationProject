@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export const PurchaseConditions = () => {
   const api = useApi();
-  const theme = useTheme();
+  const { theme } = useTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [loading, setLoading] = useState(true);
   const [contact, setContact] = useState<string>();
   useEffect(() => {
@@ -25,12 +26,38 @@ export const PurchaseConditions = () => {
   }, []);
   console.log(contact);
   return (
-    <Container sx={{ minHeight: "100vh", pt: "5rem", pb: "2rem" }}>
-      <Typography
-        sx={{ whiteSpace: "pre-line", color: theme.theme.secondaryColor }}
+    <Container
+      sx={{
+        minHeight: "85vh",
+        width: "100%",
+        pt: "5rem",
+        pb: "2rem",
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <Box sx={{ maxWidth: isMobile ? "100%" : "60%" }}>
+        <img
+          src="/xtoolslogo.png"
+          alt="XTools Logo"
+          style={{ width: "100%", height: "auto" }}
+        />
+      </Box>
+      <Box
+        sx={{
+          height: "60vh",
+          width: isMobile ? "100%" : "60%",
+          overflowY: "scroll",
+        }}
       >
-        {contact}
-      </Typography>
+        <Typography
+          sx={{ whiteSpace: "pre-line", color: theme.secondaryColor }}
+        >
+          {contact}
+        </Typography>
+      </Box>
     </Container>
   );
 };

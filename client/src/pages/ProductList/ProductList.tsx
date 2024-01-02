@@ -30,7 +30,6 @@ export const ProductList = () => {
   const fetchData = async (category?: number) => {
     if (!category || category !== null) {
       const params = new URLSearchParams(search);
-
       params.delete("category");
       window.history.replaceState(
         {},
@@ -58,16 +57,8 @@ export const ProductList = () => {
       fetchData(parseInt(newCategory, 10));
       window.history.replaceState({}, "", `?${params.toString()}`);
     } else {
-      const storedCategory = sessionStorage.getItem("filteredCategory");
-      const category = storedCategory ? parseInt(storedCategory, 10) : null;
-      window.history.replaceState({}, "", `?${params.toString()}`);
-      console.log("SS", category);
-      if (category !== null) {
-        setFilteredCategory(category);
-        await fetchData(category);
-      } else {
-        setFilteredAndSortedProducts(products?.data || []);
-      }
+      sessionStorage.clear();
+      fetchData();
     }
 
     //SortProducts();
