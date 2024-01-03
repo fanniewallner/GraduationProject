@@ -89,6 +89,7 @@ export const ProductView = () => {
         <>
           <Box sx={{ width: isMobile ? "100%" : "40%", p: "0", m: "0" }}>
             <img
+              alt={product.data.attributes.name}
               style={{ width: "100%", height: "auto" }}
               src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
               onError={(e) => setBrokenImageUrl(true)}

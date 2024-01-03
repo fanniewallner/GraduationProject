@@ -40,7 +40,9 @@ export const Footer = () => {
       }}
     >
       <Box className={styles.footerWrapper__contacts}>
-        <Typography>Kontakt</Typography>
+        <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
+          Kontakt
+        </Typography>
         <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.company}
         </Typography>
@@ -52,31 +54,49 @@ export const Footer = () => {
         </Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
-        <Typography>Xtools</Typography>
+        <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
+          Xtools
+        </Typography>
         <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.freeText}
         </Typography>
       </Box>
 
       <Box className={styles.footerWrapper__socials}>
-        <Typography>Följ oss</Typography>
+        <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
+          Följ oss
+        </Typography>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Link
             to={"https://www.facebook.com/xtools.se"}
             target="_blank"
+            aria-label="See more pictures and references on our Facebook page"
             rel="noopener noreferrer"
           >
             <FacebookIcon
-              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+              sx={{
+                color: theme.secondaryColor,
+                fontSize: "2rem",
+                "&:hover": {
+                  color: "#969696",
+                },
+              }}
             />
           </Link>
           <Link
             to={"https://www.instagram.com/xtools.se/"}
             target="_blank"
+            aria-label="See more pictures and references on our Instagram page"
             rel="noopener noreferrer"
           >
             <InstagramIcon
-              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+              sx={{
+                color: theme.secondaryColor,
+                fontSize: "2rem",
+                "&:hover": {
+                  color: "#969696",
+                },
+              }}
             />
           </Link>
         </Box>

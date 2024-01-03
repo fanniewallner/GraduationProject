@@ -4,13 +4,8 @@ const colors = {
   primayBackgroundColor: "#1d1d1def",
   secondaryBackgroundColor: "#556c56",
   primaryColor: "#556c56",
-  secondaryColor: "#ffffff",
+  secondaryColor: "#F7F4F4",
   contrastColor: "#556c56",
-  /*   primayBackgroundColor: "#556c56",
-  secondaryBackgroundColor: "#556c56",
-  primaryColor: "#556c56",
-  secondaryColor: "#ffffff",
-  contrastColor: "#AB8673", */
 };
 
 interface Theme {

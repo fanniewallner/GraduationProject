@@ -15,8 +15,9 @@ export const Home = () => {
           <Box
             data-cy="logo"
             component="img"
-            src="xtoolslogo.png"
-            className={`${styles.logoImg}`}
+            alt="XTools-logo"
+            src="xtoolslogo.webp"
+            className={styles.logoImg}
           />
           <Box className={styles.heroContainer__text}>
             <Typography variant="h5" color={theme.secondaryColor}>

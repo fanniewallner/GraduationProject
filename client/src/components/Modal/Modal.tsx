@@ -83,6 +83,7 @@ export default function Modal({
           {!orderConfirmed ? (
             <>
               <img
+                alt={product.data.attributes.name}
                 src={
                   product.data.attributes.image.data.attributes.formats
                     .thumbnail.url
