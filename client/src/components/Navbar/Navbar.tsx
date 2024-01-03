@@ -94,6 +94,7 @@ export default function DrawerAppBar(props: Props) {
           </IconButton>
           <Link to={"/"} className={styles.flex}>
             <Typography
+              fontFamily={"Poppins"}
               variant="h6"
               component="div"
               sx={{
@@ -114,6 +115,7 @@ export default function DrawerAppBar(props: Props) {
                 <Link
                   to={item.path}
                   style={{
+                    fontFamily: "Poppins",
                     textDecoration: "none",
                     color: theme.secondaryColor,
                   }}

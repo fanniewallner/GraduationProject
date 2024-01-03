@@ -71,14 +71,18 @@ export const ContactPage = () => {
         width: "100%",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
-        paddingTop: "10rem",
+        paddingTop: "6rem",
         justifyContent: "center",
 
         gap: "2rem",
       }}
     >
       <Box sx={{ width: !isMobile ? "50%" : "100%", height: "600px" }}>
-        <Typography variant="h6" color={theme.secondaryColor}>
+        <Typography
+          variant="h6"
+          color={theme.secondaryColor}
+          fontFamily={"Poppins"}
+        >
           Kontakta oss
         </Typography>
         <Box
@@ -157,7 +161,12 @@ export const ContactPage = () => {
                 })}
               />
               <Button
-                sx={{ backgroundColor: theme.contrastColor }}
+                sx={{
+                  backgroundColor: theme.contrastColor,
+                  "&:active": {
+                    backgroundColor: theme.contrastColor,
+                  },
+                }}
                 variant="contained"
                 type="submit"
                 disabled={!formState.isValid}
@@ -193,12 +202,16 @@ export const ContactPage = () => {
           paddingBottom: "2rem",
         }}
       >
-        <Typography variant="h6">Företagsinformation</Typography>
+        <Typography fontFamily={"Poppins"} variant="h6">
+          Företagsinformation
+        </Typography>
         <Typography sx={{ whiteSpace: "pre-line" }}>
           {companyData?.data.attributes.companyInfo}
         </Typography>
 
-        <Typography variant="h6">Snickeri & uthämtning</Typography>
+        <Typography variant="h6" fontFamily={"Poppins"}>
+          Snickeri & uthämtning
+        </Typography>
         <Typography sx={{ whiteSpace: "pre-line" }}>
           {companyData?.data.attributes.pickup}
         </Typography>

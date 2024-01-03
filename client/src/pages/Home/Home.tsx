@@ -1,4 +1,10 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import styles from "./Home.module.scss";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";
@@ -7,10 +13,15 @@ import { useNavigate } from "react-router-dom";
 export const Home = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   return (
     <>
-      <Container className={styles.logoContainer}>
+      <Container
+        className={
+          isMobile ? styles.logoContainer : styles.logoContainerDesktop
+        }
+      >
         <Box className={styles.heroContainer}>
           <Box
             data-cy="logo"
@@ -20,7 +31,11 @@ export const Home = () => {
             className={styles.logoImg}
           />
           <Box className={styles.heroContainer__text}>
-            <Typography variant="h5" color={theme.secondaryColor}>
+            <Typography
+              variant="h5"
+              color={theme.secondaryColor}
+              fontFamily={"Poppins"}
+            >
               Portabla{" "}
               <span
                 style={{
@@ -61,13 +76,18 @@ export const Home = () => {
             </Box>
           </Box>
         </Box>
-
-        <Box className={styles.flexContainer}>
-          <Typography variant="h6" color={theme.secondaryColor}>
-            Produkter i fokus
-          </Typography>
-          <MuiCarousel />
-        </Box>
+        {!isMobile ? (
+          <Box className={styles.flexContainer}>
+            <Typography
+              variant="h6"
+              color={theme.secondaryColor}
+              fontFamily={"Poppins"}
+            >
+              Produkter i fokus
+            </Typography>
+            <MuiCarousel />
+          </Box>
+        ) : null}
       </Container>
     </>
   );

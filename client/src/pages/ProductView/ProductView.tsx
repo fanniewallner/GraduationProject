@@ -6,7 +6,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Breadcrumbs,
   Button,
   CircularProgress,
   Container,
@@ -27,7 +26,6 @@ export const ProductView = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [product, setProduct] = useState<IStrapiSingleResponse>();
-
   const [error, setError] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
@@ -108,7 +106,7 @@ export const ProductView = () => {
             {product.data.attributes.price} kr exkl. moms
           </Typography>
           {product.data.attributes.stockStatus ?? (
-            <Typography variant="h6">
+            <Typography variant="h6" color={"white"}>
               {product.data.attributes.stockStatus}
             </Typography>
           )}

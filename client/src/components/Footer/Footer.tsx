@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -13,6 +13,7 @@ export const Footer = () => {
   const api = useApi();
   const [loading, setLoading] = useState(false);
   const [contactData, setContactData] = useState<IStrapiContactResponse>();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,13 +44,13 @@ export const Footer = () => {
         <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
           Kontakt
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.company}
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.email}
         </Typography>
       </Box>
@@ -57,7 +58,7 @@ export const Footer = () => {
         <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
           Xtools
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.freeText}
         </Typography>
       </Box>

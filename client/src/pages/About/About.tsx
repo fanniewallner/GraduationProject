@@ -29,7 +29,11 @@ export const About = () => {
 
   return (
     <Container sx={{ paddingTop: "5rem", paddingBottom: "2rem" }}>
-      <Typography variant="h6" color={theme.secondaryColor}>
+      <Typography
+        variant="h6"
+        color={theme.secondaryColor}
+        fontFamily={"Poppins"}
+      >
         Om XTools
       </Typography>
       <Box

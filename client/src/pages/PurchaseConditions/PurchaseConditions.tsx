@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
 import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
+import styles from "./PurchaseConditions.module.scss";
 
 export const PurchaseConditions = () => {
   const api = useApi();
@@ -9,6 +10,7 @@ export const PurchaseConditions = () => {
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [loading, setLoading] = useState(true);
   const [contact, setContact] = useState<string>();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,16 +29,8 @@ export const PurchaseConditions = () => {
   console.log(contact);
   return (
     <Container
-      sx={{
-        minHeight: "85vh",
-        width: "100%",
-        pt: "5rem",
-        pb: "2rem",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
+      className={styles.purchaseConditionWrapper}
+      sx={{ flexDirection: isMobile ? "column" : "row" }}
     >
       <Box sx={{ maxWidth: isMobile ? "100%" : "60%" }}>
         <img
@@ -47,6 +41,7 @@ export const PurchaseConditions = () => {
       </Box>
       <Box
         sx={{
+          paddingTop: "2rem",
           height: "60vh",
           width: isMobile ? "100%" : "60%",
           overflowY: "scroll",
