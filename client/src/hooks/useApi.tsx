@@ -20,8 +20,12 @@ export default function useApi(url?: string) {
     baseURL: url ? url : config.apiBaseUrl,
   });
   const api = {
-    getProducts: async () => {
-      return axiosInstance.get<IStrapiListResponse>("/api/products?populate=*");
+    getProducts: async (categoryId?: number | null) => {
+      const params =
+        categoryId !== null && categoryId !== undefined
+          ? `?populate=*&filters[category]=${categoryId}`
+          : "?populate=*";
+      return axiosInstance.get<IStrapiListResponse>(`/api/products${params}`);
     },
     getProductById: async (id: string) => {
       return axiosInstance.get<IStrapiSingleResponse>(

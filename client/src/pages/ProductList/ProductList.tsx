@@ -3,7 +3,6 @@ import {
   Button,
   CircularProgress,
   Container,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -28,72 +27,91 @@ export const ProductList = () => {
     IProduct[] | null
   >();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.getProducts();
-        setProducts(response.data);
-        setFilteredAndSortedProducts(response.data.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async (category?: number): Promise<IProduct[]> => {
+    if (!category || category !== null) {
+      const params = new URLSearchParams(search);
+      params.delete("category");
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?${params.toString()}`
+      );
+    }
+    try {
+      const response = await api.getProducts(category);
+      setProducts(response.data);
+      return response.data.data;
+    } catch (error) {
+      console.log(error);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    filterAndSortProducts();
-    console.log("filtered", filteredAndSortedProducts);
-    console.log("products", products?.data);
-  }, [filteredCategory, sorting]);
-
-  const filterAndSortProducts = () => {
+  const fetchDataAndFilter = async () => {
     const params = new URLSearchParams(search);
-    let filteredList: IProduct[] = products?.data || [];
+    const newCategory = params.get("category");
+    const sort = params.get("sort");
+    let productList: IProduct[] = [];
 
-    if (filteredCategory) {
-      params.set("category", filteredCategory.toString());
-      filteredList =
-        products?.data.filter((product) =>
-          filteredCategory
-            ? product.attributes.category.data.id === filteredCategory
-            : true
-        ) || [];
+    if (newCategory) {
+      console.log(newCategory);
+      sessionStorage.setItem("filteredCategory", newCategory);
+      productList = await fetchData(parseInt(newCategory, 10));
+      window.history.replaceState({}, "", `?${params.toString()}`);
+
+      if (sort) {
+        const sortedList = await SortProducts(productList, parseInt(sort));
+        setFilteredAndSortedProducts(sortedList);
+      }
+    } else {
+      sessionStorage.clear();
+      fetchData();
+    }
+  };
+
+  useEffect(() => {
+    fetchDataAndFilter();
+  }, [search]);
+
+  const SortProducts = (productList: IProduct[], sortValue: number) => {
+    const params = new URLSearchParams(search);
+
+    console.log(filteredAndSortedProducts);
+    let filteredList: IProduct[] = JSON.parse(JSON.stringify(productList));
+
+    if (filteredAndSortedProducts) {
+      if (sortValue === 3) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          a.attributes.name.localeCompare(b.attributes.name)
+        );
+      }
+      if (sortValue === 4) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          b.attributes.name.localeCompare(a.attributes.name)
+        );
+      }
+      if (sortValue === 5) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          a.attributes.price.localeCompare(b.attributes.price)
+        );
+      }
+      if (sortValue === 6) {
+        filteredList.sort((a: IProduct, b: IProduct) =>
+          b.attributes.price.localeCompare(a.attributes.price)
+        );
+      }
     }
 
-    let sortedList: IProduct[] = [...filteredList];
-
-    if (sorting === 3) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        a.attributes.name.localeCompare(b.attributes.name)
-      );
-    } else if (sorting === 4) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        b.attributes.name.localeCompare(a.attributes.name)
-      );
-    } else if (sorting === 5) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        a.attributes.price.localeCompare(b.attributes.price)
-      );
-    } else if (sorting === 6) {
-      sortedList.sort((a: IProduct, b: IProduct) =>
-        b.attributes.price.localeCompare(a.attributes.price)
-      );
-    }
-
-    setFilteredAndSortedProducts(sortedList);
     window.history.replaceState({}, "", `?${params.toString()}`);
+    return filteredList;
   };
 
   const resetFiltering = () => {
-    const params = new URLSearchParams(search);
     setFilteredCategory(null);
-    params.delete("category");
     setFilteredAndSortedProducts(null);
-    window.history.replaceState({}, "", window.location.pathname);
+    fetchData();
   };
 
   return (
@@ -114,7 +132,12 @@ export const ProductList = () => {
             color: theme.secondaryColor,
           }}
           className={styles.productListWrapper__filterButtons}
-          onClick={() => setFilteredCategory(1)}
+          onClick={() => {
+            setFilteredCategory(1);
+            const params = new URLSearchParams(window.location.search);
+            params.set("category", "1");
+            window.history.replaceState({}, "", `?${params.toString()}`);
+          }}
         >
           Arbetsbänkar
         </Button>
@@ -124,7 +147,12 @@ export const ProductList = () => {
             color: theme.secondaryColor,
           }}
           className={styles.productListWrapper__filterButtons}
-          onClick={() => setFilteredCategory(2)}
+          onClick={() => {
+            setFilteredCategory(2);
+            const params = new URLSearchParams(window.location.search);
+            params.set("category", "2");
+            window.history.replaceState({}, "", `?${params.toString()}`);
+          }}
         >
           Tillbehör
         </Button>
@@ -152,7 +180,7 @@ export const ProductList = () => {
           }}
           className={styles.productListWrapper__productWrapper}
         >
-          {filteredAndSortedProducts !== null
+          {filteredAndSortedProducts && filteredAndSortedProducts?.length > 0
             ? filteredAndSortedProducts?.map((product) => (
                 <Box key={product.id}>
                   <ProductCard product={product} />

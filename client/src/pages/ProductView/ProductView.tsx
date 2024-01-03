@@ -11,6 +11,7 @@ import {
   CircularProgress,
   Container,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
@@ -23,8 +24,10 @@ export const ProductView = () => {
   const { id } = useParams();
   const { theme } = useTheme();
   const api = useApi();
-  const [product, setProduct] = useState<IStrapiSingleResponse>();
   const [loading, setLoading] = useState<boolean>(true);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const [product, setProduct] = useState<IStrapiSingleResponse>();
+
   const [error, setError] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
@@ -84,10 +87,9 @@ export const ProductView = () => {
       <BreadCrumbsHelper items={breadcrumbs} />
       {product && (
         <>
-          <Box sx={{ width: "100%", p: "0", m: "0" }}>
+          <Box sx={{ width: isMobile ? "100%" : "40%", p: "0", m: "0" }}>
             <img
-              width="100%"
-              height="auto"
+              style={{ width: "100%", height: "auto" }}
               src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
               onError={(e) => setBrokenImageUrl(true)}
             />

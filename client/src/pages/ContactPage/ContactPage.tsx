@@ -68,7 +68,7 @@ export const ContactPage = () => {
     <Container
       sx={{
         minHeight: "100vh",
-
+        width: "100%",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         paddingTop: "10rem",
