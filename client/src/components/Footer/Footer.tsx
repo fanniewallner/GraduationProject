@@ -47,7 +47,7 @@ export const Footer = () => {
         <Typography sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography data-cy="email" sx={{ fontSize: "12px" }}>
           {contactData?.data.attributes.email}
         </Typography>
       </Box>

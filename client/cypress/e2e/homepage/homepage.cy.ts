@@ -16,9 +16,5 @@ Then("I can click a call-to-action button", () => {
 Then("I see a footer containing the email {string}", (string: string) => {
   cy.wait("@getContactInfo");
   cy.get('[data-cy="footer]').contains(string);
-});
-
-Then("I see a carousel containing the product {string}", (string: string) => {
-  cy.wait("@getContactInfo");
-  cy.get('[data-cy="carousel]');
+  cy.get('[data-cy="email]').contains(string);
 });
