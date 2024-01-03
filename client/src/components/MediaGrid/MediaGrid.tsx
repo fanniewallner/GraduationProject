@@ -1,5 +1,4 @@
 import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
 
@@ -36,8 +35,6 @@ export default function MediaGrid() {
     fetchData();
   }, []);
 
-  console.log("media", mediaGallery);
-
   return (
     <Container>
       <ImageList sx={{ height: "auto" }} cols={3} rowHeight={164}>
@@ -45,6 +42,7 @@ export default function MediaGrid() {
           mediaGallery.data[0].attributes.image.data.map((image, index) => (
             <Box key={index}>
               <img
+                loading="lazy"
                 srcSet={`http://localhost:1337${image.attributes.formats.thumbnail.url}?w=328&h=328&fit=crop&auto=format&dpr=2 2x`}
                 src={`http://localhost:1337${image.attributes.formats.thumbnail.url}?w=328&h=328&fit=crop&auto=format`}
                 alt={image.attributes.name}

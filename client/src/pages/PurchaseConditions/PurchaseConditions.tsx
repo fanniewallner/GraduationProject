@@ -34,6 +34,7 @@ export const PurchaseConditions = () => {
     >
       <Box sx={{ maxWidth: isMobile ? "100%" : "60%" }}>
         <img
+          loading="lazy"
           src="/xtoolslogo.png"
           alt="XTools Logo"
           style={{ width: "100%", height: "auto" }}

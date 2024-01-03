@@ -27,6 +27,7 @@ export default function ProductCard({ product }: IProductCardProps) {
     <>
       <Card className={styles.card}>
         <CardMedia
+          loading="lazy"
           component="img"
           alt={product.attributes.name}
           height="200"

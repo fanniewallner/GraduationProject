@@ -23,9 +23,9 @@ export const Home = () => {
         }
       >
         <Box className={styles.heroContainer}>
-          <Box
+          <img
             data-cy="logo"
-            component="img"
+            loading="lazy"
             alt="XTools-logo"
             src="xtoolslogo.webp"
             className={styles.logoImg}
@@ -53,8 +53,6 @@ export const Home = () => {
               sx={{
                 backgroundColor: theme.contrastColor,
                 color: theme.secondaryColor,
-                boxShadow: "3",
-                width: "75%",
               }}
             >
               Till produktkatalogen

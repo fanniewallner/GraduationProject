@@ -57,7 +57,6 @@ export const ProductList = () => {
     let productList: IProduct[] = [];
 
     if (newCategory) {
-      console.log(newCategory);
       sessionStorage.setItem("filteredCategory", newCategory);
       productList = await fetchData(parseInt(newCategory, 10));
       window.history.replaceState({}, "", `?${params.toString()}`);
@@ -79,7 +78,6 @@ export const ProductList = () => {
   const SortProducts = (productList: IProduct[], sortValue: number) => {
     const params = new URLSearchParams(search);
 
-    console.log(filteredAndSortedProducts);
     let filteredList: IProduct[] = JSON.parse(JSON.stringify(productList));
 
     if (filteredAndSortedProducts) {
