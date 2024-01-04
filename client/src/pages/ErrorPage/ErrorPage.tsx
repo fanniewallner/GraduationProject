@@ -1,22 +1,12 @@
 import { Container, Typography, Button, Link } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import styles from "./ErrorPage.module.scss";
 
 export const ErrorPage = () => {
-  const navigate = useNavigate();
   const { theme } = useTheme();
   return (
-    <Container
-      sx={{
-        height: "100vh",
-        pt: "5rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "1rem",
-      }}
-    >
+    <Container className={styles.containerWrapper}>
       <SentimentVeryDissatisfiedIcon
         sx={{ color: theme.secondaryColor, fontSize: "5rem" }}
       />

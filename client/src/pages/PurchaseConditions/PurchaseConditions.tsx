@@ -37,9 +37,16 @@ export const PurchaseConditions = () => {
           loading="lazy"
           src="/xtoolslogo.png"
           alt="XTools Logo"
-          style={{ width: "100%", height: "auto" }}
+          style={{ width: isMobile ? "100%" : "60%", height: "auto" }}
         />
       </Box>
+      <Typography
+        variant="h5"
+        fontFamily={"Poppins"}
+        color={theme.secondaryColor}
+      >
+        Köpvillkor
+      </Typography>
       <Box
         sx={{
           paddingTop: "2rem",

@@ -23,13 +23,16 @@ export const Home = () => {
         }
       >
         <Box className={styles.heroContainer}>
-          <img
-            data-cy="logo"
-            loading="lazy"
-            alt="XTools-logo"
-            src="xtoolslogo.webp"
-            className={styles.logoImg}
-          />
+          <Box sx={{ width: isMobile ? "100%" : "40%" }}>
+            <img
+              data-cy="logo"
+              loading="lazy"
+              alt="XTools-logo"
+              src="xtoolslogo.webp"
+              className={styles.logoImg}
+            />
+          </Box>
+
           <Box className={styles.heroContainer__text}>
             <Typography
               variant="h5"

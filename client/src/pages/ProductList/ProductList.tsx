@@ -3,7 +3,6 @@ import {
   Button,
   CircularProgress,
   Container,
-  makeStyles,
   useMediaQuery,
 } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -115,7 +114,14 @@ export const ProductList = () => {
 
   return (
     <Container className={styles.productListWrapper}>
-      <Container className={styles.productListWrapper__buttonContainer}>
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "center",
+          gap: "0.5rem",
+        }}
+      >
         <Button
           sx={{
             backgroundColor: theme.contrastColor,
@@ -161,7 +167,15 @@ export const ProductList = () => {
       {loading ? (
         <CircularProgress sx={{ color: theme.secondaryColor }} />
       ) : (
-        <Container className={styles.productListWrapper__productWrapper}>
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            flexWrap: "wrap",
+            gap: "1rem",
+            alignContent: "center",
+          }}
+        >
           {filteredAndSortedProducts && filteredAndSortedProducts?.length > 0
             ? filteredAndSortedProducts?.map((product) => (
                 <Box key={product.id}>

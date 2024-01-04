@@ -4,6 +4,7 @@ import useApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IAboutInfo } from "../../models/IAboutInfo";
 import { useTheme } from "../../contexts/ThemeContext";
+import styles from "./About.module.scss";
 
 export const About = () => {
   const { theme } = useTheme();
@@ -28,7 +29,7 @@ export const About = () => {
   }, []);
 
   return (
-    <Container sx={{ paddingTop: "5rem", paddingBottom: "2rem" }}>
+    <Container className={styles.containerWrapper}>
       <Typography
         variant="h6"
         color={theme.secondaryColor}
@@ -37,14 +38,15 @@ export const About = () => {
         Om XTools
       </Typography>
       <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          justifyContent: "center",
-        }}
+        className={
+          isMobile
+            ? styles.containerWrapper__box
+            : styles.containerWrapper__boxDesktop
+        }
       >
         <MediaGrid />
+        {/*
+         */}{" "}
         <Typography
           sx={{ whiteSpace: "pre-line" }}
           color={theme.secondaryColor}
