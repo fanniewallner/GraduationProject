@@ -36,7 +36,7 @@ export default function MediaGrid() {
   }, []);
 
   return (
-    <Container>
+    <Container sx={{ marginTop: "3rem" }}>
       <ImageList sx={{ height: "auto" }} cols={3} rowHeight={164}>
         {mediaGallery.data.length > 0 &&
           mediaGallery.data[0].attributes.image.data.map((image, index) => (

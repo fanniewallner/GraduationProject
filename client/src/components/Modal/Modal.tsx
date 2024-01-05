@@ -28,7 +28,7 @@ export default function Modal({
   setOrderConfirmed,
   product,
 }: IModalProps) {
-  const { handleSubmit, formState, register, reset } =
+  const { handleSubmit, formState, setValue, register, reset } =
     useForm<PurchaseInquiry>();
   const api = useApi();
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -48,6 +48,7 @@ export default function Modal({
     !formState.errors.data?.productname;
 
   const handleFormSubmit = async (data: PurchaseInquiry) => {
+    setValue("data.amount", amount);
     try {
       await api.submitForm(data);
       handleCheckbox();
@@ -82,36 +83,18 @@ export default function Modal({
         <DialogContent>
           {!orderConfirmed ? (
             <>
-              <img
-                alt={product.data.attributes.name}
-                src={
-                  product.data.attributes.image.data.attributes.formats
-                    .thumbnail.url
-                }
-              />
               <DialogContentText>
                 <Typography>{product.data.attributes.name}</Typography>
-                <Typography>Antal:</Typography>
+                <Typography>Antal: 1</Typography>
                 <Typography>Totalt pris: {totalPrice} kr exkl. moms</Typography>
+                <Typography>
+                  Önskar du fler än 1 st, vänligen fyll i detta i
+                  meddelanderutan eller kontakta oss.
+                </Typography>
               </DialogContentText>
               <DialogContent>
                 {" "}
                 <form>
-                  <Select
-                    error={formState.errors.data?.amount != undefined}
-                    fullWidth
-                    value={amount}
-                    label="Antal"
-                    autoFocus
-                    type="number"
-                    id="amount"
-                    {...register("data.amount", {
-                      required: "Du måste ange det här fältet",
-                    })}
-                  >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                  </Select>
                   <TextField
                     helperText={formState.errors.data?.firstname?.message}
                     error={formState.errors.data?.firstname != undefined}
@@ -216,9 +199,16 @@ export default function Modal({
           )}
         </DialogContent>
         <DialogActions>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
             {orderConfirmed ? (
-              <Button onClick={handleClose}>Stäng</Button>
+              <Button aria-label="close button" onClick={handleClose}>
+                Stäng
+              </Button>
             ) : (
               <>
                 <Box sx={{ display: "flex" }}>
@@ -236,8 +226,11 @@ export default function Modal({
                   </Typography>
                 </Box>
 
-                <Button onClick={handleClose}>Stäng</Button>
+                <Button aria-aria-label="close button" onClick={handleClose}>
+                  Stäng
+                </Button>
                 <Button
+                  aria-label="Submit button"
                   onClick={handleSubmit(handleFormSubmit)}
                   disabled={formState.isSubmitting || !isChecked || !formValid}
                 >

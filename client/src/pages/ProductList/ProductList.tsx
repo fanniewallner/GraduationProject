@@ -123,11 +123,15 @@ export const ProductList = () => {
         }}
       >
         <Button
+          aria-label="filter by workbench category button"
           sx={{
-            backgroundColor: theme.contrastColor,
+            backgroundColor:
+              filteredCategory === 1 ? "#3D4F3E" : theme.contrastColor,
             color: theme.secondaryColor,
           }}
-          className={styles.productListWrapper__filterButtons}
+          className={`${styles.productListWrapper__filterButtons} ${
+            filteredCategory === 1 ? "active" : ""
+          }`}
           onClick={() => {
             setFilteredCategory(1);
             const params = new URLSearchParams(window.location.search);
@@ -138,11 +142,15 @@ export const ProductList = () => {
           Arbetsbänkar
         </Button>
         <Button
+          aria-label="filter by accessories button"
           sx={{
-            backgroundColor: theme.contrastColor,
+            backgroundColor:
+              filteredCategory === 2 ? "#3D4F3E" : theme.contrastColor,
             color: theme.secondaryColor,
           }}
-          className={styles.productListWrapper__filterButtons}
+          className={`${styles.productListWrapper__filterButtons} ${
+            filteredCategory === 2 ? "active" : ""
+          }`}
           onClick={() => {
             setFilteredCategory(2);
             const params = new URLSearchParams(window.location.search);
@@ -154,10 +162,14 @@ export const ProductList = () => {
         </Button>
         <Button
           sx={{
-            backgroundColor: theme.contrastColor,
+            backgroundColor: !filteredCategory
+              ? "#2a372b"
+              : theme.contrastColor,
             color: theme.secondaryColor,
           }}
-          className={styles.productListWrapper__filterButtons}
+          className={`${styles.productListWrapper__filterButtons} ${
+            !filteredCategory ? "active" : ""
+          }`}
           onClick={() => resetFiltering()}
         >
           Alla produkter

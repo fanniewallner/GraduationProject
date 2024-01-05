@@ -29,15 +29,19 @@ export const PurchaseConditions = () => {
   console.log(contact);
   return (
     <Container
-      className={styles.purchaseConditionWrapper}
-      sx={{ flexDirection: isMobile ? "column" : "row" }}
+      sx={{
+        minHeight: "85vh",
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        paddingTop: "6rem",
+      }}
     >
       <Box sx={{ maxWidth: isMobile ? "100%" : "60%" }}>
         <img
           loading="lazy"
           src="/xtoolslogo.png"
           alt="XTools Logo"
-          style={{ width: isMobile ? "100%" : "60%", height: "auto" }}
+          style={{ width: "100%", height: "auto" }}
         />
       </Box>
       <Typography

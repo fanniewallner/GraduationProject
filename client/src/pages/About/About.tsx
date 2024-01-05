@@ -30,13 +30,6 @@ export const About = () => {
 
   return (
     <Container className={styles.containerWrapper}>
-      <Typography
-        variant="h6"
-        color={theme.secondaryColor}
-        fontFamily={"Poppins"}
-      >
-        Om XTools
-      </Typography>
       <Box
         className={
           isMobile
@@ -46,13 +39,24 @@ export const About = () => {
       >
         <MediaGrid />
         {/*
-         */}{" "}
-        <Typography
-          sx={{ whiteSpace: "pre-line" }}
-          color={theme.secondaryColor}
-        >
-          {aboutData?.data.attributes.freeText}
-        </Typography>
+         */}
+        <Box sx={{ width: "100%" }}>
+          <Typography
+            variant="h6"
+            color={theme.secondaryColor}
+            fontFamily={"Poppins"}
+            textAlign={"center"}
+            paddingBottom={"1rem"}
+          >
+            Om XTools
+          </Typography>
+          <Typography
+            sx={{ whiteSpace: "pre-line" }}
+            color={theme.secondaryColor}
+          >
+            {aboutData?.data.attributes.freeText}
+          </Typography>
+        </Box>
       </Box>
     </Container>
   );

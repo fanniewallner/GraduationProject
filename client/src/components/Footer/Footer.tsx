@@ -56,7 +56,7 @@ export const Footer = () => {
       </Box>
       <Box className={styles.footerWrapper__freeText}>
         <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
-          Xtools
+          XTools
         </Typography>
         <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.freeText}

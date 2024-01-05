@@ -8,12 +8,13 @@
     //flex-direction: isMobile ? "column" : "row",
     flex-direction: column;
     justify-content: center;
+    gap: 2rem;
   }
 
   &__boxDesktop {
     min-height: 100vh;
     display: flex;
-    //flex-direction: isMobile ? "column" : "row",
+
     flex-direction: row;
     justify-content: center;
   }

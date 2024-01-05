@@ -51,6 +51,7 @@ export const Home = () => {
               tillverkade i Sverige
             </Typography>
             <Button
+              aria-label="go to product catalog button"
               data-cy="actionButton"
               onClick={() => navigate("/produktkatalog")}
               sx={{

@@ -44,6 +44,7 @@ export default function ProductCard({ product }: IProductCardProps) {
         </CardContent>
         <CardActions>
           <Button
+            aria-label="Go to product button"
             sx={{
               backgroundColor: theme.contrastColor,
               color: theme.secondaryColor,
