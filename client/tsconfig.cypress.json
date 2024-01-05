@@ -3,7 +3,8 @@
     "composite": true,
     "esModuleInterop": true,
     "moduleResolution": "node16",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "module": "Node16"
   },
   "include": ["cypress.config.ts"]
 }

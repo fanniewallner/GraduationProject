@@ -1,4 +1,4 @@
-# Xtools client
+# XTools client
 
 ### About the project
 

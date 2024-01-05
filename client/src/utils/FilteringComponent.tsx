@@ -52,7 +52,17 @@ export default function FilteringComponent({
       }}
     >
       <FormControl sx={{ color: theme.secondaryColor }}>
-        <InputLabel id="filter">Sortering</InputLabel>
+        <InputLabel
+          id="filter"
+          sx={{
+            color: "white",
+            "&.Mui-focused": {
+              color: "white",
+            },
+          }}
+        >
+          Sortering
+        </InputLabel>
         <Select
           labelId="filter"
           id="filterSelect"

@@ -1,4 +1,10 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import styles from "./Home.module.scss";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";
@@ -7,19 +13,32 @@ import { useNavigate } from "react-router-dom";
 export const Home = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   return (
     <>
-      <Container className={styles.logoContainer}>
+      <Container
+        className={
+          isMobile ? styles.logoContainer : styles.logoContainerDesktop
+        }
+      >
         <Box className={styles.heroContainer}>
-          <Box
-            data-cy="logo"
-            component="img"
-            src="xtoolslogo.png"
-            className={`${styles.logoImg}`}
-          />
+          <Box sx={{ width: isMobile ? "100%" : "40%" }}>
+            <img
+              data-cy="logo"
+              loading="lazy"
+              alt="XTools-logo"
+              src="xtoolslogo.webp"
+              className={styles.logoImg}
+            />
+          </Box>
+
           <Box className={styles.heroContainer__text}>
-            <Typography variant="h5" color={theme.secondaryColor}>
+            <Typography
+              variant="h5"
+              color={theme.secondaryColor}
+              fontFamily={"Poppins"}
+            >
               Portabla{" "}
               <span
                 style={{
@@ -32,13 +51,12 @@ export const Home = () => {
               tillverkade i Sverige
             </Typography>
             <Button
+              aria-label="go to product catalog button"
               data-cy="actionButton"
               onClick={() => navigate("/produktkatalog")}
               sx={{
                 backgroundColor: theme.contrastColor,
                 color: theme.secondaryColor,
-                boxShadow: "3",
-                width: "75%",
               }}
             >
               Till produktkatalogen
@@ -60,13 +78,18 @@ export const Home = () => {
             </Box>
           </Box>
         </Box>
-
-        <Box className={styles.flexContainer}>
-          <Typography variant="h6" color={theme.secondaryColor}>
-            Produkter i fokus
-          </Typography>
-          <MuiCarousel />
-        </Box>
+        {!isMobile ? (
+          <Box className={styles.flexContainer}>
+            <Typography
+              variant="h6"
+              color={theme.secondaryColor}
+              fontFamily={"Poppins"}
+            >
+              Produkter i fokus
+            </Typography>
+            <MuiCarousel />
+          </Box>
+        ) : null}
       </Container>
     </>
   );

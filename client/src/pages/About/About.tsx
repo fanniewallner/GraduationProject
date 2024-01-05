@@ -4,6 +4,7 @@ import useApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IAboutInfo } from "../../models/IAboutInfo";
 import { useTheme } from "../../contexts/ThemeContext";
+import styles from "./About.module.scss";
 
 export const About = () => {
   const { theme } = useTheme();
@@ -28,25 +29,34 @@ export const About = () => {
   }, []);
 
   return (
-    <Container sx={{ paddingTop: "5rem", paddingBottom: "2rem" }}>
-      <Typography variant="h6" color={theme.secondaryColor}>
-        Om XTools
-      </Typography>
+    <Container className={styles.containerWrapper}>
       <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          justifyContent: "center",
-        }}
+        className={
+          isMobile
+            ? styles.containerWrapper__box
+            : styles.containerWrapper__boxDesktop
+        }
       >
         <MediaGrid />
-        <Typography
-          sx={{ whiteSpace: "pre-line" }}
-          color={theme.secondaryColor}
-        >
-          {aboutData?.data.attributes.freeText}
-        </Typography>
+        {/*
+         */}
+        <Box sx={{ width: "100%" }}>
+          <Typography
+            variant="h6"
+            color={theme.secondaryColor}
+            fontFamily={"Poppins"}
+            textAlign={"center"}
+            paddingBottom={"1rem"}
+          >
+            Om XTools
+          </Typography>
+          <Typography
+            sx={{ whiteSpace: "pre-line" }}
+            color={theme.secondaryColor}
+          >
+            {aboutData?.data.attributes.freeText}
+          </Typography>
+        </Box>
       </Box>
     </Container>
   );

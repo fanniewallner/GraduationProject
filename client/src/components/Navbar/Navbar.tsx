@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.scss";
+import { useState } from "react";
 
 interface Props {
   window?: () => Window;
@@ -32,6 +33,7 @@ export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useTheme();
+  const [active, setActive] = useState<string>();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -47,7 +49,7 @@ export default function DrawerAppBar(props: Props) {
     >
       <Link to={"/"} className={styles.flex}>
         <Typography variant="h6" color={theme.primaryColor}>
-          Xtools
+          XTools
         </Typography>
       </Link>
 
@@ -55,12 +57,27 @@ export default function DrawerAppBar(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              aria-label="navigation item"
+              onClick={() => setActive(item.label)}
+            >
               <Link
                 to={item.path}
-                style={{ textDecoration: "none", color: theme.primaryColor }}
+                style={{
+                  textDecoration: "none",
+                }}
               >
-                <Typography variant="body1">{item.label}</Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color:
+                      active === item.label
+                        ? theme.primaryColor
+                        : theme.secondaryColor,
+                  }}
+                >
+                  {item.label}
+                </Typography>
               </Link>
             </ListItemButton>
           </ListItem>
@@ -83,13 +100,6 @@ export default function DrawerAppBar(props: Props) {
         }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
-          {/*  <Box sx={{ display: { xs: "block", sm: "none" } }}>
-            <img
-              src="/xtoolslogo.png"
-              alt="Xtools Logo"
-              style={{ width: "40px", height: "auto" }}
-            />
-          </Box> */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -99,8 +109,9 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon sx={{ fontSize: "2rem" }} />
           </IconButton>
-          <Link to={"/"} className={styles.flex}>
+          <Link to={"/"} className={styles.flex} onClick={() => setActive("")}>
             <Typography
+              fontFamily={"Poppins"}
               variant="h6"
               component="div"
               sx={{
@@ -111,19 +122,30 @@ export default function DrawerAppBar(props: Props) {
                 },
               }}
             >
-              Xtools
+              XTools
             </Typography>
           </Link>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item.label} className={styles.desktopLinks}>
+              <Button
+                key={item.label}
+                aria-label="navigation item"
+                className={`${styles.desktopLinks} ${
+                  active === item.label ? "active" : ""
+                }`}
+              >
                 <Link
                   to={item.path}
                   style={{
+                    fontFamily: "Poppins",
                     textDecoration: "none",
-                    color: theme.secondaryColor,
+                    color:
+                      active === item.label
+                        ? theme.primaryColor
+                        : theme.secondaryColor,
                   }}
+                  onClick={() => setActive(item.label)}
                 >
                   {item.label}
                 </Link>

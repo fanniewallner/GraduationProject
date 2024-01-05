@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -13,6 +13,7 @@ export const Footer = () => {
   const api = useApi();
   const [loading, setLoading] = useState(false);
   const [contactData, setContactData] = useState<IStrapiContactResponse>();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,43 +41,63 @@ export const Footer = () => {
       }}
     >
       <Box className={styles.footerWrapper__contacts}>
-        <Typography>Kontakt</Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
+          Kontakt
+        </Typography>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.company}
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.email}
         </Typography>
       </Box>
       <Box className={styles.footerWrapper__freeText}>
-        <Typography>Xtools</Typography>
-        <Typography sx={{ fontSize: "12px" }}>
+        <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
+          XTools
+        </Typography>
+        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.freeText}
         </Typography>
       </Box>
 
       <Box className={styles.footerWrapper__socials}>
-        <Typography>Följ oss</Typography>
+        <Typography sx={{ color: "#7b8d7c", fontWeight: "bold" }}>
+          Följ oss
+        </Typography>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Link
             to={"https://www.facebook.com/xtools.se"}
             target="_blank"
+            aria-label="See more pictures and references on our Facebook page"
             rel="noopener noreferrer"
           >
             <FacebookIcon
-              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+              sx={{
+                color: theme.secondaryColor,
+                fontSize: "2rem",
+                "&:hover": {
+                  color: "#969696",
+                },
+              }}
             />
           </Link>
           <Link
             to={"https://www.instagram.com/xtools.se/"}
             target="_blank"
+            aria-label="See more pictures and references on our Instagram page"
             rel="noopener noreferrer"
           >
             <InstagramIcon
-              sx={{ color: theme.secondaryColor, fontSize: "2rem" }}
+              sx={{
+                color: theme.secondaryColor,
+                fontSize: "2rem",
+                "&:hover": {
+                  color: "#969696",
+                },
+              }}
             />
           </Link>
         </Box>

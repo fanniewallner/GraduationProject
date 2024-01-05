@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../models/IProduct";
+import styles from "./ProductCardComponent.module.scss";
 
 type IProductCardProps = {
   product: IProduct;
@@ -24,17 +25,9 @@ export default function ProductCard({ product }: IProductCardProps) {
 
   return (
     <>
-      <Card
-        sx={{
-          width: 330,
-          minHeight: 300,
-          display: "flex",
-          flexGrow: "1",
-          flexDirection: "column",
-          height: "100%",
-        }}
-      >
+      <Card className={styles.card}>
         <CardMedia
+          loading="lazy"
           component="img"
           alt={product.attributes.name}
           height="200"
@@ -51,6 +44,7 @@ export default function ProductCard({ product }: IProductCardProps) {
         </CardContent>
         <CardActions>
           <Button
+            aria-label="Go to product button"
             sx={{
               backgroundColor: theme.contrastColor,
               color: theme.secondaryColor,

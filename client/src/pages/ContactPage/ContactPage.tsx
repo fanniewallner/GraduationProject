@@ -12,6 +12,7 @@ import useApi from "../../hooks/useApi";
 import { useTheme } from "../../contexts/ThemeContext";
 import { ICompanyDetails } from "../../models/ICompanyDetails";
 import { useEffect, useState } from "react";
+import styles from "./ContactPage.module.scss";
 
 export const ContactPage = () => {
   const { theme } = useTheme();
@@ -66,28 +67,19 @@ export const ContactPage = () => {
 
   return (
     <Container
-      sx={{
-        minHeight: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        paddingTop: "10rem",
-        justifyContent: "center",
-
-        gap: "2rem",
-      }}
+      sx={{ display: "flex", flexDirection: isMobile ? "column" : " row" }}
+      className={styles.containerWrapper}
     >
-      <Box sx={{ width: !isMobile ? "50%" : "100%", height: "600px" }}>
-        <Typography variant="h6" color={theme.secondaryColor}>
+      <Box sx={{ width: !isMobile ? "70%" : "100%", height: "600px" }}>
+        <Typography
+          variant="h6"
+          color={theme.secondaryColor}
+          fontFamily={"Poppins"}
+        >
           Kontakta oss
         </Typography>
-        <Box
-          sx={{
-            backgroundColor: "white",
-            padding: "1rem",
-            borderRadius: "5px",
-          }}
-        >
+
+        <Box className={styles.containerWrapper__formWrapper}>
           {!formSent ? (
             <form onSubmit={submitForm(handleFormSubmit)}>
               <TextField
@@ -157,7 +149,13 @@ export const ContactPage = () => {
                 })}
               />
               <Button
-                sx={{ backgroundColor: theme.contrastColor }}
+                aria-label="Submit form button"
+                sx={{
+                  backgroundColor: theme.contrastColor,
+                  "&:active": {
+                    backgroundColor: theme.contrastColor,
+                  },
+                }}
                 variant="contained"
                 type="submit"
                 disabled={!formState.isValid}
@@ -167,14 +165,7 @@ export const ContactPage = () => {
             </form>
           ) : (
             <>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <Box className={styles.formWrapper__confirmationMessageWrapper}>
                 <Typography>
                   Tack för ditt meddelande! Vi hör av oss så snart som möjligt.{" "}
                 </Typography>
@@ -183,22 +174,17 @@ export const ContactPage = () => {
           )}
         </Box>
       </Box>
-      <Box
-        sx={{
-          color: theme.secondaryColor,
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          alignSelf: "inherit",
-          paddingBottom: "2rem",
-        }}
-      >
-        <Typography variant="h6">Företagsinformation</Typography>
+      <Box className={styles.containerWrapper__companyInformationWrapper}>
+        <Typography fontFamily={"Poppins"} variant="h6">
+          Företagsinformation
+        </Typography>
         <Typography sx={{ whiteSpace: "pre-line" }}>
           {companyData?.data.attributes.companyInfo}
         </Typography>
 
-        <Typography variant="h6">Snickeri & uthämtning</Typography>
+        <Typography variant="h6" fontFamily={"Poppins"}>
+          Snickeri & uthämtning
+        </Typography>
         <Typography sx={{ whiteSpace: "pre-line" }}>
           {companyData?.data.attributes.pickup}
         </Typography>

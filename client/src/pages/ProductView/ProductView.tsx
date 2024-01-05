@@ -6,7 +6,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Breadcrumbs,
   Button,
   CircularProgress,
   Container,
@@ -27,7 +26,6 @@ export const ProductView = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [product, setProduct] = useState<IStrapiSingleResponse>();
-
   const [error, setError] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
@@ -55,6 +53,10 @@ export const ProductView = () => {
   const breadcrumbs = [
     { label: "Hem", href: "/" },
     { label: "Produkter", href: "/produktkatalog" },
+    {
+      label: `${product?.data.attributes.name}`,
+      href: `/produktkatalog/${id}`,
+    },
   ];
 
   const handleClickOpen = () => {
@@ -75,107 +77,118 @@ export const ProductView = () => {
   }
 
   return (
-    <Container
-      sx={{
-        minHeight: "100vh",
-        py: "5rem",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-      }}
-    >
+    <Container sx={{ py: "5rem" }}>
       <BreadCrumbsHelper items={breadcrumbs} />
-      {product && (
-        <>
-          <Box sx={{ width: isMobile ? "100%" : "40%", p: "0", m: "0" }}>
-            <img
-              style={{ width: "100%", height: "auto" }}
-              src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
-              onError={(e) => setBrokenImageUrl(true)}
-            />
-            {brokenImageUrl && (
-              <Box>
-                <BrokenImageIcon />
-              </Box>
-            )}
-          </Box>
-          <Container></Container>
-          <Typography variant="h6" color={theme.secondaryColor}>
-            {product.data.attributes.name}
-          </Typography>
-          <Typography color={theme.secondaryColor}>
-            {product.data.attributes.price} kr exkl. moms
-          </Typography>
-          {product.data.attributes.stockStatus ?? (
-            <Typography variant="h6">
-              {product.data.attributes.stockStatus}
-            </Typography>
-          )}
-          <Button
-            sx={{
-              backgroundColor: theme.contrastColor,
-              color: theme.secondaryColor,
-              width: "50%",
-            }}
-            onClick={handleClickOpen}
-          >
-            Köp
-          </Button>
-          <Accordion
-            defaultExpanded
-            sx={{
-              backgroundColor: theme.primaryBackgroundColor,
-              boxShadow: "none",
-              borderTop: `1px solid ${theme.contrastColor}`,
-            }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
-            >
-              <Typography color={theme.secondaryColor}>
-                Produktbeskrivning
-              </Typography>
-            </AccordionSummary>
 
-            <AccordionDetails>
-              <Typography color={theme.secondaryColor}>
-                {product.data.attributes.description}
+      <Container
+        sx={{
+          minHeight: "100vh",
+          pt: "2rem",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: "1rem",
+        }}
+      >
+        {product && (
+          <>
+            <Box sx={{ width: isMobile ? "100%" : "40%", p: "0", m: "0" }}>
+              <img
+                alt={product.data.attributes.name}
+                style={{ width: "100%", height: "auto" }}
+                src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
+                onError={(e) => setBrokenImageUrl(true)}
+              />
+              {brokenImageUrl && (
+                <Box>
+                  <BrokenImageIcon />
+                </Box>
+              )}
+            </Box>
+            <Container sx={{ display: "flex", flexDirection: "column" }}>
+              <Typography variant="h6" color={theme.secondaryColor}>
+                {product.data.attributes.name}
               </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            sx={{
-              backgroundColor: theme.primaryBackgroundColor,
-              boxShadow: "none",
-              borderTop: `1px solid ${theme.contrastColor}`,
-            }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMore sx={{ color: theme.contrastColor }} />}
-            >
               <Typography color={theme.secondaryColor}>
-                Specifikationer:
+                {product.data.attributes.price} kr exkl. moms
               </Typography>
-            </AccordionSummary>
-
-            <AccordionDetails>
-              <Typography
-                color={theme.secondaryColor}
-                sx={{ whiteSpace: "pre-line" }}
+              {product.data.attributes.stockStatus ?? (
+                <Typography variant="h6" sx={{ color: theme.primaryColor }}>
+                  {product.data.attributes.stockStatus}
+                </Typography>
+              )}
+              <Button
+                aria-label="purchase button"
+                sx={{
+                  backgroundColor: theme.contrastColor,
+                  color: theme.secondaryColor,
+                  width: "50%",
+                  mb: "1rem",
+                }}
+                onClick={handleClickOpen}
               >
-                {product.data.attributes.specification}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Modal
-            open={openModal}
-            handleClose={handleClose}
-            orderConfirmed={orderConfirmed}
-            setOrderConfirmed={setOrderConfirmed}
-            product={product}
-          />
-        </>
-      )}
+                Köp
+              </Button>
+              <Accordion
+                defaultExpanded
+                sx={{
+                  backgroundColor: theme.primaryBackgroundColor,
+                  boxShadow: "none",
+                  borderTop: `1px solid ${theme.contrastColor}`,
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    <ExpandMore sx={{ color: theme.contrastColor }} />
+                  }
+                >
+                  <Typography color={theme.secondaryColor}>
+                    Produktbeskrivning
+                  </Typography>
+                </AccordionSummary>
+
+                <AccordionDetails>
+                  <Typography color={theme.secondaryColor}>
+                    {product.data.attributes.description}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                sx={{
+                  backgroundColor: theme.primaryBackgroundColor,
+                  boxShadow: "none",
+                  borderTop: `1px solid ${theme.contrastColor}`,
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    <ExpandMore sx={{ color: theme.contrastColor }} />
+                  }
+                >
+                  <Typography color={theme.secondaryColor}>
+                    Specifikationer:
+                  </Typography>
+                </AccordionSummary>
+
+                <AccordionDetails>
+                  <Typography
+                    color={theme.secondaryColor}
+                    sx={{ whiteSpace: "pre-line" }}
+                  >
+                    {product.data.attributes.specification}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+              <Modal
+                open={openModal}
+                handleClose={handleClose}
+                orderConfirmed={orderConfirmed}
+                setOrderConfirmed={setOrderConfirmed}
+                product={product}
+              />
+            </Container>
+          </>
+        )}
+      </Container>
     </Container>
   );
 };

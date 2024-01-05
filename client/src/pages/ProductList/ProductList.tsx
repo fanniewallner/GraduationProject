@@ -56,7 +56,6 @@ export const ProductList = () => {
     let productList: IProduct[] = [];
 
     if (newCategory) {
-      console.log(newCategory);
       sessionStorage.setItem("filteredCategory", newCategory);
       productList = await fetchData(parseInt(newCategory, 10));
       window.history.replaceState({}, "", `?${params.toString()}`);
@@ -78,7 +77,6 @@ export const ProductList = () => {
   const SortProducts = (productList: IProduct[], sortValue: number) => {
     const params = new URLSearchParams(search);
 
-    console.log(filteredAndSortedProducts);
     let filteredList: IProduct[] = JSON.parse(JSON.stringify(productList));
 
     if (filteredAndSortedProducts) {
@@ -119,19 +117,21 @@ export const ProductList = () => {
       <Container
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
-          gap: "1rem",
-          py: "1rem",
-          width: isMobile ? "100%" : "20%",
+          gap: "0.5rem",
         }}
       >
         <Button
+          aria-label="filter by workbench category button"
           sx={{
-            backgroundColor: theme.contrastColor,
+            backgroundColor:
+              filteredCategory === 1 ? "#3D4F3E" : theme.contrastColor,
             color: theme.secondaryColor,
           }}
-          className={styles.productListWrapper__filterButtons}
+          className={`${styles.productListWrapper__filterButtons} ${
+            filteredCategory === 1 ? "active" : ""
+          }`}
           onClick={() => {
             setFilteredCategory(1);
             const params = new URLSearchParams(window.location.search);
@@ -142,11 +142,15 @@ export const ProductList = () => {
           Arbetsbänkar
         </Button>
         <Button
+          aria-label="filter by accessories button"
           sx={{
-            backgroundColor: theme.contrastColor,
+            backgroundColor:
+              filteredCategory === 2 ? "#3D4F3E" : theme.contrastColor,
             color: theme.secondaryColor,
           }}
-          className={styles.productListWrapper__filterButtons}
+          className={`${styles.productListWrapper__filterButtons} ${
+            filteredCategory === 2 ? "active" : ""
+          }`}
           onClick={() => {
             setFilteredCategory(2);
             const params = new URLSearchParams(window.location.search);
@@ -158,10 +162,14 @@ export const ProductList = () => {
         </Button>
         <Button
           sx={{
-            backgroundColor: theme.contrastColor,
+            backgroundColor: !filteredCategory
+              ? "#2a372b"
+              : theme.contrastColor,
             color: theme.secondaryColor,
           }}
-          className={styles.productListWrapper__filterButtons}
+          className={`${styles.productListWrapper__filterButtons} ${
+            !filteredCategory ? "active" : ""
+          }`}
           onClick={() => resetFiltering()}
         >
           Alla produkter
@@ -174,11 +182,11 @@ export const ProductList = () => {
         <Container
           sx={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: isMobile ? "column" : "row",
             flexWrap: "wrap",
-            justifyContent: "center",
+            gap: "1rem",
+            alignContent: "center",
           }}
-          className={styles.productListWrapper__productWrapper}
         >
           {filteredAndSortedProducts && filteredAndSortedProducts?.length > 0
             ? filteredAndSortedProducts?.map((product) => (
