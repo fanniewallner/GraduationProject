@@ -109,7 +109,7 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon sx={{ fontSize: "2rem" }} />
           </IconButton>
-          <Link to={"/"} className={styles.flex}>
+          <Link to={"/"} className={styles.flex} onClick={() => setActive("")}>
             <Typography
               fontFamily={"Poppins"}
               variant="h6"
@@ -131,15 +131,21 @@ export default function DrawerAppBar(props: Props) {
               <Button
                 key={item.label}
                 aria-label="navigation item"
-                className={styles.desktopLinks}
+                className={`${styles.desktopLinks} ${
+                  active === item.label ? "active" : ""
+                }`}
               >
                 <Link
                   to={item.path}
                   style={{
                     fontFamily: "Poppins",
                     textDecoration: "none",
-                    color: theme.secondaryColor,
+                    color:
+                      active === item.label
+                        ? theme.primaryColor
+                        : theme.secondaryColor,
                   }}
+                  onClick={() => setActive(item.label)}
                 >
                   {item.label}
                 </Link>

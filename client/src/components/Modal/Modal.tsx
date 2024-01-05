@@ -210,22 +210,19 @@ export default function Modal({
                 Stäng
               </Button>
             ) : (
-              <>
-                <Box sx={{ display: "flex" }}>
-                  <Checkbox onChange={handleCheckbox} checked={isChecked} />
-                  <Typography>
-                    Jag har läst och godkänner{" "}
-                    <Link
-                      sx={{ color: "black" }}
-                      href="/kopvillkor"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      köpvillkoren
-                    </Link>
-                  </Typography>
-                </Box>
-
+              <Box sx={{ display: "flex" }}>
+                <Checkbox onChange={handleCheckbox} checked={isChecked} />
+                <Typography>
+                  Jag har läst och godkänner{" "}
+                  <Link
+                    sx={{ color: "black" }}
+                    href="/kopvillkor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    köpvillkoren
+                  </Link>
+                </Typography>{" "}
                 <Button aria-aria-label="close button" onClick={handleClose}>
                   Stäng
                 </Button>
@@ -236,7 +233,7 @@ export default function Modal({
                 >
                   Skicka
                 </Button>
-              </>
+              </Box>
             )}
           </Box>
         </DialogActions>
