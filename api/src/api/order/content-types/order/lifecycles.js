@@ -48,6 +48,7 @@ module.exports = {
       <div class="email-container">
       <p><strong>Det har inkommit en ny order från Xtools.se.</strong></p>
       Orderdetaljer:
+      <p><strong> Order ID:</strong> ${result.id}</p>
       <p><strong> Förnamn:</strong> ${result.firstname}</p>
       <p><strong> Efternamn:</strong> ${result.lastname}</p>
       <p><strong>Epost:</strong> ${result.email}</p>

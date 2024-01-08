@@ -18,6 +18,7 @@ import styles from "./Navbar.module.scss";
 import { useContext, useState } from "react";
 import { ProductCartContext } from "../../contexts/ProductCardContext";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useMediaQuery } from "@mui/material";
 
 interface Props {
   window?: () => Window;
@@ -41,6 +42,7 @@ export default function DrawerAppBar(props: Props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   const drawer = (
     <Box
@@ -103,18 +105,19 @@ export default function DrawerAppBar(props: Props) {
         }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
-          <Box
-            sx={{
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "start",
-            }}
-            onClick={props.handleClickOpen}
-          >
-            <ShoppingCartIcon sx={{ color: theme.secondaryColor }} />
-            <Typography>{state.length}</Typography>
-          </Box>
-
+          {isMobile ? (
+            <Box
+              sx={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "start",
+              }}
+              onClick={props.handleClickOpen}
+            >
+              <ShoppingCartIcon sx={{ color: theme.secondaryColor }} />
+              <Typography>{state.length}</Typography>
+            </Box>
+          ) : null}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -166,6 +169,13 @@ export default function DrawerAppBar(props: Props) {
                 </Link>
               </Button>
             ))}
+            <Box
+              onClick={props.handleClickOpen}
+              sx={{ display: "inline-block", flexDirection: "row" }}
+            >
+              <ShoppingCartIcon sx={{ color: theme.secondaryColor }} />
+              <Typography>{state.length}</Typography>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

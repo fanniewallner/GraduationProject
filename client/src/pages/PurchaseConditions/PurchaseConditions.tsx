@@ -30,10 +30,11 @@ export const PurchaseConditions = () => {
   return (
     <Container
       sx={{
-        minHeight: "85vh",
+        minHeight: "90vh",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
-        paddingTop: "6rem",
+        alignItems: "center",
+
         gap: "3rem",
       }}
     >
