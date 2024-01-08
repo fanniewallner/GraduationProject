@@ -886,12 +886,10 @@ export interface ApiOrderOrder extends Schema.CollectionType {
   attributes: {
     firstname: Attribute.String;
     lastname: Attribute.String;
-    amount: Attribute.Integer;
-    productname: Attribute.String;
-    productId: Attribute.String;
     email: Attribute.String;
     phonenumber: Attribute.String;
     message: Attribute.String;
+    productDetails: Attribute.Component<'oder.purchase', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

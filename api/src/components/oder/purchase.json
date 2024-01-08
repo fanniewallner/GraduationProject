@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_oder_purchases",
+  "info": {
+    "displayName": "purchase",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "productname": {
+      "type": "string"
+    },
+    "prouctid": {
+      "type": "integer"
+    }
+  }
+}

@@ -15,10 +15,13 @@ import Button from "@mui/material/Button";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductCartContext } from "../../contexts/ProductCardContext";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 interface Props {
   window?: () => Window;
+  handleClickOpen: () => void;
 }
 
 const drawerWidth = 240;
@@ -34,7 +37,7 @@ export default function DrawerAppBar(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useTheme();
   const [active, setActive] = useState<string>();
-
+  const { state } = useContext(ProductCartContext);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -100,6 +103,18 @@ export default function DrawerAppBar(props: Props) {
         }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
+          <Box
+            sx={{
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "start",
+            }}
+            onClick={props.handleClickOpen}
+          >
+            <ShoppingCartIcon sx={{ color: theme.secondaryColor }} />
+            <Typography>{state.length}</Typography>
+          </Box>
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
