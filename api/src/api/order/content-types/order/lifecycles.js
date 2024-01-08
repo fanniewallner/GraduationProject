@@ -8,11 +8,17 @@ module.exports = {
       productDetailsHtml = result.productDetails
         .map(
           (productDetail) => `
-            <p><strong>Produkt:</strong> ${productDetail.productname}</p>
+            <div>
+              <p><strong>Produkt:</strong> ${productDetail.productname}</p>
+              <p><strong>Pris:</strong> ${productDetail.productprice}</p>
+            </div>
           `
         )
         .join("");
     }
+    console.log("result.productDetails:", result.productDetails);
+    console.log("productDetailsHtml:", productDetailsHtml);
+
     try {
       await strapi.plugins["email"].services.email.send({
         to: "fannie.wallner@medieinstitutet.se",

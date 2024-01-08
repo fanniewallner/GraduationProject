@@ -50,6 +50,7 @@ export default function DrawerAppBar(props: Props) {
       sx={{
         textAlign: "center",
         color: theme.primaryColor,
+        fontFamily: "Poppins",
       }}
     >
       <Link to={"/"} className={styles.flex}>
@@ -70,6 +71,7 @@ export default function DrawerAppBar(props: Props) {
                 to={item.path}
                 style={{
                   textDecoration: "none",
+                  fontFamily: "Poppins",
                 }}
               >
                 <Typography
@@ -78,7 +80,7 @@ export default function DrawerAppBar(props: Props) {
                     color:
                       active === item.label
                         ? theme.primaryColor
-                        : theme.secondaryColor,
+                        : theme.primaryColor,
                   }}
                 >
                   {item.label}
@@ -127,7 +129,7 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon sx={{ fontSize: "2rem" }} />
           </IconButton>
-          <Link to={"/"} className={styles.flex} onClick={() => setActive("")}>
+          <Link to={"/"} className={styles.flex}>
             <Typography
               fontFamily={"Poppins"}
               variant="h6"
@@ -144,7 +146,9 @@ export default function DrawerAppBar(props: Props) {
             </Typography>
           </Link>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box
+            sx={{ display: { xs: "none", sm: "block", flexWrap: "nowrap" } }}
+          >
             {navItems.map((item) => (
               <Button
                 key={item.label}
@@ -158,10 +162,11 @@ export default function DrawerAppBar(props: Props) {
                   style={{
                     fontFamily: "Poppins",
                     textDecoration: "none",
-                    color:
-                      active === item.label
+                    color: !isMobile
+                      ? active === item.label
                         ? theme.primaryColor
-                        : theme.secondaryColor,
+                        : theme.secondaryColor
+                      : theme.contrastColor,
                   }}
                   onClick={() => setActive(item.label)}
                 >
@@ -169,14 +174,13 @@ export default function DrawerAppBar(props: Props) {
                 </Link>
               </Button>
             ))}
-            <Box
-              onClick={props.handleClickOpen}
-              sx={{ display: "inline-block", flexDirection: "row" }}
-            >
-              <ShoppingCartIcon sx={{ color: theme.secondaryColor }} />
+          </Box>
+          {!isMobile ? (
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <ShoppingCartIcon />
               <Typography>{state.length}</Typography>
             </Box>
-          </Box>
+          ) : null}
         </Toolbar>
       </AppBar>
       <nav>
