@@ -38,18 +38,8 @@ export const About = () => {
         }
       >
         <MediaGrid />
-        {/*
-         */}
-        <Box sx={{ width: "100%" }}>
-          <Typography
-            variant="h6"
-            color={theme.secondaryColor}
-            fontFamily={"Poppins"}
-            textAlign={"center"}
-            paddingBottom={"1rem"}
-          >
-            Om XTools
-          </Typography>
+
+        <Box sx={{ width: "100%", pt: "3.5rem" }}>
           <Typography
             sx={{ whiteSpace: "pre-line" }}
             color={theme.secondaryColor}

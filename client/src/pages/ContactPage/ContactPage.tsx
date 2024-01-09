@@ -70,15 +70,7 @@ export const ContactPage = () => {
       sx={{ display: "flex", flexDirection: isMobile ? "column" : " row" }}
       className={styles.containerWrapper}
     >
-      <Box sx={{ width: !isMobile ? "70%" : "100%", height: "600px" }}>
-        <Typography
-          variant="h6"
-          color={theme.secondaryColor}
-          fontFamily={"Poppins"}
-        >
-          Kontakta oss
-        </Typography>
-
+      <Box sx={{ width: !isMobile ? "50%" : "100%", height: "600px" }}>
         <Box className={styles.containerWrapper__formWrapper}>
           {!formSent ? (
             <form onSubmit={submitForm(handleFormSubmit)}>

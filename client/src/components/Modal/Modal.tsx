@@ -209,7 +209,7 @@ export default function Modal({
             </DialogContentText>
           )}
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ display: "flex", flexDirection: "column" }}>
           <Box
             sx={{
               display: "flex",
@@ -226,7 +226,6 @@ export default function Modal({
                   width: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
                 }}
               >
                 <Box
