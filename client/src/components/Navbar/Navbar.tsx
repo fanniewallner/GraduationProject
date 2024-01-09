@@ -162,6 +162,7 @@ export default function DrawerAppBar(props: Props) {
                   style={{
                     fontFamily: "Poppins",
                     textDecoration: "none",
+                    fontSize: "16px",
                     color: !isMobile
                       ? active === item.label
                         ? theme.primaryColor
