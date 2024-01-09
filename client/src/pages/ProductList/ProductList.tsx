@@ -115,6 +115,7 @@ export const ProductList = () => {
   return (
     <Container className={styles.productListWrapper}>
       <Container
+        data-cy="sortButtonContainer"
         sx={{
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
@@ -123,6 +124,7 @@ export const ProductList = () => {
         }}
       >
         <Button
+          data-cy="sortByCategory1"
           aria-label="filter by workbench category button"
           sx={{
             backgroundColor:
@@ -180,6 +182,7 @@ export const ProductList = () => {
         <CircularProgress sx={{ color: theme.secondaryColor }} />
       ) : (
         <Container
+          data-cy="productList"
           sx={{
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
