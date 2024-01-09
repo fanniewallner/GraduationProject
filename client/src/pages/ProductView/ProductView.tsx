@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import {
@@ -18,6 +18,8 @@ import Modal from "../../components/Modal/Modal";
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { ExpandMore } from "@mui/icons-material";
 import BreadCrumbsHelper from "../../utils/BreadcrumbsHelper";
+import { ProductCartContext } from "../../contexts/ProductCardContext";
+import { ActionType } from "../../reducers/ProductsReducer";
 
 export const ProductView = () => {
   const { id } = useParams();
@@ -30,6 +32,7 @@ export const ProductView = () => {
   const [openModal, setOpenModal] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
   const [brokenImageUrl, setBrokenImageUrl] = useState<boolean>(false);
+  const { state, dispatch } = useContext(ProductCartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,18 +53,17 @@ export const ProductView = () => {
     fetchData();
   }, [id]);
 
-  const breadcrumbs = [
-    { label: "Hem", href: "/" },
-    { label: "Produkter", href: "/produktkatalog" },
-    {
-      label: `${product?.data.attributes.name}`,
-      href: `/produktkatalog/${id}`,
-    },
-  ];
+  const addToCart = () => {
+    if (product) {
+      dispatch({ type: ActionType.ADDED_PRODUCT, payload: product.data });
+    }
+  };
 
   const handleClickOpen = () => {
     setOpenModal(true);
   };
+
+  console.log(state);
 
   const handleClose = () => {
     setOrderConfirmed(false);
@@ -78,8 +80,6 @@ export const ProductView = () => {
 
   return (
     <Container sx={{ py: "5rem" }}>
-      <BreadCrumbsHelper items={breadcrumbs} />
-
       <Container
         sx={{
           minHeight: "100vh",
@@ -111,11 +111,11 @@ export const ProductView = () => {
               <Typography color={theme.secondaryColor}>
                 {product.data.attributes.price} kr exkl. moms
               </Typography>
-              {product.data.attributes.stockStatus ?? (
+              {product.data.attributes.stockStatus ? (
                 <Typography variant="h6" sx={{ color: theme.primaryColor }}>
                   {product.data.attributes.stockStatus}
                 </Typography>
-              )}
+              ) : null}
               <Button
                 aria-label="purchase button"
                 sx={{
@@ -124,7 +124,8 @@ export const ProductView = () => {
                   width: "50%",
                   mb: "1rem",
                 }}
-                onClick={handleClickOpen}
+                onClick={addToCart}
+                disabled={product.data.attributes.stockStatus !== null}
               >
                 Köp
               </Button>
@@ -178,13 +179,13 @@ export const ProductView = () => {
                   </Typography>
                 </AccordionDetails>
               </Accordion>
-              <Modal
+              {/*               <Modal
                 open={openModal}
                 handleClose={handleClose}
                 orderConfirmed={orderConfirmed}
                 setOrderConfirmed={setOrderConfirmed}
-                product={product}
-              />
+                products={state}
+              /> */}
             </Container>
           </>
         )}

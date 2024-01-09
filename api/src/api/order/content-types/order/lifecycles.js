@@ -2,6 +2,23 @@ module.exports = {
   async afterCreate(event) {
     const { result } = event;
     console.log("Lifecycle afterCreate triggered:", result);
+    let productDetailsHtml = "";
+
+    if (result.productDetails && Array.isArray(result.productDetails)) {
+      productDetailsHtml = result.productDetails
+        .map(
+          (productDetail) => `
+            <div>
+              <p><strong>Produkt:</strong> ${productDetail.productname}</p>
+              <p><strong>Pris:</strong> ${productDetail.productprice}</p>
+            </div>
+          `
+        )
+        .join("");
+    }
+    console.log("result.productDetails:", result.productDetails);
+    console.log("productDetailsHtml:", productDetailsHtml);
+
     try {
       await strapi.plugins["email"].services.email.send({
         to: "fannie.wallner@medieinstitutet.se",
@@ -37,14 +54,16 @@ module.exports = {
       <div class="email-container">
       <p><strong>Det har inkommit en ny order från Xtools.se.</strong></p>
       Orderdetaljer:
+      <p><strong> Order ID:</strong> ${result.id}</p>
       <p><strong> Förnamn:</strong> ${result.firstname}</p>
       <p><strong> Efternamn:</strong> ${result.lastname}</p>
       <p><strong>Epost:</strong> ${result.email}</p>
       <p><strong>Mobilnummer:</strong> ${result.phonenumber}</p>
-      <p><strong>Produkt:</strong> ${result.productname}</p>
-      <p><strong>Produkt ID:</strong> ${result.productId}</p>
-      <p><strong> Antal:</strong> ${result.amount}</p>
+      <div class="order-details">
+      <p><strong>Produktdetaljer:</strong></p>
+      <p>${productDetailsHtml}</p>
       <p><strong>Meddelande:</strong> ${result.message}</p>
+    </div>
           </div>`,
       });
       await strapi.plugins["email"].services.email.send({
@@ -83,11 +102,10 @@ module.exports = {
     <p>Tack för din order. Detta är din orderbekräftelse. Nedan följer en sammanfattning om din beställning:</p>
     
     <div class="order-details">
-      <p><strong>Produkt:</strong> ${result.productname}</p>
-      <p><strong>Produkt ID:</strong> ${result.productId}</p>
-      <p><strong>Antal:</strong> ${result.amount}</p>
-      <p><strong>Meddelande:</strong> ${result.message}</p>
-    </div>
+    <p><strong>Produktdetaljer:</strong></p>
+   <p> ${productDetailsHtml}</p>
+    <p><strong>Meddelande:</strong> ${result.message}</p>
+  </div>
 
     <div class="contact-info">
       <p>För frågor eller ytterligare information, kontakta oss på:</p>

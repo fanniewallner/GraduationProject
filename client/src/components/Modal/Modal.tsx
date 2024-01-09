@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -12,13 +12,16 @@ import { useForm } from "react-hook-form";
 import { PurchaseInquiry } from "../../models/PurchaseInquiry";
 import Checkbox from "@mui/material/Checkbox";
 import useApi from "../../hooks/useApi";
+import { IProduct } from "../../models/IProduct";
+import { ProductCartContext } from "../../contexts/ProductCardContext";
+import { ActionType } from "../../reducers/ProductsReducer";
 
 type IModalProps = {
   open: boolean;
   handleClose: () => void;
   orderConfirmed: boolean;
   setOrderConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
-  product: IStrapiSingleResponse;
+  products: IProduct[];
 };
 
 export default function Modal({
@@ -26,47 +29,54 @@ export default function Modal({
   handleClose,
   orderConfirmed,
   setOrderConfirmed,
-  product,
+  products,
 }: IModalProps) {
   const { handleSubmit, formState, setValue, register, reset } =
     useForm<PurchaseInquiry>();
   const api = useApi();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(1);
-  const [totalPrice, setTotalPrice] = useState<number>(
-    parseInt(product.data.attributes.price)
-  );
+  const { state, dispatch } = useContext(ProductCartContext);
 
   const formValid =
-    !formState.errors.data?.amount &&
     !formState.errors.data?.checked &&
     !formState.errors.data?.email &&
     !formState.errors.data?.firstname &&
     !formState.errors.data?.lastname &&
     !formState.errors.data?.phonenumber &&
-    !formState.errors.data?.productId &&
-    !formState.errors.data?.productname;
+    !formState.errors.data?.productDetails;
 
   const handleFormSubmit = async (data: PurchaseInquiry) => {
-    setValue("data.amount", amount);
     try {
-      await api.submitForm(data);
+      console.log("products", products);
+      const productDetails = products.map((product) => ({
+        productname: product.attributes.name,
+        productid: product.id,
+      }));
+      setValue("data.productDetails", productDetails);
+      console.log(productDetails);
+      const response = await api.submitForm(data);
+      console.log("DATA", data);
       handleCheckbox();
-      reset({
-        data: {
-          firstname: "",
-          lastname: "",
-          amount: 0,
-          phonenumber: 0,
-          email: "",
-          productId: 0,
-          productname: "",
-          message: "",
-          checked: false,
-        },
-      });
+      if (response.status === 200) {
+        reset({
+          data: {
+            firstname: "",
+            lastname: "",
+            phonenumber: 0,
+            email: "",
+            productDetails: productDetails as {
+              productname: string;
+              productid: number;
+            }[],
+            message: "",
+            checked: false,
+          },
+        });
 
-      setOrderConfirmed(true);
+        dispatch({ type: ActionType.CLEARED_CART });
+        setOrderConfirmed(true);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -84,13 +94,28 @@ export default function Modal({
           {!orderConfirmed ? (
             <>
               <DialogContentText>
-                <Typography>{product.data.attributes.name}</Typography>
-                <Typography>Antal: 1</Typography>
-                <Typography>Totalt pris: {totalPrice} kr exkl. moms</Typography>
-                <Typography>
-                  Önskar du fler än 1 st, vänligen fyll i detta i
-                  meddelanderutan eller kontakta oss.
-                </Typography>
+                {state.map((product, index) => (
+                  <Box
+                    key={product.id}
+                    display="flex"
+                    justifyContent="space-between"
+                  >
+                    <Typography variant="body1">
+                      Produkt: {product.attributes.name}
+                    </Typography>
+                    <Typography variant="body1">{`Pris: ${product.attributes.price}.00kr`}</Typography>
+                    <Button
+                      onClick={() =>
+                        dispatch({
+                          type: ActionType.REMOVED_PRODUCT,
+                          payload: product,
+                        })
+                      }
+                    >
+                      x
+                    </Button>
+                  </Box>
+                ))}
               </DialogContentText>
               <DialogContent>
                 {" "}
@@ -162,28 +187,14 @@ export default function Modal({
 
                   <TextField
                     sx={{ display: "none" }}
-                    helperText={formState.errors.data?.productId?.message}
-                    error={formState.errors.data?.productId != undefined}
                     margin="normal"
                     fullWidth
                     autoFocus
-                    value={product.data.id}
-                    type="number"
-                    id="productId"
-                    {...register("data.productId")}
+                    value={products}
+                    type=""
+                    id="purchaseDetails"
                   />
-                  <TextField
-                    sx={{ display: "none" }}
-                    helperText={formState.errors.data?.productname?.message}
-                    error={formState.errors.data?.productname != undefined}
-                    margin="normal"
-                    fullWidth
-                    autoFocus
-                    value={product.data.attributes.name}
-                    type="text"
-                    id="productname"
-                    {...register("data.productname")}
-                  />
+
                   <Typography fontSize={"14px"}>
                     Faktura för köp skickas ut via epost inom 14 arbetsdagar
                     från det datum som ordern registrerats.
@@ -210,20 +221,35 @@ export default function Modal({
                 Stäng
               </Button>
             ) : (
-              <Box sx={{ display: "flex" }}>
-                <Checkbox onChange={handleCheckbox} checked={isChecked} />
-                <Typography>
-                  Jag har läst och godkänner{" "}
-                  <Link
-                    sx={{ color: "black" }}
-                    href="/kopvillkor"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    köpvillkoren
-                  </Link>
-                </Typography>{" "}
-                <Button aria-aria-label="close button" onClick={handleClose}>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Checkbox onChange={handleCheckbox} checked={isChecked} />
+                  <Typography>
+                    Jag har läst och godkänner{" "}
+                    <Link
+                      sx={{ color: "black" }}
+                      href="/kopvillkor"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      köpvillkoren
+                    </Link>
+                  </Typography>{" "}
+                </Box>
+                <Button aria-label="close button" onClick={handleClose}>
                   Stäng
                 </Button>
                 <Button

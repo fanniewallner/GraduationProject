@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_product_order_products",
+  "info": {
+    "displayName": "order-product"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "specification": {
+      "type": "text"
+    },
+    "price": {
+      "type": "string"
+    },
+    "stockstatus": {
+      "type": "string"
+    }
+  }
+}

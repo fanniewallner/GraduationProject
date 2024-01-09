@@ -18,15 +18,6 @@
     "lastname": {
       "type": "string"
     },
-    "amount": {
-      "type": "integer"
-    },
-    "productname": {
-      "type": "string"
-    },
-    "productId": {
-      "type": "string"
-    },
     "email": {
       "type": "string"
     },
@@ -35,6 +26,11 @@
     },
     "message": {
       "type": "string"
+    },
+    "productDetails": {
+      "type": "component",
+      "repeatable": true,
+      "component": "oder.purchase"
     }
   }
 }

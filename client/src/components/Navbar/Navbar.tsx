@@ -15,10 +15,14 @@ import Button from "@mui/material/Button";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductCartContext } from "../../contexts/ProductCardContext";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useMediaQuery } from "@mui/material";
 
 interface Props {
   window?: () => Window;
+  handleClickOpen: () => void;
 }
 
 const drawerWidth = 240;
@@ -34,10 +38,11 @@ export default function DrawerAppBar(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useTheme();
   const [active, setActive] = useState<string>();
-
+  const { state } = useContext(ProductCartContext);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   const drawer = (
     <Box
@@ -45,6 +50,7 @@ export default function DrawerAppBar(props: Props) {
       sx={{
         textAlign: "center",
         color: theme.primaryColor,
+        fontFamily: "Poppins",
       }}
     >
       <Link to={"/"} className={styles.flex}>
@@ -65,6 +71,7 @@ export default function DrawerAppBar(props: Props) {
                 to={item.path}
                 style={{
                   textDecoration: "none",
+                  fontFamily: "Poppins",
                 }}
               >
                 <Typography
@@ -73,7 +80,7 @@ export default function DrawerAppBar(props: Props) {
                     color:
                       active === item.label
                         ? theme.primaryColor
-                        : theme.secondaryColor,
+                        : theme.primaryColor,
                   }}
                 >
                   {item.label}
@@ -100,6 +107,19 @@ export default function DrawerAppBar(props: Props) {
         }}
       >
         <Toolbar id="back-to-top-anchor" className={styles.navbar__anchor}>
+          {isMobile ? (
+            <Box
+              sx={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "start",
+              }}
+              onClick={props.handleClickOpen}
+            >
+              <ShoppingCartIcon sx={{ color: theme.secondaryColor }} />
+              <Typography>{state.length}</Typography>
+            </Box>
+          ) : null}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -109,7 +129,7 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon sx={{ fontSize: "2rem" }} />
           </IconButton>
-          <Link to={"/"} className={styles.flex} onClick={() => setActive("")}>
+          <Link to={"/"} className={styles.flex}>
             <Typography
               fontFamily={"Poppins"}
               variant="h6"
@@ -126,7 +146,9 @@ export default function DrawerAppBar(props: Props) {
             </Typography>
           </Link>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box
+            sx={{ display: { xs: "none", sm: "block", flexWrap: "nowrap" } }}
+          >
             {navItems.map((item) => (
               <Button
                 key={item.label}
@@ -140,10 +162,11 @@ export default function DrawerAppBar(props: Props) {
                   style={{
                     fontFamily: "Poppins",
                     textDecoration: "none",
-                    color:
-                      active === item.label
+                    color: !isMobile
+                      ? active === item.label
                         ? theme.primaryColor
-                        : theme.secondaryColor,
+                        : theme.secondaryColor
+                      : theme.contrastColor,
                   }}
                   onClick={() => setActive(item.label)}
                 >
@@ -152,6 +175,15 @@ export default function DrawerAppBar(props: Props) {
               </Button>
             ))}
           </Box>
+          {!isMobile ? (
+            <Box
+              sx={{ display: "flex", flexDirection: "row", cursor: "pointer" }}
+              onClick={props.handleClickOpen}
+            >
+              <ShoppingCartIcon />
+              <Typography>{state.length}</Typography>
+            </Box>
+          ) : null}
         </Toolbar>
       </AppBar>
       <nav>

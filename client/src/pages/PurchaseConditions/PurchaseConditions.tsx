@@ -30,10 +30,12 @@ export const PurchaseConditions = () => {
   return (
     <Container
       sx={{
-        minHeight: "85vh",
+        minHeight: "90vh",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
-        paddingTop: "6rem",
+        alignItems: "center",
+
+        gap: "3rem",
       }}
     >
       <Box sx={{ maxWidth: isMobile ? "100%" : "60%" }}>
@@ -44,13 +46,7 @@ export const PurchaseConditions = () => {
           style={{ width: "100%", height: "auto" }}
         />
       </Box>
-      <Typography
-        variant="h5"
-        fontFamily={"Poppins"}
-        color={theme.secondaryColor}
-      >
-        Köpvillkor
-      </Typography>
+
       <Box
         sx={{
           paddingTop: "2rem",
