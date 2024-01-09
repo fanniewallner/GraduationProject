@@ -221,19 +221,34 @@ export default function Modal({
                 Stäng
               </Button>
             ) : (
-              <Box sx={{ display: "flex" }}>
-                <Checkbox onChange={handleCheckbox} checked={isChecked} />
-                <Typography>
-                  Jag har läst och godkänner{" "}
-                  <Link
-                    sx={{ color: "black" }}
-                    href="/kopvillkor"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    köpvillkoren
-                  </Link>
-                </Typography>{" "}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Checkbox onChange={handleCheckbox} checked={isChecked} />
+                  <Typography>
+                    Jag har läst och godkänner{" "}
+                    <Link
+                      sx={{ color: "black" }}
+                      href="/kopvillkor"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      köpvillkoren
+                    </Link>
+                  </Typography>{" "}
+                </Box>
                 <Button aria-label="close button" onClick={handleClose}>
                   Stäng
                 </Button>

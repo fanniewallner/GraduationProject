@@ -176,7 +176,10 @@ export default function DrawerAppBar(props: Props) {
             ))}
           </Box>
           {!isMobile ? (
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box
+              sx={{ display: "flex", flexDirection: "row", cursor: "pointer" }}
+              onClick={props.handleClickOpen}
+            >
               <ShoppingCartIcon />
               <Typography>{state.length}</Typography>
             </Box>
