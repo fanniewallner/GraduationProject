@@ -28,7 +28,7 @@ export const Home = () => {
               data-cy="logo"
               loading="lazy"
               alt="XTools-logo"
-              src="xtoolslogo.webp"
+              src="/xtoolslogo.webp"
               className={styles.logoImg}
             />
           </Box>
@@ -64,7 +64,7 @@ export const Home = () => {
 
             <Box sx={{ textAlign: "start" }}>
               <Typography color={theme.secondaryColor}>
-                "Det ska vara lätt att jobba rätt".
+                Det ska vara lätt att jobba rätt.
               </Typography>
               <Typography color={theme.secondaryColor}>
                 XTools tillverkar portabla arbetsbänkar för hantverkare som

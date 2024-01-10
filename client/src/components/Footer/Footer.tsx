@@ -11,6 +11,7 @@ import { IStrapiContactResponse } from "../../models/IStrapiResponse";
 export const Footer = () => {
   const { theme } = useTheme();
   const api = useApi();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
   const [contactData, setContactData] = useState<IStrapiContactResponse>();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);

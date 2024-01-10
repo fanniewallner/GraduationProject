@@ -3,7 +3,6 @@
   padding-bottom: 2rem;
 
   &__box {
-    min-height: 100vh;
     display: flex;
     //flex-direction: isMobile ? "column" : "row",
     flex-direction: column;
@@ -12,7 +11,7 @@
   }
 
   &__boxDesktop {
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
 
     flex-direction: row;

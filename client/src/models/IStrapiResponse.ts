@@ -40,5 +40,5 @@ export type IStrapiMediaResponse = {
 
 export type IStrapiContactResponse = {
   data: IContact;
-  meta: {};
+  meta: object;
 };

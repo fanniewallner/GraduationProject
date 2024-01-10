@@ -17,6 +17,7 @@ export default function MediaGrid() {
       },
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState<boolean>(true);
   const api = useApi();
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Link } from "@mui/material";
+import { Container, Typography, Link } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import styles from "./ErrorPage.module.scss";

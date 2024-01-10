@@ -9,6 +9,7 @@ import styles from "./About.module.scss";
 export const About = () => {
   const { theme } = useTheme();
   const [aboutData, setAboutData] = useState<IAboutInfo>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState<boolean>(true);
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const api = useApi();
