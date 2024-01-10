@@ -36,7 +36,7 @@ export default function useApi(url?: string) {
       return axiosInstance.get<IStrapiContactResponse>("/api/contact-detail");
     },
     submitForm: async (data: PurchaseInquiry) => {
-      return axiosInstance.post("/api/orders", data);
+      return axiosInstance.post("/api/orders?populate=*", data);
     },
     sendContactForm: async (data: IContactFormDetails) => {
       return axiosInstance.post("api/contact-forms", data);

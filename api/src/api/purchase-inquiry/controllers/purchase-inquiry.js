@@ -1,11 +1,8 @@
-// api/purchase-inquiry/controllers/purchase-inquiry.js
-
 module.exports = {
   async sendEmail(ctx) {
     try {
       const { toEmail, subject, content } = ctx.request.body;
 
-      // Use the Strapi email service to send emails
       await strapi.plugins.email.services.email.send({
         to: toEmail,
         subject,

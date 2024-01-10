@@ -8,7 +8,7 @@ export interface OderPurchase extends Schema.Component {
   };
   attributes: {
     productname: Attribute.String;
-    prouctid: Attribute.Integer;
+    productid: Attribute.Integer;
   };
 }
 

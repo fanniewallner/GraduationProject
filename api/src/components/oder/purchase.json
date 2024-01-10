@@ -9,7 +9,7 @@
     "productname": {
       "type": "string"
     },
-    "prouctid": {
+    "productid": {
       "type": "integer"
     }
   }
