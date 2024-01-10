@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppConfigContext } from "../contexts/ApiContext";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import {
   IStrapiContactResponse,
   IStrapiListResponse,
@@ -11,7 +11,6 @@ import { PurchaseInquiry } from "../models/PurchaseInquiry";
 import { IConditions } from "../models/IConditions";
 import { IContactFormDetails } from "../models/IContactFormDetails";
 import { ICompanyDetails } from "../models/ICompanyDetails";
-import { IMediaGallery } from "../models/IMediaGallery";
 import { IAboutInfo } from "../models/IAboutInfo";
 
 export default function useApi(url?: string) {

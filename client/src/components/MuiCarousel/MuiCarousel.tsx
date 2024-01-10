@@ -8,7 +8,6 @@ import { IStrapiListResponse } from "../../models/IStrapiResponse";
 import ProductCard from "../ProductCardComponent/ProductCardComponent";
 
 export const MuiCarousel = () => {
-  const { theme } = useTheme();
   const { breakpoints } = useTheme().theme;
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.sm}px)`);
   const [currentIndex, setCurrentIndex] = useState(0);

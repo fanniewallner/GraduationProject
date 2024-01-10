@@ -77,7 +77,7 @@ export const ProductList = () => {
   const SortProducts = (productList: IProduct[], sortValue: number) => {
     const params = new URLSearchParams(search);
 
-    let filteredList: IProduct[] = JSON.parse(JSON.stringify(productList));
+    const filteredList: IProduct[] = JSON.parse(JSON.stringify(productList));
 
     if (filteredAndSortedProducts) {
       if (sortValue === 3) {
@@ -177,7 +177,9 @@ export const ProductList = () => {
       </Container>
       <FilteringComponent filter={sorting} setFilter={setSorting} />
       {loading ? (
-        <CircularProgress sx={{ color: theme.secondaryColor }} />
+        <Container sx={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress sx={{ color: theme.secondaryColor }} />
+        </Container>
       ) : (
         <Container
           sx={{

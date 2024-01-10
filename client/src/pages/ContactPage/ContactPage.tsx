@@ -17,6 +17,7 @@ import styles from "./ContactPage.module.scss";
 export const ContactPage = () => {
   const { theme } = useTheme();
   const api = useApi();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
   const [companyData, setCompanyData] = useState<ICompanyDetails>();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);

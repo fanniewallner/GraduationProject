@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { IProduct } from "../models/IProduct";
 
 export enum ActionType {

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
 import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "../../contexts/ThemeContext";
-import styles from "./PurchaseConditions.module.scss";
 
 export const PurchaseConditions = () => {
   const api = useApi();
   const { theme } = useTheme();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(true);
   const [contact, setContact] = useState<string>();
 

@@ -14,10 +14,9 @@ import {
 } from "@mui/material";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
-import Modal from "../../components/Modal/Modal";
+
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { ExpandMore } from "@mui/icons-material";
-import BreadCrumbsHelper from "../../utils/BreadcrumbsHelper";
 import { ProductCartContext } from "../../contexts/ProductCardContext";
 import { ActionType } from "../../reducers/ProductsReducer";
 
@@ -29,10 +28,8 @@ export const ProductView = () => {
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [product, setProduct] = useState<IStrapiSingleResponse>();
   const [error, setError] = useState<string | null>(null);
-  const [openModal, setOpenModal] = useState(false);
-  const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
   const [brokenImageUrl, setBrokenImageUrl] = useState<boolean>(false);
-  const { state, dispatch } = useContext(ProductCartContext);
+  const { dispatch } = useContext(ProductCartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,17 +54,6 @@ export const ProductView = () => {
     if (product) {
       dispatch({ type: ActionType.ADDED_PRODUCT, payload: product.data });
     }
-  };
-
-  const handleClickOpen = () => {
-    setOpenModal(true);
-  };
-
-  console.log(state);
-
-  const handleClose = () => {
-    setOrderConfirmed(false);
-    setOpenModal(false);
   };
 
   if (loading) {
@@ -96,7 +82,7 @@ export const ProductView = () => {
                 alt={product.data.attributes.name}
                 style={{ width: "100%", height: "auto" }}
                 src={`http://localhost:1337${product?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
-                onError={(e) => setBrokenImageUrl(true)}
+                onError={() => setBrokenImageUrl(true)}
               />
               {brokenImageUrl && (
                 <Box>

@@ -6,8 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
-import { Box, Link, Select, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { PurchaseInquiry } from "../../models/PurchaseInquiry";
 import Checkbox from "@mui/material/Checkbox";
@@ -35,7 +34,6 @@ export default function Modal({
     useForm<PurchaseInquiry>();
   const api = useApi();
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [amount, setAmount] = useState<number>(1);
   const { state, dispatch } = useContext(ProductCartContext);
 
   const formValid =
@@ -94,7 +92,7 @@ export default function Modal({
           {!orderConfirmed ? (
             <>
               <DialogContentText>
-                {state.map((product, index) => (
+                {state.map((product) => (
                   <Box
                     key={product.id}
                     display="flex"
