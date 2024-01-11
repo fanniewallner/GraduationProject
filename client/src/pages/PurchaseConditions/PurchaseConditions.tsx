@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
-import { Box, Container, Typography, useMediaQuery } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export const PurchaseConditions = () => {

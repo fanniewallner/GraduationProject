@@ -1,11 +1,10 @@
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 import { IContactFormDetails } from "../../models/IContactFormDetails";
 import { useForm } from "react-hook-form";
 import useApi from "../../hooks/useApi";

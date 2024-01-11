@@ -1,20 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { IStrapiSingleResponse } from "../../models/IStrapiResponse";
 import { useTheme } from "../../contexts/ThemeContext";
-
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { ExpandMore } from "@mui/icons-material";
 import { ProductCartContext } from "../../contexts/ProductCardContext";

@@ -252,7 +252,7 @@ export default function Modal({
                 <Button
                   aria-label="Submit button"
                   onClick={handleSubmit(handleFormSubmit)}
-                  disabled={formState.isSubmitting || !isChecked || !formValid}
+                  disabled={!formValid || !isChecked || !formValid}
                 >
                   Skicka
                 </Button>

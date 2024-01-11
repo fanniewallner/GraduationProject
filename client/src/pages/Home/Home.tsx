@@ -1,10 +1,9 @@
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 import styles from "./Home.module.scss";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";
@@ -38,6 +37,7 @@ export const Home = () => {
               variant="h5"
               color={theme.secondaryColor}
               fontFamily={"Poppins"}
+              sx={{ marginBottom: "0.5rem" }}
             >
               Portabla{" "}
               <span
@@ -51,7 +51,8 @@ export const Home = () => {
               tillverkade i Sverige
             </Typography>
             <Button
-              aria-label="go to product catalog button"
+              aria-label="Till produktkatalogen"
+              tabIndex={0}
               data-cy="actionButton"
               onClick={() => navigate("/produktkatalog")}
               sx={{

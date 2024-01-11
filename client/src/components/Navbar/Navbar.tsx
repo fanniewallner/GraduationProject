@@ -53,7 +53,7 @@ export default function DrawerAppBar(props: Props) {
         fontFamily: "Poppins",
       }}
     >
-      <Link to={"/"} className={styles.flex}>
+      <Link to={"/"} className={styles.flex} tabIndex={0} aria-label={"XTools"}>
         <Typography variant="h6" color={theme.primaryColor}>
           XTools
         </Typography>
@@ -64,8 +64,8 @@ export default function DrawerAppBar(props: Props) {
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
             <ListItemButton
-              aria-label="navigation item"
               onClick={() => setActive(item.label)}
+              aria-label={item.label}
             >
               <Link
                 to={item.path}
@@ -73,6 +73,7 @@ export default function DrawerAppBar(props: Props) {
                   textDecoration: "none",
                   fontFamily: "Poppins",
                 }}
+                tabIndex={0}
               >
                 <Typography
                   variant="body1"
@@ -129,7 +130,12 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon sx={{ fontSize: "2rem" }} />
           </IconButton>
-          <Link to={"/"} className={styles.flex}>
+          <Link
+            to={"/"}
+            className={styles.flex}
+            tabIndex={0}
+            aria-label={"XTools"}
+          >
             <Typography
               fontFamily={"Poppins"}
               variant="h6"
@@ -152,12 +158,13 @@ export default function DrawerAppBar(props: Props) {
             {navItems.map((item) => (
               <Button
                 key={item.label}
-                aria-label="navigation item"
+                aria-label={item.label}
                 className={`${styles.desktopLinks} ${
                   active === item.label ? "active" : ""
                 }`}
               >
                 <Link
+                  aria-label={item.label}
                   to={item.path}
                   style={{
                     fontFamily: "Poppins",
@@ -169,6 +176,7 @@ export default function DrawerAppBar(props: Props) {
                         : theme.secondaryColor
                       : theme.contrastColor,
                   }}
+                  tabIndex={0}
                   onClick={() => setActive(item.label)}
                 >
                   {item.label}

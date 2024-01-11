@@ -1,10 +1,8 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  useMediaQuery,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState, useEffect } from "react";
 import useApi from "../../hooks/useApi";
 import { useTheme } from "../../contexts/ThemeContext";
