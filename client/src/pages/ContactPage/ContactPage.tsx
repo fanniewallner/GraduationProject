@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
 import { IContactFormDetails } from "../../models/IContactFormDetails";
 import { useForm } from "react-hook-form";
 import useApi from "../../hooks/useApi";
@@ -70,7 +69,7 @@ export const ContactPage = () => {
       sx={{ display: "flex", flexDirection: isMobile ? "column" : " row" }}
       className={styles.containerWrapper}
     >
-      <Box sx={{ width: !isMobile ? "50%" : "100%", height: "600px" }}>
+      <Box sx={{ width: !isMobile ? "50%" : "100%" }}>
         <Box className={styles.containerWrapper__formWrapper}>
           {!formSent ? (
             <form onSubmit={submitForm(handleFormSubmit)}>

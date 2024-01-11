@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
 import styles from "./Home.module.scss";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MuiCarousel } from "../../components/MuiCarousel/MuiCarousel";

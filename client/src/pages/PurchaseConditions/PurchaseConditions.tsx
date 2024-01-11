@@ -9,7 +9,7 @@ import { useTheme } from "../../contexts/ThemeContext";
 export const PurchaseConditions = () => {
   const api = useApi();
   const { theme } = useTheme();
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(true);
   const [contact, setContact] = useState<string>();
