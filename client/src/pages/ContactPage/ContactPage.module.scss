@@ -1,9 +1,7 @@
 .containerWrapper {
   min-height: 100vh;
   width: 100%;
-  display: flex;
   flex-direction: column;
-  //flexDirection: isMobile ? "column" : "row",
   padding-top: 6rem;
   justify-content: center;
   gap: 2rem;

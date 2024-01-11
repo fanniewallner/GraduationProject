@@ -11,13 +11,11 @@
 
   &__buttonContainer {
     display: flex;
-    flex-direction: column;
     align-items: center;
-
     padding: 1rem 1rem 0 0;
   }
 
-  &__filterButtons {
+  &buttonContainer__filterButtons {
     width: 50%;
   }
 }

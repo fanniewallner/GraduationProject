@@ -162,13 +162,6 @@ export const ProductView = () => {
                   </Typography>
                 </AccordionDetails>
               </Accordion>
-              {/*               <Modal
-                open={openModal}
-                handleClose={handleClose}
-                orderConfirmed={orderConfirmed}
-                setOrderConfirmed={setOrderConfirmed}
-                products={state}
-              /> */}
             </Container>
           </>
         )}

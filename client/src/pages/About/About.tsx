@@ -14,7 +14,7 @@ export const About = () => {
   const [aboutData, setAboutData] = useState<IAboutInfo>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState<boolean>(true);
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
   const api = useApi();
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +43,7 @@ export const About = () => {
       >
         <MediaGrid />
 
-        <Box sx={{ width: "100%", pt: "3.5rem" }}>
+        <Box className={styles.containerWrapper__text}>
           <Typography
             sx={{ whiteSpace: "pre-line" }}
             color={theme.secondaryColor}

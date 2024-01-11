@@ -161,7 +161,7 @@ export const ProductList = () => {
         <Button
           sx={{
             backgroundColor: !filteredCategory
-              ? "#2a372b"
+              ? theme.primaryColor
               : theme.contrastColor,
             color: theme.secondaryColor,
           }}
