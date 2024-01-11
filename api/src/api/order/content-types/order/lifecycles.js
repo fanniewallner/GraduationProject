@@ -122,7 +122,7 @@ module.exports = {
 
     <div class="contact-info">
       <p>För frågor eller ytterligare information, kontakta oss på:</p>
-      <p>E-post: kreativa.snickare@gmail.com.com</p>
+      <p>E-post: kreativa.snickare@gmail.com</p>
       <p>Telefon: 070-423 75 88</p>
       <p>XTools C/O Kreativa Snickare AB</p>
       <p>Xtools.se</p>
