@@ -26,8 +26,6 @@ export const Layout = (props: LayoutProps) => {
     setOpenModal(true);
   };
 
-  console.log(state);
-
   const handleClose = () => {
     setOrderConfirmed(false);
     setOpenModal(false);

@@ -46,15 +46,12 @@ export default function Modal({
 
   const handleFormSubmit = async (data: PurchaseInquiry) => {
     try {
-      console.log("products", products);
       const productDetails = products.map((product) => ({
         productname: product.attributes.name,
         productid: product.id,
       }));
       setValue("data.productDetails", productDetails);
-      console.log(productDetails);
       const response = await api.submitForm(data);
-      console.log("DATA", data);
       handleCheckbox();
       if (response.status === 200) {
         reset({

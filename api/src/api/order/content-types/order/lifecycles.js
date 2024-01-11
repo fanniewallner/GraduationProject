@@ -1,7 +1,6 @@
 module.exports = {
   async afterCreate(event) {
     const { result } = event;
-    console.log("Lifecycle afterCreate triggered:", result);
     let productDetailsHtml = "";
 
     if (result.productDetails && Array.isArray(result.productDetails)) {
@@ -27,10 +26,6 @@ module.exports = {
         `;
       }
     }
-    console.log("result", result);
-    console.log("result.productDetails:", result.productDetails);
-    console.log("result.single:", result.singleProductDetail);
-    console.log("productDetailsHtml:", productDetailsHtml);
 
     try {
       await strapi.plugins["email"].services.email.send({

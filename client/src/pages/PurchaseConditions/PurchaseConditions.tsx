@@ -29,7 +29,6 @@ export const PurchaseConditions = () => {
 
     fetchData();
   }, []);
-  console.log(contact);
   return (
     <Container
       sx={{
