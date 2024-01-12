@@ -14,7 +14,7 @@ import { IProduct } from "../../models/IProduct";
 
 export const ProductList = () => {
   const { theme } = useTheme();
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
   const api = useApi();
   const [products, setProducts] = useState<IStrapiListResponse>();
   const [filteredCategory, setFilteredCategory] = useState<number | null>(null);
@@ -118,12 +118,13 @@ export const ProductList = () => {
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
+          justifyContent: "center",
           gap: "0.5rem",
         }}
       >
         <Button
           data-cy="sortByCategory1"
-          aria-label="filter by workbench category button"
+          aria-label="Arbetsbänkar"
           sx={{
             backgroundColor:
               filteredCategory === 1 ? "#3D4F3E" : theme.contrastColor,

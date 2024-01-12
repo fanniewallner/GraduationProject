@@ -36,8 +36,8 @@ export const PurchaseConditions = () => {
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         alignItems: "center",
-
         gap: "3rem",
+        pt: "5rem",
       }}
     >
       <Box sx={{ maxWidth: isMobile ? "100%" : "60%" }}>

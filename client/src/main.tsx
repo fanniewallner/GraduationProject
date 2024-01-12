@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./App.scss";
 import App from "./App";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import AppConfigProvider from "./contexts/ApiContext";

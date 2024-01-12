@@ -9,13 +9,7 @@
   justify-content: center;
   display: inline-block;
 
-  &__buttonContainer {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1rem 0 0;
-  }
-
-  &buttonContainer__filterButtons {
+  &__filterButtons {
     width: 50%;
   }
 }
