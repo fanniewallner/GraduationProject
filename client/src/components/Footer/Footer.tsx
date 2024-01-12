@@ -51,7 +51,10 @@ export const Footer = () => {
         <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
           {contactData?.data.attributes.phonenumber}
         </Typography>
-        <Typography sx={{ fontSize: isMobile ? "12px" : "16px" }}>
+        <Typography
+          data-cy="footer-email"
+          sx={{ fontSize: isMobile ? "12px" : "16px" }}
+        >
           {contactData?.data.attributes.email}
         </Typography>
       </Box>
